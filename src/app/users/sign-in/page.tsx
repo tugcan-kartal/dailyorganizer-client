@@ -1,9 +1,10 @@
+import SignInWithGoogle from "@/components/signInWithGoogle";
 import React from "react";
 
 const SignInUser=()=>{
     return(
         <div>
-            SignInUser
+            <SignInWithGoogle />
         </div>
     )
 }
