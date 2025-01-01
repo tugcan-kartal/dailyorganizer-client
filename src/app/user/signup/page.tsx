@@ -10,6 +10,7 @@ const Signup: React.FC = () => {
   });
 
   const [errors, setErrors] = useState<string[]>([]);
+  const [success, setSuccess] = useState<string>("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserData({
@@ -33,12 +34,16 @@ const Signup: React.FC = () => {
 
       if (!response.ok) {
         const data = await response.json();
-        setErrors(data.message);
+        const errorMessages = Array.isArray(data.message)
+          ? data.message
+          : [data.message];
+        setErrors(errorMessages);
       } else {
         const data = await response.json();
         console.log("Token:", data.token);
 
-        localStorage.setItem("token",data.token);
+        localStorage.setItem("token", data.token);
+        setSuccess("Signup successfully");
       }
     } catch (error) {
       console.error(error);
@@ -50,9 +55,7 @@ const Signup: React.FC = () => {
       <div className="bg-white p-8 shadow-md rounded-md w-[400px]">
         <div className="mb-6">
           <h1 className="text-2xl font-semibold">Think it. Make it.</h1>
-          <p className="text-2xl text-gray-400 font-semibold">
-            Log in to your account
-          </p>
+          <p className="text-2xl text-gray-400 font-semibold">Sign up</p>
         </div>
 
         <form onSubmit={handleSubmit} className="mt-6">
@@ -63,6 +66,12 @@ const Signup: React.FC = () => {
                   <li key={index}>{error}</li>
                 ))}
               </ul>
+            </div>
+          )}
+
+          {success && (
+            <div className="mb-4">
+              <div className="text-green-500">{success}</div>
             </div>
           )}
 
