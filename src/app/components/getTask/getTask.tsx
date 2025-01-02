@@ -44,6 +44,24 @@ const GetTask: React.FC = () => {
         getUserTasks();
     },[])
 
+    const handleDelete=async(taskId: string)=>{
+
+        try {
+            const response=await fetch(`http://localhost:3000/task/${taskId}`,{
+                method: "DELETE",
+            })
+
+            if(!response.ok){
+                throw new Error("Not deleted")
+            }else{
+                setSuccess("Deleted successfully")
+            }
+        } catch (error) {
+            
+        }
+
+    }
+
     return(
         <div>
             <div>
@@ -57,7 +75,7 @@ const GetTask: React.FC = () => {
                         <div>{new Date(item.start_date).toLocaleDateString("en-GB")}</div>
                         <div>{new Date(item.end_date).toLocaleDateString("en-GB")}</div>
 
-                        <div className="text-red-700 text-xl cursor-pointer">X</div>
+                        <div onClick={()=>handleDelete(item._id)} className="text-red-700 text-xl cursor-pointer">X</div>
                     </div>
                 ))}
             </div>

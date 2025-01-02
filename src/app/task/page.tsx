@@ -8,7 +8,7 @@ const Task: React.FC =() => {
 
     return(
         <div>
-            {/* <AddTask /> */}
+            <AddTask />
             <GetTask />
         </div>
     )
