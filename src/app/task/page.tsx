@@ -14,8 +14,6 @@ const Task: React.FC =() => {
         end_date: "",
     });
 
-    const [addedTasks,setAddedTasks]=useState();
-
     const [errors, setErrors]=useState<string[]>([]);
     const [success, setSuccess] = useState<string>("");
 
@@ -54,8 +52,8 @@ const Task: React.FC =() => {
                 setErrors(errorMessages);
             }else{
                 const data=await response.json();
-                setAddedTasks(data);
                 setSuccess("Task Added")
+                console.log(data);
             }
         } catch (error) {
             console.log(error);
