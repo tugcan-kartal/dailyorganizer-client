@@ -46,11 +46,21 @@ const GetTask: React.FC = () => {
 
     return(
         <div>
-            {userTasks && userTasks.map((item:any,index:any)=>(
-                <div key={index}>
-                    {item.title}
-                </div>
-            ))}
+            <div>
+                {userTasks && userTasks.map((item:any,index:any)=>(
+                    <div className="my-10 bg-gray-300" key={index}>
+                        <div className="text-xl font-semibold">{item.title}</div>
+                        <div className="text-lg">{item.description}</div>
+                        <div className="text-gray-400">{item.author}</div>
+                        <div className="bg-green-400 p-2 inline-block rounded-full">{item.importance_level}</div>
+                        <div>{item.category}</div>
+                        <div>{new Date(item.start_date).toLocaleDateString("en-GB")}</div>
+                        <div>{new Date(item.end_date).toLocaleDateString("en-GB")}</div>
+
+                        <div className="text-red-700 text-xl cursor-pointer">X</div>
+                    </div>
+                ))}
+            </div>
 
             <div>
                 {errors && errors}
