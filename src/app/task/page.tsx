@@ -8,6 +8,7 @@ const Task: React.FC =() => {
     return(
         <div>
             <AddTask />
+            
         </div>
     )
 
