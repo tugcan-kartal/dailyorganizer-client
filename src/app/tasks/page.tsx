@@ -6,7 +6,7 @@ const Tasks: React.FC=()=>{
     return(
         <div>
             <TaskList />
-            <TaskAddForm />
+            {/* <TaskAddForm /> */}
         </div>
     )
 }

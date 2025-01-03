@@ -26,7 +26,7 @@ const TaskList: React.FC=()=>{
 
     return (
         <div>
-            {tasks.map((task: any)=>(
+            {tasks && tasks.map((task: any)=>(
                 <TaskItem key={task._id} task={task} refreshTasks={fetchTasks}/>
             ))}
         </div>
