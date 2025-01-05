@@ -38,60 +38,58 @@ const TaskItem: React.FC<{task: any; refreshTasks: ()=>void}>=({
 
     return (
         <div>
-            <div>
+            <div className="bg-white shadow-lg rounded-2xl p-6 relative">
                 <div>
-                    <div>{task.title}</div>
-                    {isEditing && 
-                        <input name="title" onChange={handleChange} placeholder="Update task title"/>
-                    }
-                </div>
-                
-                <div>
-                    <div>{task.description}</div>
-                    {isEditing && 
-                        <input name="description" onChange={handleChange} placeholder="Update task description"/>
-                    }
-                </div>
+                    <div className="">
+                        <div>{task.title}</div>
+                        {isEditing && 
+                            <input name="title" onChange={handleChange} placeholder="Update task title"/>
+                        }
+                    </div>
+                    
+                    <div>
+                        <div>{task.description}</div>
+                        {isEditing && 
+                            <input name="description" onChange={handleChange} placeholder="Update task description"/>
+                        }
+                    </div>
 
-                <div>
-                    <div>{task.author}</div>
-                    {isEditing && 
-                        <input name="author" onChange={handleChange} placeholder="Update task author"/>
-                    }
-                </div>
-
-                <div>
-                    <div>{task.importance_level}</div>
-                    {isEditing && 
-                        <input name="importance_level" onChange={handleChange} placeholder="Update task importance_level"/>
-                    }
-                </div>
-
-                <div>
+                    <div>
                     <div>{task.category}</div>
                     {isEditing && 
                         <input name="category" onChange={handleChange} placeholder="Update task category"/>
                     }
-                </div>
+                    </div>
 
-                <div>
-                    <div>{task.start_date}</div>
-                    {isEditing && 
-                        <input type="date" name="start_date" onChange={handleChange} placeholder="Update task start_date"/>
-                    }
-                </div>
+                    <div>
+                        <div>{task.importance_level}</div>
+                        {isEditing && 
+                            <input name="importance_level" onChange={handleChange} placeholder="Update task importance_level"/>
+                        }
+                    </div>
 
-                <div>
-                    <div>{task.end_date}</div>
-                    {isEditing && 
-                        <input type="date" name="end_date" onChange={handleChange} placeholder="Update task end_date"/>
-                    }
-                </div>
                     
-                <button onClick={handleDelete}>Delete</button>
-                <button onClick={()=>setIsEditing(!isEditing)}>Edit</button>
-                <button onClick={handleUpdate}>Update</button>
 
+                    <div>
+                        <div>{task.start_date}</div>
+                        {isEditing && 
+                            <input type="date" name="start_date" onChange={handleChange} placeholder="Update task start_date"/>
+                        }
+                    </div>
+
+                    <div>
+                        <div>{task.end_date}</div>
+                        {isEditing && 
+                            <input type="date" name="end_date" onChange={handleChange} placeholder="Update task end_date"/>
+                        }
+                    </div>
+                        
+                    <button onClick={handleDelete}>Delete</button>
+                    <button onClick={()=>setIsEditing(!isEditing)}>Edit</button>
+                    <button onClick={handleUpdate}>Update</button>
+
+                </div>
+                
             </div>
         </div>
     )
