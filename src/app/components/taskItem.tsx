@@ -53,7 +53,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
     <div>
       <div className="bg-white shadow-lg rounded-2xl p-6 relative">
 
-        <div className="absolute top-0 left-0 h-full bg-yellow-500 text-white flex items-center justify-center w-[50px]">
+        <div className="absolute top-0 left-0 h-full bg-yellow-500 text-white flex items-center justify-center w-[50px] rounded-l-2xl">
           <div className="rotate-90 whitespace-nowrap">{task.category}</div>
           {isEditing && (
             <input
@@ -134,18 +134,18 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
               ></div>
             </div>
             <div className="text-sm text-gray-600 text-center mt-2">
-              {progress}% completed
+              {progress}% time passed
             </div>
           </div>
 
-          <div className="flex gap-x-[1vw] mt-4 justify-between">
-            <button className="bg-red-500 rounded-2xl px-2 py-1" onClick={handleDelete}>Delete</button>
-            <button className="bg-yellow-500 rounded-2xl px-2 py-1" onClick={() => setIsEditing(!isEditing)}>
+          <div className="flex gap-x-[1vw] mt-4 justify-evenly">
+            <button className="bg-red-500 rounded-2xl px-[2.5vw] py-1" onClick={handleDelete}>Delete</button>
+            <button className="bg-yellow-500 rounded-2xl px-[2.5vw] py-1" onClick={() => setIsEditing(!isEditing)}>
               {isEditing ? "Cancel" : "Edit"}
             </button>
 
             {
-                isEditing ? <button onClick={handleUpdate}>{isEditing ? "Update" : ""}</button> : ""
+                isEditing ? <button className="bg-green-500 rounded-2xl px-[2.5vw] py-1" onClick={handleUpdate}>{isEditing ? "Update" : ""}</button> : ""
             }
           </div>
         </div>
