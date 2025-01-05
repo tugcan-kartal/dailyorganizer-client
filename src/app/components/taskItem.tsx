@@ -67,19 +67,22 @@ const TaskItem: React.FC<{task: any; refreshTasks: ()=>void}>=({
                             <input name="importance_level" onChange={handleChange} placeholder="Update task importance_level"/>
                         }
                     </div>
+                    
+                    <div className="flex justify-between">
+                        <div>
+                            <div>{new Date(task.start_date).toLocaleDateString("en-GB")}</div>
+                            {isEditing && 
+                                <input type="date" name="start_date" onChange={handleChange} placeholder="Update task start_date"/>
+                            }
+                        </div>
 
-                    <div>
-                        <div>{new Date(task.start_date).toLocaleDateString("en-GB")}</div>
-                        {isEditing && 
-                            <input type="date" name="start_date" onChange={handleChange} placeholder="Update task start_date"/>
-                        }
-                    </div>
 
-                    <div>
-                        <div>{new Date(task.end_date).toLocaleDateString("en-GB")}</div>
-                        {isEditing && 
-                            <input type="date" name="end_date" onChange={handleChange} placeholder="Update task end_date"/>
-                        }
+                        <div>
+                            <div>{new Date(task.end_date).toLocaleDateString("en-GB")}</div>
+                            {isEditing && 
+                                <input type="date" name="end_date" onChange={handleChange} placeholder="Update task end_date"/>
+                            }
+                        </div>
                     </div>
                         
                     <div className="flex gap-x-[1vw]">
