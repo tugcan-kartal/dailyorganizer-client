@@ -52,11 +52,27 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
   return (
     <div>
       <div className="bg-white shadow-lg rounded-2xl p-6 relative">
-        <div>
+
+        <div className="absolute top-0 right-0 h-full bg-yellow-500 text-white flex items-center justify-center w-[50px]">
+          <div className="rotate-90 whitespace-nowrap">{task.category}</div>
+          {isEditing && (
+            <input
+              name="category"
+              onChange={handleChange}
+              placeholder="Update task category"
+            />
+          )}
+        </div>
+
+        <div className="mr-[2vw]">
           <div>
             <div>{task.title}</div>
             {isEditing && (
-              <input name="title" onChange={handleChange} placeholder="Update task title" />
+              <input
+                name="title"
+                onChange={handleChange}
+                placeholder="Update task title"
+              />
             )}
           </div>
 
@@ -67,17 +83,6 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
                 name="description"
                 onChange={handleChange}
                 placeholder="Update task description"
-              />
-            )}
-          </div>
-
-          <div>
-            <div>{task.category}</div>
-            {isEditing && (
-              <input
-                name="category"
-                onChange={handleChange}
-                placeholder="Update task category"
               />
             )}
           </div>
@@ -127,7 +132,9 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
                 style={{ width: `${progress}%` }}
               ></div>
             </div>
-            <div className="text-sm text-gray-600 text-center mt-2">{progress}% completed</div>
+            <div className="text-sm text-gray-600 text-center mt-2">
+              {progress}% completed
+            </div>
           </div>
 
           <div className="flex gap-x-[1vw] mt-4">
