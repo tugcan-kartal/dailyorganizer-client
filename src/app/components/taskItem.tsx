@@ -1,5 +1,8 @@
+"use client"
 import React, { ChangeEvent, useState } from "react";
 import { deleteTask, updateTask } from "../api/taskService";
+import { useSortable } from "@dnd-kit/sortable";
+import {CSS} from "@dnd-kit/utilities";
 
 const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
   task,
@@ -35,7 +38,8 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
     });
   };
 
-  // Progress calculation
+
+  // Yüzde tamamlanma ibresi burası--------
   const calculateProgress = () => {
     const startDate = new Date(task.start_date).getTime();
     const endDate = new Date(task.end_date).getTime();
@@ -48,10 +52,23 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
   };
 
   const progress = calculateProgress();
+  //Yüzde tamamlanma ibresi bitişi----------
+
+
+
+  //Sürüklemek için elementleri------------
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: task._id });
+
+  const style={
+    transition,
+    transform: CSS.Transform.toString(transform),
+
+  }
+  //Sürüklemek için elementleri  bitiş-----
 
   return (
     <div>
-      <div className="bg-white shadow-lg rounded-2xl p-6 relative">
+      <div ref={setNodeRef} {...attributes} {...listeners} style={style} className="bg-white shadow-lg rounded-2xl p-6 relative">
 
         <div className="absolute top-0 left-0 h-full bg-yellow-500 text-white flex items-center justify-center w-[50px] rounded-l-2xl">
           <div className="rotate-90 whitespace-nowrap">{task.category}</div>

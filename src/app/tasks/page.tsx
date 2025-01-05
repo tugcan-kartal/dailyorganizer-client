@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import TaskList from "../components/taskList";
 import TaskAddForm from "../components/taskAddForm";
