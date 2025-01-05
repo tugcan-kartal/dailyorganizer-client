@@ -69,22 +69,24 @@ const TaskItem: React.FC<{task: any; refreshTasks: ()=>void}>=({
                     </div>
 
                     <div>
-                        <div>{task.start_date}</div>
+                        <div>{new Date(task.start_date).toLocaleDateString("en-GB")}</div>
                         {isEditing && 
                             <input type="date" name="start_date" onChange={handleChange} placeholder="Update task start_date"/>
                         }
                     </div>
 
                     <div>
-                        <div>{task.end_date}</div>
+                        <div>{new Date(task.end_date).toLocaleDateString("en-GB")}</div>
                         {isEditing && 
                             <input type="date" name="end_date" onChange={handleChange} placeholder="Update task end_date"/>
                         }
                     </div>
                         
-                    <button onClick={handleDelete}>Delete</button>
-                    <button onClick={()=>setIsEditing(!isEditing)}>Edit</button>
-                    <button onClick={handleUpdate}>Update</button>
+                    <div className="flex gap-x-[1vw]">
+                        <button onClick={handleDelete}>Delete</button>
+                        <button onClick={()=>setIsEditing(!isEditing)}>{isEditing ? "Cancel" : "Edit"}</button>
+                        <button onClick={handleUpdate}>Update</button>
+                    </div>
 
                 </div>
             </div>
