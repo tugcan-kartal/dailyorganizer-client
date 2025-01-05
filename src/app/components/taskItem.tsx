@@ -42,6 +42,36 @@ const TaskItem: React.FC<{task: any; refreshTasks: ()=>void}>=({
             {isEditing && 
                 <input name="title" onChange={handleChange} placeholder="Update task title"/>
             }
+            
+            <div>{task.description}</div>
+            {isEditing && 
+                <input name="description" onChange={handleChange} placeholder="Update task description"/>
+            }
+
+            <div>{task.author}</div>
+            {isEditing && 
+                <input name="author" onChange={handleChange} placeholder="Update task author"/>
+            }
+
+            <div>{task.importance_level}</div>
+            {isEditing && 
+                <input name="importance_level" onChange={handleChange} placeholder="Update task importance_level"/>
+            }
+
+            <div>{task.category}</div>
+            {isEditing && 
+                <input name="category" onChange={handleChange} placeholder="Update task category"/>
+            }
+
+            <div>{task.start_date}</div>
+            {isEditing && 
+                <input type="date" name="start_date" onChange={handleChange} placeholder="Update task start_date"/>
+            }
+
+            <div>{task.end_date}</div>
+            {isEditing && 
+                <input type="date" name="end_date" onChange={handleChange} placeholder="Update task end_date"/>
+            }
 
             <button onClick={handleDelete}>Delete</button>
 
