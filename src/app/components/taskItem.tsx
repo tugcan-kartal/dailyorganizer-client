@@ -40,7 +40,7 @@ const TaskItem: React.FC<{task: any; refreshTasks: ()=>void}>=({
         <div>
             <div className="bg-white shadow-lg rounded-2xl p-6 relative">
                 <div>
-                    <div className="">
+                    <div>
                         <div>{task.title}</div>
                         {isEditing && 
                             <input name="title" onChange={handleChange} placeholder="Update task title"/>
@@ -55,10 +55,10 @@ const TaskItem: React.FC<{task: any; refreshTasks: ()=>void}>=({
                     </div>
 
                     <div>
-                    <div>{task.category}</div>
-                    {isEditing && 
-                        <input name="category" onChange={handleChange} placeholder="Update task category"/>
-                    }
+                        <div>{task.category}</div>
+                        {isEditing && 
+                            <input name="category" onChange={handleChange} placeholder="Update task category"/>
+                        }
                     </div>
 
                     <div>
@@ -67,8 +67,6 @@ const TaskItem: React.FC<{task: any; refreshTasks: ()=>void}>=({
                             <input name="importance_level" onChange={handleChange} placeholder="Update task importance_level"/>
                         }
                     </div>
-
-                    
 
                     <div>
                         <div>{task.start_date}</div>
@@ -89,7 +87,6 @@ const TaskItem: React.FC<{task: any; refreshTasks: ()=>void}>=({
                     <button onClick={handleUpdate}>Update</button>
 
                 </div>
-                
             </div>
         </div>
     )
