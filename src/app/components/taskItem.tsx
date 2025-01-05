@@ -53,7 +53,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
     <div>
       <div className="bg-white shadow-lg rounded-2xl p-6 relative">
 
-        <div className="absolute top-0 right-0 h-full bg-yellow-500 text-white flex items-center justify-center w-[50px]">
+        <div className="absolute top-0 left-0 h-full bg-yellow-500 text-white flex items-center justify-center w-[50px]">
           <div className="rotate-90 whitespace-nowrap">{task.category}</div>
           {isEditing && (
             <input
@@ -64,7 +64,8 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
           )}
         </div>
 
-        <div className="mr-[2vw]">
+        <div className="ml-[2vw] relative">
+
           <div>
             <div>{task.title}</div>
             {isEditing && (
@@ -87,7 +88,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
             )}
           </div>
 
-          <div>
+          <div className="absolute right-0 top-0 bg-red-500 p-2 rounded-full text-white">
             <div>{task.importance_level}</div>
             {isEditing && (
               <input
@@ -137,14 +138,18 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
             </div>
           </div>
 
-          <div className="flex gap-x-[1vw] mt-4">
-            <button onClick={handleDelete}>Delete</button>
-            <button onClick={() => setIsEditing(!isEditing)}>
+          <div className="flex gap-x-[1vw] mt-4 justify-between">
+            <button className="bg-red-500 rounded-2xl px-2 py-1" onClick={handleDelete}>Delete</button>
+            <button className="bg-yellow-500 rounded-2xl px-2 py-1" onClick={() => setIsEditing(!isEditing)}>
               {isEditing ? "Cancel" : "Edit"}
             </button>
-            <button onClick={handleUpdate}>Update</button>
+
+            {
+                isEditing ? <button onClick={handleUpdate}>{isEditing ? "Update" : ""}</button> : ""
+            }
           </div>
         </div>
+        
       </div>
     </div>
   );
