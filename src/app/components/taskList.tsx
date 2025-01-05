@@ -26,9 +26,11 @@ const TaskList: React.FC=()=>{
 
     return (
         <div>
-            {tasks && tasks.map((task: any)=>(
-                <TaskItem key={task._id} task={task} refreshTasks={fetchTasks}/>
-            ))}
+            <div className="grid grid-cols-3 w-[80vw] mx-auto gap-6">
+                {tasks && tasks.map((task: any)=>(
+                    <TaskItem key={task._id} task={task} refreshTasks={fetchTasks}/>
+                ))}
+            </div>
         </div>
     )
 }

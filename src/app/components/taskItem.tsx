@@ -38,46 +38,61 @@ const TaskItem: React.FC<{task: any; refreshTasks: ()=>void}>=({
 
     return (
         <div>
-            <div>{task.title}</div>
-            {isEditing && 
-                <input name="title" onChange={handleChange} placeholder="Update task title"/>
-            }
-            
-            <div>{task.description}</div>
-            {isEditing && 
-                <input name="description" onChange={handleChange} placeholder="Update task description"/>
-            }
+            <div>
+                <div>
+                    <div>{task.title}</div>
+                    {isEditing && 
+                        <input name="title" onChange={handleChange} placeholder="Update task title"/>
+                    }
+                </div>
+                
+                <div>
+                    <div>{task.description}</div>
+                    {isEditing && 
+                        <input name="description" onChange={handleChange} placeholder="Update task description"/>
+                    }
+                </div>
 
-            <div>{task.author}</div>
-            {isEditing && 
-                <input name="author" onChange={handleChange} placeholder="Update task author"/>
-            }
+                <div>
+                    <div>{task.author}</div>
+                    {isEditing && 
+                        <input name="author" onChange={handleChange} placeholder="Update task author"/>
+                    }
+                </div>
 
-            <div>{task.importance_level}</div>
-            {isEditing && 
-                <input name="importance_level" onChange={handleChange} placeholder="Update task importance_level"/>
-            }
+                <div>
+                    <div>{task.importance_level}</div>
+                    {isEditing && 
+                        <input name="importance_level" onChange={handleChange} placeholder="Update task importance_level"/>
+                    }
+                </div>
 
-            <div>{task.category}</div>
-            {isEditing && 
-                <input name="category" onChange={handleChange} placeholder="Update task category"/>
-            }
+                <div>
+                    <div>{task.category}</div>
+                    {isEditing && 
+                        <input name="category" onChange={handleChange} placeholder="Update task category"/>
+                    }
+                </div>
 
-            <div>{task.start_date}</div>
-            {isEditing && 
-                <input type="date" name="start_date" onChange={handleChange} placeholder="Update task start_date"/>
-            }
+                <div>
+                    <div>{task.start_date}</div>
+                    {isEditing && 
+                        <input type="date" name="start_date" onChange={handleChange} placeholder="Update task start_date"/>
+                    }
+                </div>
 
-            <div>{task.end_date}</div>
-            {isEditing && 
-                <input type="date" name="end_date" onChange={handleChange} placeholder="Update task end_date"/>
-            }
+                <div>
+                    <div>{task.end_date}</div>
+                    {isEditing && 
+                        <input type="date" name="end_date" onChange={handleChange} placeholder="Update task end_date"/>
+                    }
+                </div>
+                    
+                <button onClick={handleDelete}>Delete</button>
+                <button onClick={()=>setIsEditing(!isEditing)}>Edit</button>
+                <button onClick={handleUpdate}>Update</button>
 
-            <button onClick={handleDelete}>Delete</button>
-
-            <button onClick={()=>setIsEditing(!isEditing)}>Edit Task</button>
-            <button onClick={handleUpdate}>Update Task</button>
-
+            </div>
         </div>
     )
 
