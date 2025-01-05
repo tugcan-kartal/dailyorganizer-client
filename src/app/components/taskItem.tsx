@@ -88,7 +88,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
             )}
           </div>
 
-          <div className="absolute right-0 top-0 bg-red-500 p-2 rounded-full text-white">
+          <div className="absolute right-0 top-[-2vh] bg-red-500 p-2 rounded-full text-white">
             <div>{task.importance_level}</div>
             {isEditing && (
               <input
