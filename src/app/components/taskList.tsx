@@ -69,7 +69,7 @@ const TaskList: React.FC = () => {
           onDragEnd={handleDragEnd}
         >
           <SortableContext
-            items={tasks.map((task) => task._id)}
+            items={tasks && tasks.map((task) => task._id)}
             strategy={rectSortingStrategy}
           >
             {tasks.map((task) => (

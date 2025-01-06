@@ -7,7 +7,7 @@ const Tasks: React.FC=()=>{
     return(
         <div className="bg-gray-500 h-full py-10">
             <TaskList />
-            {/* <TaskAddForm /> */}
+            <TaskAddForm />
         </div>
     )
 }

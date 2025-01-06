@@ -28,14 +28,6 @@ const TaskAddForm: React.FC=()=>{
 
         await addTask(taskToAdd,token);
         
-        setTaskToAdd({
-            title: "",
-            description: "",
-            importance_level: "",
-            category: "",
-            start_date: "",
-            end_date: "",
-        });
     };
 
     return(
