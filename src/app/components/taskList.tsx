@@ -62,7 +62,7 @@ const TaskList: React.FC=()=>{
         <div>
             <div className="grid grid-cols-3 w-[80vw] mx-auto gap-6">
                 <DndContext collisionDetection={closestCorners} onDragEnd={handleDragEnd}>
-                    <SortableContext items={tasks.map(task => ({ id: task._id }))} strategy={rectSortingStrategy}>
+                    <SortableContext items={tasks && tasks.map(task => ({ id: task._id }))} strategy={rectSortingStrategy}>
                         {tasks && tasks.map((task: any)=>(
                             <TaskItem key={task._id} task={task} refreshTasks={fetchTasks}/>
                         ))}

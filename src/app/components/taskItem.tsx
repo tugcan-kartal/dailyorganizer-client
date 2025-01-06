@@ -1,8 +1,8 @@
-"use client"
+"use client";
 import React, { ChangeEvent, useState } from "react";
 import { deleteTask, updateTask } from "../api/taskService";
 import { useSortable } from "@dnd-kit/sortable";
-import {CSS} from "@dnd-kit/utilities";
+import { CSS } from "@dnd-kit/utilities";
 
 const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
   task,
@@ -38,7 +38,6 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
     });
   };
 
-
   // Yüzde tamamlanma ibresi burası--------
   const calculateProgress = () => {
     const startDate = new Date(task.start_date).getTime();
@@ -54,22 +53,20 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
   const progress = calculateProgress();
   //Yüzde tamamlanma ibresi bitişi----------
 
-
-
   //Sürüklemek için elementleri------------
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: task._id });
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: task._id });
 
-  const style={
+  const style = {
     transition,
     transform: CSS.Transform.toString(transform),
-
-  }
+  };
   //Sürüklemek için elementleri  bitiş-----
 
   return (
     <div>
-      <div ref={setNodeRef} {...attributes} {...listeners} style={style} className="bg-white shadow-lg rounded-2xl p-6 relative">
-
+      <div className="bg-white shadow-lg rounded-2xl p-6 relative">
+        {/* Kategori kısmı */}
         <div className="absolute top-0 left-0 h-full bg-yellow-500 text-white flex items-center justify-center w-[50px] rounded-l-2xl">
           <div className="rotate-90 whitespace-nowrap">{task.category}</div>
           {isEditing && (
@@ -82,30 +79,74 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
         </div>
 
         <div className="ml-[2vw] relative">
-
+          
           <div>
-            <div>{task.title}</div>
-            {isEditing && (
-              <input
-                name="title"
-                onChange={handleChange}
-                placeholder="Update task title"
-              />
-            )}
+            <div>
+              <div>{task.title}</div>
+              {isEditing && (
+                <input
+                  name="title"
+                  onChange={handleChange}
+                  placeholder="Update task title"
+                />
+              )}
+            </div>
+
+            <div>
+              <div>{task.description}</div>
+              {isEditing && (
+                <input
+                  name="description"
+                  onChange={handleChange}
+                  placeholder="Update task description"
+                />
+              )}
+            </div>
+
+            <div className="flex justify-between">
+              <div>
+                <div>
+                  {new Date(task.start_date).toLocaleDateString("en-GB")}
+                </div>
+                {isEditing && (
+                  <input
+                    type="date"
+                    name="start_date"
+                    onChange={handleChange}
+                    placeholder="Update task start_date"
+                  />
+                )}
+              </div>
+
+              <div>
+                <div>{new Date(task.end_date).toLocaleDateString("en-GB")}</div>
+                {isEditing && (
+                  <input
+                    type="date"
+                    name="end_date"
+                    onChange={handleChange}
+                    placeholder="Update task end_date"
+                  />
+                )}
+              </div>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="mt-4">
+              <div className="relative w-full bg-gray-200 rounded-full h-4">
+                <div
+                  className="bg-blue-500 h-4 rounded-full"
+                  style={{ width: `${progress}%` }}
+                ></div>
+              </div>
+              <div className="text-sm text-gray-600 text-center mt-2">
+                {progress}% time passed
+              </div>
+            </div>
           </div>
 
-          <div>
-            <div>{task.description}</div>
-            {isEditing && (
-              <input
-                name="description"
-                onChange={handleChange}
-                placeholder="Update task description"
-              />
-            )}
-          </div>
-
-          <div className="absolute right-0 top-[-2vh] bg-red-500 p-2 rounded-full text-white">
+          {/* Zorluk Seviyesi */}
+          <div className="absolute right-0 top-[0vh] bg-red-500 p-2 rounded-full text-white">
             <div>{task.importance_level}</div>
             {isEditing && (
               <input
@@ -115,58 +156,41 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
               />
             )}
           </div>
-
-          <div className="flex justify-between">
-            <div>
-              <div>{new Date(task.start_date).toLocaleDateString("en-GB")}</div>
-              {isEditing && (
-                <input
-                  type="date"
-                  name="start_date"
-                  onChange={handleChange}
-                  placeholder="Update task start_date"
-                />
-              )}
-            </div>
-
-            <div>
-              <div>{new Date(task.end_date).toLocaleDateString("en-GB")}</div>
-              {isEditing && (
-                <input
-                  type="date"
-                  name="end_date"
-                  onChange={handleChange}
-                  placeholder="Update task end_date"
-                />
-              )}
-            </div>
-          </div>
-
-          {/* Progress Bar */}
-          <div className="mt-4">
-            <div className="relative w-full bg-gray-200 rounded-full h-4">
-              <div
-                className="bg-blue-500 h-4 rounded-full"
-                style={{ width: `${progress}%` }}
-              ></div>
-            </div>
-            <div className="text-sm text-gray-600 text-center mt-2">
-              {progress}% time passed
-            </div>
-          </div>
-
+          
+          {/* Butonlar */}
           <div className="flex gap-x-[1vw] mt-4 justify-evenly">
-            <button className="bg-red-500 rounded-2xl px-[2.5vw] py-1" onClick={handleDelete}>Delete</button>
-            <button className="bg-yellow-500 rounded-2xl px-[2.5vw] py-1" onClick={() => setIsEditing(!isEditing)}>
+            <button
+              className="bg-red-500 rounded-2xl px-[2.5vw] py-1"
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
+            <button
+              className="bg-yellow-500 rounded-2xl px-[2.5vw] py-1"
+              onClick={() => setIsEditing(!isEditing)}
+            >
               {isEditing ? "Cancel" : "Edit"}
             </button>
 
-            {
-                isEditing ? <button className="bg-green-500 rounded-2xl px-[2.5vw] py-1" onClick={handleUpdate}>{isEditing ? "Update" : ""}</button> : ""
-            }
+            {isEditing ? (
+              <button
+                className="bg-green-500 rounded-2xl px-[2.5vw] py-1"
+                onClick={handleUpdate}
+              >
+                {isEditing ? "Update" : ""}
+              </button>
+            ) : (
+              ""
+            )}
           </div>
+
+          
         </div>
-        
+
+        <div ref={setNodeRef} {...attributes} {...listeners} style={style} className="absolute top-0 right-2 text-xl font-semibold cursor-pointer">
+          |||
+        </div>
+
       </div>
     </div>
   );
