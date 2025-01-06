@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { rectSortingStrategy, SortableContext } from "@dnd-kit/sortable";
-import { getUserTasks } from "../api/taskService";
+import { getUserTasks, saveTaskOrder } from "../api/taskService";
 import TaskItem from "./taskItem";
 import { closestCorners, DndContext, DragOverlay } from "@dnd-kit/core";
 
-interface Task {
+export interface Task {
   _id: string;
   title: string;
   description: string;
@@ -12,6 +12,7 @@ interface Task {
   category: string;
   start_date: string;
   end_date: string;
+  order: number;
 }
 
 const TaskList: React.FC = () => {
@@ -41,23 +42,32 @@ const TaskList: React.FC = () => {
     setActiveTask(task || null);
   };
 
-  const handleDragEnd = (event: any) => {
+  const handleDragEnd = async (event: any) => {
     const { active, over } = event;
-
+  
     if (active.id !== over?.id) {
       setTasks((prevTasks) => {
         const oldIndex = prevTasks.findIndex((task) => task._id === active.id);
         const newIndex = prevTasks.findIndex((task) => task._id === over.id);
-
+  
         const updatedTasks = [...prevTasks];
         const [movedTask] = updatedTasks.splice(oldIndex, 1);
         updatedTasks.splice(newIndex, 0, movedTask);
-
+  
+        // Update the order property based on the new array index
+        updatedTasks.forEach((task, index) => {
+          task.order = index;
+        });
+  
+        // Save the updated order to the server
+        saveTaskOrder(updatedTasks);
+  
         return updatedTasks;
       });
     }
     setActiveTask(null);
   };
+  
   // Sürüklenen görev için olan fonksiyonlar bitiş
 
   return (
