@@ -11,7 +11,6 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
   const [newUpdatedTask, setNewUpdatedTask] = useState({
     title: task.title,
     description: task.description,
-    author: task.author,
     importance_level: task.importance_level,
     category: task.category,
     start_date: task.start_date,

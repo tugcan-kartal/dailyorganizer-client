@@ -8,7 +8,6 @@ interface Task {
   _id: string;
   title: string;
   description: string;
-  author: string;
   importance_level: number;
   category: string;
   start_date: string;

@@ -7,7 +7,6 @@ const TaskAddForm: React.FC=()=>{
     const [taskToAdd,setTaskToAdd]=useState({
         title: "",
         description: "",
-        author: "",
         importance_level: "",
         category: "",
         start_date: "",
@@ -32,7 +31,6 @@ const TaskAddForm: React.FC=()=>{
         setTaskToAdd({
             title: "",
             description: "",
-            author: "",
             importance_level: "",
             category: "",
             start_date: "",
@@ -45,7 +43,6 @@ const TaskAddForm: React.FC=()=>{
             <form onSubmit={handleSubmit}>
                 <input onChange={handleChange} name="title" placeholder="title"/>
                 <input onChange={handleChange} name="description" placeholder="description"/>
-                <input onChange={handleChange} name="author" placeholder="author"/>
                 <input onChange={handleChange} name="importance_level" placeholder="importance_level"/>
                 <input onChange={handleChange} name="category" placeholder="category"/>
                 <input onChange={handleChange} type="date" name="start_date" placeholder="start_date"/>
