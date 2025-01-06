@@ -52,6 +52,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
   const progress = calculateProgress();
   //Yüzde tamamlanma ibresi bitişi----------
 
+
   //Sürüklemek için elementleri------------
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: task._id });
