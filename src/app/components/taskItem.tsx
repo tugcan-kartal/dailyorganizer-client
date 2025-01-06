@@ -5,6 +5,8 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import RoboticHand from "@/../public/assets/robotic-hand.png"
 import Image from "next/image";
+import { MdDragIndicator } from "react-icons/md";
+
 
 const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
   task,
@@ -148,6 +150,11 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
                 <Image className="mt-[5vh]" width="100" src={RoboticHand} alt="not found"/>
               </div>
             </div>
+
+            {/* Sürüklenebilme özelliği olan button */}
+            <div ref={setNodeRef} {...attributes} {...listeners} style={style} className="absolute top-[-3vh] left-[-2vw] text-3xl font-semibold cursor-pointer">
+              <MdDragIndicator />
+            </div>
             
           </div>
           
@@ -180,10 +187,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
           
         </div>
         
-        {/* Sürüklenebilme özelliği olan button */}
-        {/* <div ref={setNodeRef} {...attributes} {...listeners} style={style} className="absolute top-0 right-2 text-xl font-semibold cursor-pointer">
-          |||
-        </div> */}
+        
 
       </div>
     </div>
