@@ -5,7 +5,7 @@ import TaskAddForm from "../components/taskAddForm";
 
 const Tasks: React.FC=()=>{
     return(
-        <div className="bg-gray-500 h-screen py-10">
+        <div className="bg-gray-500 h-full py-10">
             <TaskList />
             {/* <TaskAddForm /> */}
         </div>

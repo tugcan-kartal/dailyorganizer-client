@@ -40,7 +40,7 @@ const TaskAddForm: React.FC=()=>{
 
     return(
         <div>
-            <form onSubmit={handleSubmit}>
+            <form className="flex flex-col" onSubmit={handleSubmit}>
                 <input onChange={handleChange} name="title" placeholder="title"/>
                 <input onChange={handleChange} name="description" placeholder="description"/>
                 <input onChange={handleChange} name="importance_level" placeholder="importance_level"/>
