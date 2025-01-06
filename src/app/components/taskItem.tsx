@@ -186,7 +186,8 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
 
           
         </div>
-
+        
+        {/* Sürüklenebilme özelliği olan button */}
         <div ref={setNodeRef} {...attributes} {...listeners} style={style} className="absolute top-0 right-2 text-xl font-semibold cursor-pointer">
           |||
         </div>

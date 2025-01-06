@@ -17,7 +17,8 @@ interface Task {
 
 const TaskList: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [activeTask, setActiveTask] = useState<Task | null>(null); // Sürüklenen görev
+
+  const [activeTask, setActiveTask] = useState<Task | null>(null); // Sürüklenen görev için olan state
 
   const fetchTasks = async () => {
     const token = localStorage.getItem("token");
@@ -35,6 +36,7 @@ const TaskList: React.FC = () => {
     fetchTasks();
   }, []);
 
+  // Sürüklenen görev için olan fonksiyonlar
   const handleDragStart = (event: any) => {
     const task = tasks.find((t) => t._id === event.active.id);
     setActiveTask(task || null);
@@ -57,6 +59,7 @@ const TaskList: React.FC = () => {
     }
     setActiveTask(null);
   };
+  // Sürüklenen görev için olan fonksiyonlar bitiş
 
   return (
     <div>
@@ -75,10 +78,10 @@ const TaskList: React.FC = () => {
             ))}
           </SortableContext>
 
-          {/* Drag Overlay */}
+          {/* Drag yapılırken gösterilen kısım */}
           <DragOverlay>
             {activeTask ? (
-              <div className="bg-white shadow-lg rounded-2xl w-[20vw] h-[10vh] text-center">
+              <div className="bg-white shadow-lg rounded-2xl w-[20vw] h-[10vh] text-center pt-7">
                 <div>{activeTask.title}</div>
               </div>
             ) : null}
