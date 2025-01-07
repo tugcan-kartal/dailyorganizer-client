@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { addTask } from "../api/taskService";
 import RoboticHand from "@/../public/assets/robotic-hand.png";
 import Image from "next/image";
@@ -30,9 +30,28 @@ const TaskAddForm: React.FC = () => {
     await addTask(taskToAdd, token);
   };
 
+
+  //kartın arkasındaki renk için zorluk belirten
+  const borderPicker=()=>{
+    if(taskToAdd.importance_level==="1"){
+      return "border-green-500"
+    }else if(taskToAdd.importance_level==="2"){
+      return "border-yellow-500"
+    }else if(taskToAdd.importance_level==="3"){
+      return "border-blue-500"
+    }else if(taskToAdd.importance_level==="4"){
+      return "border-red-500"
+    }
+  }
+
+  useEffect(()=>{
+    borderPicker();
+  },[taskToAdd])
+  //kartın arkasındaki renk için zorluk belirten bitiş
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white border-t-8 border-blue-500 shadow-lg rounded-2xl w-[20vw] py-[4vh] relative">
+      <div className={`bg-white border-t-8 ${borderPicker()} shadow-lg rounded-2xl w-[20vw] py-[4vh] relative`}>
         <form
           className="mx-5 relative flex flex-col gap-y-4"
           onSubmit={handleSubmit}
