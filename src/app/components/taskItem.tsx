@@ -110,9 +110,9 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
               )}
             </div>
             
-            {/* date ve img kısmı */}
-            <div className="flex justify-center mt-[5vh]">
-              <div className="flex justify-evenly">
+            {/* date ve yüzde barı kısmı */}
+            <div className="flex justify-between mr-4 mt-[5vh]">
+
                 <div>
                   <div className="text-xs">{new Date(task.start_date).toLocaleDateString("en-GB")}</div>
                   {isEditing && (
@@ -126,7 +126,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
                 </div>
 
                 {/* Progress Bar */}
-                <div className="mt-4">
+                <div className="mt-4 w-full">
                   <div className="relative w-full bg-gray-200 rounded-full h-4">
                     <div
                       className="bg-blue-500 h-4 rounded-full"
@@ -149,11 +149,12 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
                     />
                   )}
                 </div>
-              </div>
 
-              <div>
-                <Image className="mt-[5vh]" width="100" src={RoboticHand} alt="not found"/>
-              </div>
+            </div>
+            
+            {/* resim kısmı */}
+            <div className="flex justify-center">
+              <Image className="mt-[5vh]" width="100" src={RoboticHand} alt="not found"/>
             </div>
 
             {/* Sürüklenebilme özelliği olan button kısmı */}
