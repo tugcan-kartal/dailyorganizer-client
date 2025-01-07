@@ -6,6 +6,7 @@ import { CSS } from "@dnd-kit/utilities";
 import RoboticHand from "@/../public/assets/robotic-hand.png"
 import Image from "next/image";
 import { MdDragIndicator } from "react-icons/md";
+import { IoIosMenu } from "react-icons/io";
 
 
 const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
@@ -21,6 +22,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
     end_date: task.end_date,
   });
 
+  const [isMenu, setIsMenu] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   const handleDelete = async () => {
@@ -84,6 +86,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
           
           <div>
 
+            {/* title kısmı */}
             <div>
               <div className="text-2xl text-gray-800 font-semibold">{task.title}</div>
               {isEditing && (
@@ -95,6 +98,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
               )}
             </div>
 
+            {/* description kısmı */}
             <div className="text-gray-400 my-[2vh]">
               <div>{task.description}</div>
               {isEditing && (
@@ -105,7 +109,8 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
                 />
               )}
             </div>
-
+            
+            {/* date ve img kısmı */}
             <div className="flex justify-center mt-[5vh]">
               <div className="flex justify-evenly">
                 <div>
@@ -151,39 +156,45 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
               </div>
             </div>
 
-            {/* Sürüklenebilme özelliği olan button */}
+            {/* Sürüklenebilme özelliği olan button kısmı */}
             <div ref={setNodeRef} {...attributes} {...listeners} style={style} className="absolute top-[-3vh] left-[-2vw] text-3xl font-semibold cursor-pointer">
               <MdDragIndicator />
             </div>
             
+            {/* Butonlar */}
+            <div onClick={()=>setIsMenu(!isMenu)} className="absolute top-[-3vh] right-[0vw] text-4xl cursor-pointer">
+              <IoIosMenu />
+            </div>
+            {isMenu && 
+              <div className="flex flex-col gap-y-[4vh] absolute top-[2vh] right-[-6.7vw] justify-evenly">
+                <button
+                  className="bg-red-500 rounded-2xl px-[2vw] py-1"
+                  onClick={handleDelete}
+                >
+                  Delete
+                </button>
+                <button
+                  className="bg-yellow-500 rounded-2xl px-[2vw] py-1"
+                  onClick={() => setIsEditing(!isEditing)}
+                >
+                  {isEditing ? "Cancel" : "Edit"}
+                </button>
+
+                {isEditing ? (
+                  <button
+                    className="bg-green-500 rounded-2xl px-[2vw] py-1"
+                    onClick={handleUpdate}
+                  >
+                    {isEditing ? "Update" : ""}
+                  </button>
+                ) : (
+                  ""
+                )}
+              </div>
+            }
           </div>
           
-          {/* Butonlar */}
-          {/* <div className="flex gap-x-[1vw] mt-4 justify-evenly">
-            <button
-              className="bg-red-500 rounded-2xl px-[2.5vw] py-1"
-              onClick={handleDelete}
-            >
-              Delete
-            </button>
-            <button
-              className="bg-yellow-500 rounded-2xl px-[2.5vw] py-1"
-              onClick={() => setIsEditing(!isEditing)}
-            >
-              {isEditing ? "Cancel" : "Edit"}
-            </button>
-
-            {isEditing ? (
-              <button
-                className="bg-green-500 rounded-2xl px-[2.5vw] py-1"
-                onClick={handleUpdate}
-              >
-                {isEditing ? "Update" : ""}
-              </button>
-            ) : (
-              ""
-            )}
-          </div> */}
+          
           
         </div>
         
