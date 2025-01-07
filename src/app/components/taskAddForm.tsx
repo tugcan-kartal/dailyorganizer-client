@@ -8,7 +8,7 @@ const TaskAddForm: React.FC = () => {
   const [taskToAdd, setTaskToAdd] = useState({
     title: "",
     description: "",
-    importance_level: "",
+    importance_level: "3",
     category: "",
     start_date: "",
     end_date: "",
@@ -81,7 +81,7 @@ const TaskAddForm: React.FC = () => {
               <div className="flex justify-between text-xs font-semibold mt-1">
                 <span className="text-green-500">Low</span>
                 <span className="text-yellow-500">Medium</span>
-                <span className="text-orange-500">High</span>
+                <span className="text-blue-500">High</span>
                 <span className="text-red-500">Extreme</span>
               </div>
             </div>
