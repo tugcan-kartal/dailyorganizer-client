@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    domains: [
+      'tasksdailyorganizer.s3.amazonaws.com', // Genel AWS S3 URL'si
+      'tasksdailyorganizer.s3.eu-north-1.amazonaws.com' // Eğer bölge farklıysa bu da eklenebilir
+    ],
+  },
 };
 
 export default nextConfig;

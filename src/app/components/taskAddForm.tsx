@@ -1,8 +1,39 @@
 "use client";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { addTask } from "../api/taskService";
-import RoboticHand from "@/../public/assets/robotic-hand.png";
 import Image from "next/image";
+
+import TechnologyCat from "@/../public/assets/category-images/technology.png";
+import ScienceCat from "@/../public/assets/category-images/science.png";
+import ArtCat from "@/../public/assets/category-images/art.png";
+import SportsCat from "@/../public/assets/category-images/sports.png";
+import EducationCat from "@/../public/assets/category-images/education.png";
+import HealthCat from "@/../public/assets/category-images/health.png";
+import FinanceCat from "@/../public/assets/category-images/finance.png";
+import EntertaintmentCat from "@/../public/assets/category-images/entertaintment.png";
+import TravelCat from "@/../public/assets/category-images/travel.png";
+import BusinessCat from "@/../public/assets/category-images/business.png";
+import LifestyleCat from "@/../public/assets/category-images/lifestyle.png";
+import FoodCat from "@/../public/assets/category-images/food.png";
+import EnvironmentCat from "@/../public/assets/category-images/environment.png";
+import OtherCat from "@/../public/assets/category-images/other.png";
+
+const categoryImages: { [key: string]: string } = {
+  technology: TechnologyCat.src,
+  science: ScienceCat.src,
+  art: ArtCat.src,
+  sports: SportsCat.src,
+  education: EducationCat.src,
+  health: HealthCat.src,
+  finance: FinanceCat.src,
+  entertainment: EntertaintmentCat.src,
+  travel: TravelCat.src,
+  business: BusinessCat.src,
+  lifestyle: LifestyleCat.src,
+  food: FoodCat.src,
+  environment: EnvironmentCat.src,
+  other: OtherCat.src,
+};
 
 const TaskAddForm: React.FC = () => {
   const [taskToAdd, setTaskToAdd] = useState({
@@ -15,14 +46,20 @@ const TaskAddForm: React.FC = () => {
     files: [] as File[],
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if(e.target.name==="files"){
-      console.log(e.target.files)
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    if (e.target.name === "category") {
+      setSelectedCategory(e.target.value);
+    }
+    if (e.target.name === "files" && e.target instanceof HTMLInputElement) {
       setTaskToAdd({
         ...taskToAdd,
-        [e.target.name]: Array.from(e.target.files || [])
-      })
-    }else{
+        [e.target.name]: Array.from(e.target.files || []),
+      });
+    } else {
       setTaskToAdd({
         ...taskToAdd,
         [e.target.name]: e.target.value,
@@ -39,33 +76,43 @@ const TaskAddForm: React.FC = () => {
     await addTask(taskToAdd, token);
   };
 
-
-  //kartın arkasındaki renk için zorluk belirten
-  const borderPicker=()=>{
-    if(taskToAdd.importance_level==="1"){
-      return "border-green-500"
-    }else if(taskToAdd.importance_level==="2"){
-      return "border-yellow-500"
-    }else if(taskToAdd.importance_level==="3"){
-      return "border-blue-500"
-    }else if(taskToAdd.importance_level==="4"){
-      return "border-red-500"
+  const borderPicker = () => {
+    if (taskToAdd.importance_level === "1") {
+      return "border-green-500";
+    } else if (taskToAdd.importance_level === "2") {
+      return "border-yellow-500";
+    } else if (taskToAdd.importance_level === "3") {
+      return "border-blue-500";
+    } else if (taskToAdd.importance_level === "4") {
+      return "border-red-500";
     }
-  }
+  };
 
-  useEffect(()=>{
-    borderPicker();
-  },[taskToAdd])
-  //kartın arkasındaki renk için zorluk belirten bitiş
+  useEffect(() => {
+    const fetchCategoryImage = async () => {
+      if (selectedCategory && categoryImages[selectedCategory]) {
+        const response = await fetch(categoryImages[selectedCategory]);
+        const blob = await response.blob();
+        const imageFile = new File([blob], `${selectedCategory}.png`, {
+          type: "image/png",
+        });
+        setTaskToAdd((prev) => ({ ...prev, files: [imageFile] }));
+      }
+    };
+  
+    fetchCategoryImage();
+  }, [selectedCategory]);
+  
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className={`bg-white border-t-8 ${borderPicker()} shadow-lg rounded-2xl w-[20vw] py-[4vh] relative`}>
+      <div
+        className={`bg-white border-t-8 ${borderPicker()} shadow-lg rounded-2xl w-[20vw] py-[4vh] relative`}
+      >
         <form
           className="mx-5 relative flex flex-col gap-y-4"
           onSubmit={handleSubmit}
         >
-          {/* Başlık */}
           <input
             className="text-2xl text-gray-800 font-semibold border-b"
             name="title"
@@ -73,7 +120,6 @@ const TaskAddForm: React.FC = () => {
             onChange={handleChange}
           />
 
-          {/* Açıklama */}
           <input
             className="text-gray-400 border-b"
             name="description"
@@ -81,15 +127,21 @@ const TaskAddForm: React.FC = () => {
             onChange={handleChange}
           />
 
-          {/* Kategori */}
-          <input
+          <select
             className="text-gray-400 border-b"
             name="category"
-            placeholder="Category"
             onChange={handleChange}
-          />
+          >
+            <option value="" disabled>
+              Select a category
+            </option>
+            {Object.keys(categoryImages).map((key) => (
+              <option key={key} value={key}>
+                {key.charAt(0).toUpperCase() + key.slice(1)}
+              </option>
+            ))}
+          </select>
 
-          {/* Önemlilik Derecesi */}
           <div className="mt-4">
             <label className="text-gray-800 font-semibold">
               Importance Level
@@ -101,9 +153,7 @@ const TaskAddForm: React.FC = () => {
                 max="4"
                 step="1"
                 name="importance_level"
-                onChange={(e) => {
-                  handleChange(e);
-                }}
+                onChange={handleChange}
                 className="w-full h-3 rounded-lg appearance-none cursor-pointer bg-gray-300"
               />
               <div className="flex justify-between text-xs font-semibold mt-1">
@@ -115,7 +165,6 @@ const TaskAddForm: React.FC = () => {
             </div>
           </div>
 
-          {/* Tarihler */}
           <div className="flex justify-between">
             <input
               className="text-xs text-gray-600 border-b"
@@ -131,16 +180,24 @@ const TaskAddForm: React.FC = () => {
             />
           </div>
 
-          <div>
+          {/* <div>
             <input type="file" name="files" multiple onChange={handleChange} />
-          </div>
+          </div> */}
 
-          {/* Görsel */}
           <div className="flex justify-center mt-4">
-            <Image className="w-20" src={RoboticHand} alt="not found" />
+            {selectedCategory ? (
+              <Image
+                width={500}
+                height={500}
+                className="w-20"
+                src={categoryImages[selectedCategory]}
+                alt={selectedCategory}
+              />
+            ) : (
+              <p className="text-gray-500">Select a category to see the image</p>
+            )}
           </div>
 
-          {/* Submit Butonu */}
           <button
             type="submit"
             className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-600"

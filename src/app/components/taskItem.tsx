@@ -3,7 +3,7 @@ import React, { ChangeEvent, useState } from "react";
 import { deleteTask, updateTask } from "../api/taskService";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import RoboticHand from "@/../public/assets/robotic-hand.png"
+import OtherCat from "@/../public/assets/category-images/other.png";
 import Image from "next/image";
 import { MdDragIndicator } from "react-icons/md";
 import { IoIosMenu } from "react-icons/io";
@@ -154,7 +154,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
             
             {/* resim kısmı */}
             <div className="flex justify-center">
-              <Image className="mt-[5vh]" width="100" src={RoboticHand} alt="not found"/>
+              <Image className="mt-[5vh]" width="100" height={100} src={task.images[0]?.Location || OtherCat} alt="not found"/>
             </div>
 
             {/* Sürüklenebilme özelliği olan button kısmı */}
