@@ -95,6 +95,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
                   name="title"
                   onChange={handleChange}
                   placeholder="Update task title"
+                  className="border-2 border-gray-300 focus:border-blue-500 rounded-lg px-2 py-2 mt-2 w-[90%] transition-all duration-300 ease-in-out shadow-sm focus:ring-2 focus:ring-blue-500"
                 />
               )}
             </div>
@@ -107,6 +108,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
                   name="description"
                   onChange={handleChange}
                   placeholder="Update task description"
+                  className="border-2 border-gray-300 focus:border-blue-500 rounded-lg px-2 py-2 mt-2 w-[90%] transition-all duration-300 ease-in-out shadow-sm focus:ring-2 focus:ring-blue-500"
                 />
               )}
             </div>
@@ -122,6 +124,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
                       name="start_date"
                       onChange={handleChange}
                       placeholder="Update task start_date"
+                      className="border-2 border-gray-300 focus:border-blue-500 rounded-lg px-2 py-2 mt-2 w-[90%] transition-all duration-300 ease-in-out shadow-sm focus:ring-2 focus:ring-blue-500"
                     />
                   )}
                 </div>
@@ -147,6 +150,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
                       name="end_date"
                       onChange={handleChange}
                       placeholder="Update task end_date"
+                      className="border-2 border-gray-300 focus:border-blue-500 rounded-lg px-2 py-2 mt-2 w-[90%] transition-all duration-300 ease-in-out shadow-sm focus:ring-2 focus:ring-blue-500"
                     />
                   )}
                 </div>
