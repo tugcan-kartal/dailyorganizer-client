@@ -17,6 +17,7 @@ import LifestyleCat from "@/../public/assets/category-images/lifestyle.png";
 import FoodCat from "@/../public/assets/category-images/food.png";
 import EnvironmentCat from "@/../public/assets/category-images/environment.png";
 import OtherCat from "@/../public/assets/category-images/other.png";
+import { borderPicker } from "./borderPicker";
 
 const categoryImages: { [key: string]: string } = {
   technology: TechnologyCat.src,
@@ -76,18 +77,6 @@ const TaskAddForm: React.FC = () => {
     await addTask(taskToAdd, token);
   };
 
-  const borderPicker = () => {
-    if (taskToAdd.importance_level === "1") {
-      return "border-green-500";
-    } else if (taskToAdd.importance_level === "2") {
-      return "border-yellow-500";
-    } else if (taskToAdd.importance_level === "3") {
-      return "border-blue-500";
-    } else if (taskToAdd.importance_level === "4") {
-      return "border-red-500";
-    }
-  };
-
   useEffect(() => {
     const fetchCategoryImage = async () => {
       if (selectedCategory && categoryImages[selectedCategory]) {
@@ -107,7 +96,7 @@ const TaskAddForm: React.FC = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div
-        className={`bg-white border-t-8 ${borderPicker()} shadow-lg rounded-2xl w-[20vw] py-[4vh] relative`}
+        className={`bg-white border-t-8 ${borderPicker(taskToAdd)} shadow-lg rounded-2xl w-[20vw] py-[4vh] relative`}
       >
         <form
           className="mx-5 relative flex flex-col gap-y-4"

@@ -7,6 +7,7 @@ import OtherCat from "@/../public/assets/category-images/other.png";
 import Image from "next/image";
 import { MdDragIndicator } from "react-icons/md";
 import { IoIosMenu } from "react-icons/io";
+import { borderPicker } from "./borderPicker";
 
 
 const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
@@ -71,7 +72,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
 
   return (
     <div>
-      <div className="bg-white border-t-8 border-red-500 shadow-lg rounded-2xl w-[20vw] py-[4vh] relative">
+      <div className={`bg-white border-t-8 ${borderPicker(task)} shadow-lg rounded-2xl w-[20vw] py-[4vh] relative`}>
           {/* <div className="absolute top-0 left-0 h-full bg-yellow-500 text-white flex items-center justify-center w-[50px] rounded-l-2xl">
             <div className="rotate-90 whitespace-nowrap">{task.category}</div>
             {isEditing && (
