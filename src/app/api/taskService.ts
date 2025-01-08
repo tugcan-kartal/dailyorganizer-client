@@ -15,17 +15,39 @@ export const getUserTasks=async(token: string)=>{
     return await response.json();
 }
 
-export const addTask=async(taskData: any,token: string)=>{
-    const response=await fetch(API_URL, {
-        method: "POST",
-        headers: {
-            "Content-Type":"application/json",
-            Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(taskData),
+export const addTask = async (taskData: any, token: string) => {
+    // FormData oluşturuyoruz
+    const formData = new FormData();
+  
+    // Diğer alanları FormData'ya ekliyoruz
+    formData.append("title", taskData.title);
+    formData.append("description", taskData.description);
+    formData.append("importance_level", taskData.importance_level);
+    formData.append("category", taskData.category);
+    formData.append("start_date", taskData.start_date);
+    formData.append("end_date", taskData.end_date);
+  
+    // Dosyaları FormData'ya ekliyoruz
+    if (taskData.files.length > 0) {
+      taskData.files.forEach((file: File) => {
+        formData.append("files", file);
+      });
+    }
+  
+    // API'ye veri gönderiyoruz
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        // Content-Type burada belirtilmez çünkü FormData otomatik olarak bunu yapar
+      },
+      body: formData, // FormData'yı gönderiyoruz
     });
-    return response.json();
-}
+  
+    const data = await response.json();
+    return data;
+  };
+  
 
 export const updateTask=async(taskId: string,taskData: any)=>{
     const response=await fetch(`${API_URL}/${taskId}`,{

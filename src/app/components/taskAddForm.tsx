@@ -12,13 +12,22 @@ const TaskAddForm: React.FC = () => {
     category: "",
     start_date: "",
     end_date: "",
+    files: [] as File[],
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setTaskToAdd({
-      ...taskToAdd,
-      [e.target.name]: e.target.value,
-    });
+    if(e.target.name==="files"){
+      console.log(e.target.files)
+      setTaskToAdd({
+        ...taskToAdd,
+        [e.target.name]: Array.from(e.target.files || [])
+      })
+    }else{
+      setTaskToAdd({
+        ...taskToAdd,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -120,6 +129,10 @@ const TaskAddForm: React.FC = () => {
               name="end_date"
               onChange={handleChange}
             />
+          </div>
+
+          <div>
+            <input type="file" name="files" multiple onChange={handleChange} />
           </div>
 
           {/* Görsel */}
