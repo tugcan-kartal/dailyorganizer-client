@@ -88,15 +88,16 @@ const TaskAddForm: React.FC = () => {
         setTaskToAdd((prev) => ({ ...prev, files: [imageFile] }));
       }
     };
-  
+
     fetchCategoryImage();
   }, [selectedCategory]);
-  
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div
-        className={`bg-white border-t-8 ${borderPicker(taskToAdd)} shadow-lg rounded-2xl w-[20vw] py-[4vh] relative`}
+        className={`bg-white border-t-8 ${borderPicker(
+          taskToAdd
+        )} shadow-lg rounded-2xl w-[20vw] py-[4vh] relative`}
       >
         <form
           className="mx-5 relative flex flex-col gap-y-4"
@@ -154,19 +155,30 @@ const TaskAddForm: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex justify-between">
-            <input
-              className="text-xs text-gray-600 border-b"
-              type="date"
-              name="start_date"
-              onChange={handleChange}
-            />
-            <input
-              className="text-xs text-gray-600 border-b"
-              type="date"
-              name="end_date"
-              onChange={handleChange}
-            />
+          <div className="flex justify-between items-center space-x-6">
+            <div className="flex flex-col gap-y-1 w-1/2">
+              <label className="text-sm text-gray-700 font-medium">
+                Starting Date
+              </label>
+              <input
+                className="text-xs text-gray-600 border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 rounded-md"
+                type="date"
+                name="start_date"
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="flex flex-col gap-y-1 w-1/2">
+              <label className="text-sm text-gray-700 font-medium">
+                Ending Date
+              </label>
+              <input
+                className="text-xs text-gray-600 border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 rounded-md"
+                type="date"
+                name="end_date"
+                onChange={handleChange}
+              />
+            </div>
           </div>
 
           {/* <div>
@@ -183,7 +195,9 @@ const TaskAddForm: React.FC = () => {
                 alt={selectedCategory}
               />
             ) : (
-              <p className="text-gray-500">Select a category to see the image</p>
+              <p className="text-gray-500">
+                Select a category to see the image
+              </p>
             )}
           </div>
 
