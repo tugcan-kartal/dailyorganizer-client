@@ -74,142 +74,157 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
       <div
         className={`bg-white border-t-8 ${borderPicker(
           task
-        )} shadow-lg rounded-2xl w-[20vw] py-[4vh] relative`}
+        )} shadow-lg rounded-2xl w-[20vw] py-4 relative`}
       >
-        <div className="ml-[2vw] relative">
+        <div className="relative w-[90%] mx-auto py-2">
           <div>
-            {/* title kısmı */}
-            <div>
-              <div className="text-2xl text-gray-800 font-semibold">
-                {task.title}
+            {/* Sürükle ve Menü butonu  */}
+            <div className="w-[100%]">
+              {/* Çarpı ve sürükleme butonu */}
+              <div className="flex justify-between pb-2">
+
+                {/* Sürüklenebilme özelliği olan button kısmı */}
+                <div
+                  ref={setNodeRef}
+                  {...attributes}
+                  {...listeners}
+                  style={style}
+                  className="text-3xl font-semibold cursor-pointer"
+                >
+                  <MdDragIndicator />
+                </div>
+
+                {/* Kapama butonu */}
+                <div
+                  onClick={() => setIsMenu(!isMenu)}
+                  className="text-4xl cursor-pointer"
+                >
+                  {isMenu ? <IoMdClose /> : <IoIosMenu />}
+                </div>
               </div>
-              {isEditing && (
-                <input
-                  name="title"
-                  onChange={handleChange}
-                  placeholder="Update task title"
-                  className="border-2 border-gray-300 focus:border-blue-500 rounded-lg px-2 py-2 mt-2 w-[90%] transition-all duration-300 ease-in-out shadow-sm focus:ring-2 focus:ring-blue-500"
-                />
-              )}
-            </div>
 
-            {/* description kısmı */}
-            <div className="text-gray-400 my-[2vh]">
-              <div>{task.description}</div>
-              {isEditing && (
-                <input
-                  name="description"
-                  onChange={handleChange}
-                  placeholder="Update task description"
-                  className="border-2 border-gray-300 focus:border-blue-500 rounded-lg px-2 py-4 mt-2 w-[90%] transition-all duration-300 ease-in-out shadow-sm focus:ring-2 focus:ring-blue-500"
-                />
-              )}
-            </div>
+              {/* Delete cancel update butonları */}
+              <div>
+                {isMenu && (
+                  <div className="flex justify-center gap-x-[1.5vw] my-2">
+                    <button
+                      className="bg-red-500 rounded-2xl px-[1.5vw] py-1 text-white shadow-lg"
+                      onClick={handleDelete}
+                    >
+                      Delete
+                    </button>
+                    
+                    <button
+                      className="bg-yellow-500 rounded-2xl px-[1.5vw] py-1 text-white shadow-lg"
+                      onClick={() => setIsEditing(!isEditing)}
+                    >
+                      {isEditing ? "Cancel" : "Edit"}
+                    </button>
 
-            {/* date ve yüzde barı kısmı */}
-            <div className="flex justify-between mr-6 mt-[5vh] space-x-6">
-              {/* Start Date Section */}
-              <div className="flex flex-col items-center w-[15%]">
-                <div className="text-sm text-gray-700 font-medium">
-                  {new Date(task.start_date).toLocaleDateString("en-GB")}
+                    {isEditing ? (
+                      <button
+                        className="bg-green-500 rounded-2xl px-[1.5vw] py-1 text-white shadow-lg"
+                        onClick={handleUpdate}
+                      >
+                        {isEditing ? "Update" : ""}
+                      </button>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            {/* Kart içeriği */}
+            <div className="w-[80%] mx-auto">
+              {/* title kısmı */}
+              <div>
+                <div className="text-2xl text-gray-800 font-semibold">
+                  {task.title}
                 </div>
                 {isEditing && (
                   <input
-                    type="date"
-                    name="start_date"
+                    name="title"
                     onChange={handleChange}
-                    placeholder="Update task start_date"
-                    className="border-2 border-gray-300 focus:border-blue-500 rounded-lg px-3 py-2 mt-2 w-[90%] transition-all duration-300 ease-in-out shadow-sm focus:ring-2 focus:ring-blue-500"
+                    placeholder="Update task title"
+                    className="border-2 border-gray-300 focus:border-blue-500 rounded-lg px-2 py-2 mt-2 w-[90%] transition-all duration-300 ease-in-out shadow-sm focus:ring-2 focus:ring-blue-500"
                   />
                 )}
               </div>
 
-              {/* Progress Bar Section */}
-              <div className="flex flex-col items-center w-[70%]">
-                <div className="relative w-full bg-gray-200 rounded-full h-4">
-                  <div
-                    className="bg-blue-500 h-4 rounded-full transition-all duration-300 ease-in-out"
-                    style={{ width: `${progress}%` }}
-                  ></div>
-                </div>
-                <div className="text-xs text-gray-600 text-center mt-2">
-                  {progress}% time passed
-                </div>
-              </div>
-
-              {/* End Date Section */}
-              <div className="flex flex-col items-center w-[15%]">
-                <div className="text-sm text-gray-700 font-medium">
-                  {new Date(task.end_date).toLocaleDateString("en-GB")}
-                </div>
+              {/* description kısmı */}
+              <div className="text-gray-400 my-[2vh]">
+                <div>{task.description}</div>
                 {isEditing && (
                   <input
-                    type="date"
-                    name="end_date"
+                    name="description"
                     onChange={handleChange}
-                    placeholder="Update task end_date"
-                    className="border-2 border-gray-300 focus:border-blue-500 rounded-lg px-3 py-2 mt-2 w-full transition-all duration-300 ease-in-out shadow-sm focus:ring-2 focus:ring-blue-500"
+                    placeholder="Update task description"
+                    className="border-2 border-gray-300 focus:border-blue-500 rounded-lg px-2 py-4 mt-2 w-[90%] transition-all duration-300 ease-in-out shadow-sm focus:ring-2 focus:ring-blue-500"
                   />
                 )}
               </div>
-            </div>
 
-            {/* resim kısmı */}
-            <div className="flex justify-center">
-              <Image
-                className="mt-[5vh]"
-                width="100"
-                height={100}
-                src={task.images[0]?.Location || OtherCat}
-                alt="not found"
-              />
-            </div>
+              {/* date ve yüzde barı kısmı */}
+              <div className="flex justify-between mt-[5vh] mx-3 gap-x-[1.5vw]">
+                {/* Start Date Section */}
+                <div className="flex flex-col items-center w-[15%]">
+                  <div className="text-sm text-gray-700 font-medium">
+                    {new Date(task.start_date).toLocaleDateString("en-GB")}
+                  </div>
+                  {isEditing && (
+                    <input
+                      type="date"
+                      name="start_date"
+                      onChange={handleChange}
+                      placeholder="Update task start_date"
+                      className="border-2 border-gray-300 focus:border-blue-500 rounded-lg px-[0.7vw] py-2 mt-2 w-full transition-all duration-300 ease-in-out shadow-sm focus:ring-2 focus:ring-blue-500"
+                    />
+                  )}
+                </div>
 
-            {/* Sürüklenebilme özelliği olan button kısmı */}
-            <div
-              ref={setNodeRef}
-              {...attributes}
-              {...listeners}
-              style={style}
-              className="absolute top-[-3vh] left-[-2vw] text-3xl font-semibold cursor-pointer"
-            >
-              <MdDragIndicator />
-            </div>
+                {/* Progress Bar Section */}
+                <div className="flex flex-col items-center w-[60%]">
+                  <div className="relative w-full bg-gray-200 rounded-full h-4">
+                    <div
+                      className="bg-blue-500 h-4 rounded-full transition-all duration-300 ease-in-out"
+                      style={{ width: `${progress}%` }}
+                    ></div>
+                  </div>
+                  <div className="text-xs text-gray-600 text-center mt-2">
+                    {progress}% time passed
+                  </div>
+                </div>
 
-            {/* Butonlar */}
-            <div
-              onClick={() => setIsMenu(!isMenu)}
-              className="absolute top-[-3vh] right-[0vw] text-4xl cursor-pointer"
-            >
-              {isMenu ? <IoMdClose /> : <IoIosMenu />}
-            </div>
-            {isMenu && (
-              <div className="flex gap-x-4 absolute top-[-3vh] left-[-2vw]">
-                <button
-                  className="bg-red-500 rounded-2xl px-[1.5vw] py-1 text-white shadow-lg"
-                  onClick={handleDelete}
-                >
-                  Delete
-                </button>
-                <button
-                  className="bg-yellow-500 rounded-2xl px-[1.5vw] py-1 text-white shadow-lg"
-                  onClick={() => setIsEditing(!isEditing)}
-                >
-                  {isEditing ? "Cancel" : "Edit"}
-                </button>
-
-                {isEditing ? (
-                  <button
-                    className="bg-green-500 rounded-2xl px-[1.5vw] py-1 text-white shadow-lg"
-                    onClick={handleUpdate}
-                  >
-                    {isEditing ? "Update" : ""}
-                  </button>
-                ) : (
-                  ""
-                )}
+                {/* End Date Section */}
+                <div className="flex flex-col items-center w-[15%]">
+                  <div className="text-sm text-gray-700 font-medium">
+                    {new Date(task.end_date).toLocaleDateString("en-GB")}
+                  </div>
+                  {isEditing && (
+                    <input
+                      type="date"
+                      name="end_date"
+                      onChange={handleChange}
+                      placeholder="Update task end_date"
+                      className="border-2 border-gray-300 focus:border-blue-500 rounded-lg px-[0.7vw] py-2 mt-2 w-full transition-all duration-300 ease-in-out shadow-sm focus:ring-2 focus:ring-blue-500"
+                    />
+                  )}
+                </div>
               </div>
-            )}
+
+              {/* resim kısmı */}
+              <div className="flex justify-center">
+                <Image
+                  className="mt-[5vh]"
+                  width="100"
+                  height={100}
+                  src={task.images[0]?.Location || OtherCat}
+                  alt="not found"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
