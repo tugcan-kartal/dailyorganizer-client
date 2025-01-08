@@ -7,6 +7,7 @@ import OtherCat from "@/../public/assets/category-images/other.png";
 import Image from "next/image";
 import { MdDragIndicator } from "react-icons/md";
 import { IoIosMenu } from "react-icons/io";
+import { IoMdClose } from "react-icons/io";
 import { borderPicker } from "./borderPicker";
 
 
@@ -73,16 +74,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
   return (
     <div>
       <div className={`bg-white border-t-8 ${borderPicker(task)} shadow-lg rounded-2xl w-[20vw] py-[4vh] relative`}>
-          {/* <div className="absolute top-0 left-0 h-full bg-yellow-500 text-white flex items-center justify-center w-[50px] rounded-l-2xl">
-            <div className="rotate-90 whitespace-nowrap">{task.category}</div>
-            {isEditing && (
-              <input
-                name="category"
-                onChange={handleChange}
-                placeholder="Update task category"
-              />
-            )}
-          </div> */}
+          
         <div className="ml-[2vw] relative">
           
           <div>
@@ -108,7 +100,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
                   name="description"
                   onChange={handleChange}
                   placeholder="Update task description"
-                  className="border-2 border-gray-300 focus:border-blue-500 rounded-lg px-2 py-2 mt-2 w-[90%] transition-all duration-300 ease-in-out shadow-sm focus:ring-2 focus:ring-blue-500"
+                  className="border-2 border-gray-300 focus:border-blue-500 rounded-lg px-2 py-4 mt-2 w-[90%] transition-all duration-300 ease-in-out shadow-sm focus:ring-2 focus:ring-blue-500"
                 />
               )}
             </div>
@@ -169,18 +161,18 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
             
             {/* Butonlar */}
             <div onClick={()=>setIsMenu(!isMenu)} className="absolute top-[-3vh] right-[0vw] text-4xl cursor-pointer">
-              <IoIosMenu />
+              {isMenu ? <IoMdClose /> : <IoIosMenu />}
             </div>
             {isMenu && 
-              <div className="flex flex-col gap-y-[4vh] absolute top-[2vh] right-[-6.7vw] justify-evenly">
+              <div className="flex gap-x-4 absolute top-[-3vh] left-[-2vw]">
                 <button
-                  className="bg-red-500 rounded-2xl px-[2vw] py-1"
+                  className="bg-red-500 rounded-2xl px-[1.5vw] py-1 text-white shadow-lg"
                   onClick={handleDelete}
                 >
                   Delete
                 </button>
                 <button
-                  className="bg-yellow-500 rounded-2xl px-[2vw] py-1"
+                  className="bg-yellow-500 rounded-2xl px-[1.5vw] py-1 text-white shadow-lg"
                   onClick={() => setIsEditing(!isEditing)}
                 >
                   {isEditing ? "Cancel" : "Edit"}
@@ -188,7 +180,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
 
                 {isEditing ? (
                   <button
-                    className="bg-green-500 rounded-2xl px-[2vw] py-1"
+                    className="bg-green-500 rounded-2xl px-[1.5vw] py-1 text-white shadow-lg"
                     onClick={handleUpdate}
                   >
                     {isEditing ? "Update" : ""}
@@ -200,11 +192,7 @@ const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
             }
           </div>
           
-          
-          
         </div>
-        
-        
 
       </div>
     </div>
