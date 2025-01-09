@@ -26,7 +26,9 @@ const TaskList: React.FC = () => {
 
     try {
       const data = await getUserTasks(token);
-      setTasks(data);
+      if(Array.isArray(data)){
+        setTasks(data);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -79,7 +81,7 @@ const TaskList: React.FC = () => {
           onDragEnd={handleDragEnd}
         >
           <SortableContext
-            items={tasks && tasks.map((task) => task._id)}
+            items={tasks?.map((task) => task._id)}
             strategy={rectSortingStrategy}
           >
             {tasks.map((task) => (
