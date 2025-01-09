@@ -3,40 +3,17 @@ import { rectSortingStrategy, SortableContext } from "@dnd-kit/sortable";
 import { getUserTasks, saveTaskOrder } from "../api/taskService";
 import TaskItem from "./taskItem";
 import { closestCorners, DndContext, DragOverlay } from "@dnd-kit/core";
+import { Task } from "../tasks/page";
 
-export interface Task {
-  _id: string;
-  title: string;
-  description: string;
-  importance_level: number;
-  category: string;
-  start_date: string;
-  end_date: string;
-  order: number;
+interface TaskListProps {
+  tasks: Task[];
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+  fetchTasks: () => Promise<void>;
 }
 
-const TaskList: React.FC = () => {
-  const [tasks, setTasks] = useState<Task[]>([]);
+const TaskList: React.FC<TaskListProps> = ({tasks,setTasks,fetchTasks}) => {
 
   const [activeTask, setActiveTask] = useState<Task | null>(null); // Sürüklenen görev için olan state
-
-  const fetchTasks = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-
-    try {
-      const data = await getUserTasks(token);
-      if(Array.isArray(data)){
-        setTasks(data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchTasks();
-  }, []);
 
   // Sürüklenen görev için olan fonksiyonlar
   const handleDragStart = (event: any) => {
@@ -85,7 +62,7 @@ const TaskList: React.FC = () => {
             strategy={rectSortingStrategy}
           >
             {tasks.map((task) => (
-              <TaskItem key={task._id} task={task} refreshTasks={fetchTasks} />
+              <TaskItem key={task._id} task={task} fetchTasks={fetchTasks} />
             ))}
           </SortableContext>
 

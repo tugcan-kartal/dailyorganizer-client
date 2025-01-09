@@ -10,9 +10,9 @@ import { IoIosMenu } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import { borderPicker } from "./borderPicker";
 
-const TaskItem: React.FC<{ task: any; refreshTasks: () => void }> = ({
+const TaskItem: React.FC<{ task: any; fetchTasks: () => void }> = ({
   task,
-  refreshTasks,
+  fetchTasks: refreshTasks,
 }) => {
   const [newUpdatedTask, setNewUpdatedTask] = useState({
     title: task.title,
