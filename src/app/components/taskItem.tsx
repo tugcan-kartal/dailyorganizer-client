@@ -10,7 +10,7 @@ import { IoIosMenu } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import { borderPicker } from "./borderPicker";
 
-const TaskItem: React.FC<{ task: any; fetchTasks: () => void }> = ({
+const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
   task,
   fetchTasks: refreshTasks,
 }) => {
@@ -106,7 +106,7 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => void }> = ({
               {/* Delete cancel update butonları */}
               <div>
                 {isMenu && (
-                  <div className="flex justify-center gap-x-[1.5vw] my-2">
+                  <div className="flex justify-center gap-x-[1.5vw] mb-5">
                     <button
                       className="bg-red-500 rounded-2xl px-[1.5vw] py-1 text-white shadow-lg"
                       onClick={handleDelete}
@@ -169,7 +169,7 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => void }> = ({
               {/* date ve yüzde barı kısmı */}
               <div className="flex justify-between mt-[5vh] mx-3 gap-x-[1.5vw]">
                 {/* Start Date Section */}
-                <div className="flex flex-col items-center w-[15%]">
+                <div className="flex flex-col items-center w-[20%]">
                   <div className="text-sm text-gray-700 font-medium">
                     {new Date(task.start_date).toLocaleDateString("en-GB")}
                   </div>
@@ -198,7 +198,7 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => void }> = ({
                 </div>
 
                 {/* End Date Section */}
-                <div className="flex flex-col items-center w-[15%]">
+                <div className="flex flex-col items-center w-[20%]">
                   <div className="text-sm text-gray-700 font-medium">
                     {new Date(task.end_date).toLocaleDateString("en-GB")}
                   </div>

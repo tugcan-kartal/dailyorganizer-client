@@ -40,7 +40,7 @@ const Tasks: React.FC=()=>{
     return(
         <div className="bg-blue-100 h-full py-10">
             <TaskList tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks}/>
-            <TaskAddForm />
+            <TaskAddForm fetchTasks={fetchTasks}/>
         </div>
     )
 }

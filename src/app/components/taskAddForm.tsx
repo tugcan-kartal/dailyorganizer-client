@@ -36,7 +36,7 @@ const categoryImages: { [key: string]: string } = {
   other: OtherCat.src,
 };
 
-const TaskAddForm: React.FC = () => {
+const TaskAddForm: React.FC<{fetchTasks: () => Promise<void>}> = ({ fetchTasks }) => {
   const [taskToAdd, setTaskToAdd] = useState({
     title: "",
     description: "",
@@ -75,6 +75,7 @@ const TaskAddForm: React.FC = () => {
     if (!token) return;
 
     await addTask(taskToAdd, token);
+    fetchTasks()
   };
 
   useEffect(() => {
