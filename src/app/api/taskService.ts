@@ -2,8 +2,9 @@ import { Task } from "../tasks/page";
 
 const API_URL="http://localhost:3000/task";
 
-export const getUserTasks=async(token: string)=>{
-    const response=await fetch(API_URL, {
+export const getUserTasks=async(token: string,taskFilter?: string)=>{
+    const queryParams=taskFilter ? `?filter=${taskFilter}` : "";
+    const response=await fetch(`${API_URL}${queryParams}`, {
         method: "GET",
         headers: {
             "Content-Type":"application/json",
@@ -78,7 +79,6 @@ export const saveTaskOrder = async (updatedTasks: Task[]) => {
       console.error("Failed to save task order:", error);
     }
 };
-  
 
 export const deleteTask=async(taskId: string) => {
     const response=await fetch(`${API_URL}/${taskId}`,{method: "DELETE"});

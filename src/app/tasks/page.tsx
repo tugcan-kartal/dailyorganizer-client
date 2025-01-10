@@ -19,13 +19,14 @@ export interface Task {
 const Tasks: React.FC=()=>{
 
     const [tasks, setTasks] = useState<Task[]>([]);
+    const [taskFilter, setTaskFilter] = useState<string | undefined>(undefined);
 
     const fetchTasks = async () => {
         const token = localStorage.getItem("token");
         if (!token) return;
     
         try {
-          const data = await getUserTasks(token);
+          const data = await getUserTasks(token,taskFilter);
           if(Array.isArray(data)){
             setTasks(data);
           }
@@ -36,14 +37,14 @@ const Tasks: React.FC=()=>{
     
       useEffect(() => {
         fetchTasks();
-      }, []);
+      }, [taskFilter || ""]);
 
     return(
         <div className="bg-blue-100 h-full">
           <div className="flex gap-x-8">
 
             <div className="w-[15%] border-r-2 bg-gray-100 border-white shadow-lg">
-              <SideBar />
+              <SideBar setTaskFilter={setTaskFilter}/>
             </div>
 
             <div className="w-[60%]">
