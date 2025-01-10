@@ -1,7 +1,6 @@
-import { Task } from "../components/taskList";
+import { Task } from "../tasks/page";
 
 const API_URL="http://localhost:3000/task";
-
 
 export const getUserTasks=async(token: string)=>{
     const response=await fetch(API_URL, {
@@ -46,9 +45,8 @@ export const addTask = async (taskData: any, token: string) => {
   
     const data = await response.json();
     return data;
-  };
+};
   
-
 export const updateTask=async(taskId: string,taskData: any)=>{
     const response=await fetch(`${API_URL}/${taskId}`,{
         method: "PUT",
@@ -61,6 +59,7 @@ export const updateTask=async(taskId: string,taskData: any)=>{
     return response.json();
 }
 
+// Burası sürüklenen taskların orderını belirliyordu
 export const saveTaskOrder = async (updatedTasks: Task[]) => {
     const token = localStorage.getItem("token");
     if (!token) return;
@@ -78,7 +77,7 @@ export const saveTaskOrder = async (updatedTasks: Task[]) => {
     } catch (error) {
       console.error("Failed to save task order:", error);
     }
-  };
+};
   
 
 export const deleteTask=async(taskId: string) => {

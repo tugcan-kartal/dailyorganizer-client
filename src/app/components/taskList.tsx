@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { rectSortingStrategy, SortableContext } from "@dnd-kit/sortable";
-import { getUserTasks, saveTaskOrder } from "../api/taskService";
+import { saveTaskOrder } from "../api/taskService";
 import TaskItem from "./taskItem";
 import { closestCorners, DndContext, DragOverlay } from "@dnd-kit/core";
 import { Task } from "../tasks/page";

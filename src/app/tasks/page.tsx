@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import TaskList from "../components/taskList";
 import TaskAddForm from "../components/taskAddForm";
 import { getUserTasks } from "../api/taskService";
+import SideBar from "../components/sideBar";
 
 export interface Task {
   _id: string;
@@ -38,9 +39,19 @@ const Tasks: React.FC=()=>{
       }, []);
 
     return(
-        <div className="bg-blue-100 h-full py-10">
-            <TaskList tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks}/>
-            <TaskAddForm fetchTasks={fetchTasks}/>
+        <div className="bg-blue-100 h-full">
+          <div className="flex gap-x-8">
+
+            <div className="w-[15%] border-r-2 bg-gray-100 border-white shadow-lg">
+              <SideBar />
+            </div>
+
+            <div className="w-[60%]">
+              <TaskList tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks}/>
+              <TaskAddForm fetchTasks={fetchTasks}/>
+            </div>
+
+          </div>
         </div>
     )
 }
