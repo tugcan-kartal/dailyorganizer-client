@@ -1,20 +1,56 @@
 import React from "react";
+import CategoryBar from "@/../public/assets/sidebar-images/category.png";
+import ImportanceBar from "@/../public/assets/sidebar-images/importance.png";
+import StartDateBar from "@/../public/assets/sidebar-images/start-date.png";
+import EndDateBar from "@/../public/assets/sidebar-images/end-date.png";
+import Image from "next/image";
 
 interface SideBarProps {
     setTaskFilter: (filter: string) => void;
 }
 
 const SideBar: React.FC<SideBarProps> = ({ setTaskFilter }) => {
+    
     return (
         <div>
             <div>
-                <div className="flex flex-col justify-center items-center gap-y-2 mt-[5vh]">
-                    <div className="cursor-pointer" onClick={()=>setTaskFilter("category:asc")}>List by category</div>
-                    <div className="cursor-pointer" onClick={()=>setTaskFilter("importance_level:asc")}>List by importance level</div>
-                    <div className="cursor-pointer" onClick={()=>setTaskFilter("start_date:asc")}>List by start date</div>
-                    <div className="cursor-pointer" onClick={()=>setTaskFilter("end_date:asc")}>List by end date</div>
+                <div className="flex flex-col justify-center gap-y-[2vh] mt-[5vh] ml-[1vw] border-b-2 border-gray-300 pb-10">
+
+                    <div className="cursor-pointer flex gap-x-4 w-[85%] hover:shadow-lg transition-all duration-300 px-2 py-2 rounded-lg" onClick={()=>setTaskFilter("category:asc")}>
+                        <div>
+                            <Image src={CategoryBar} alt="Category Bar" width={20}/>
+                        </div>
+                        <div>Sort by category</div>
+                    </div>
+
+                    <div className="cursor-pointer flex gap-x-4 w-[85%] hover:shadow-lg transition-all duration-300 px-2 py-2 rounded-lg" onClick={()=>setTaskFilter("importance_level:asc")}>
+                        <div>
+                            <Image src={ImportanceBar} alt="Importance Bar" width={20}/>
+                        </div>
+                        <div>Sort by Priority</div>
+                    </div>
+
+
+                    <div className="cursor-pointer flex gap-x-4 w-[85%] hover:shadow-lg transition-all duration-300 px-2 py-2 rounded-lg" onClick={()=>setTaskFilter("start_date:asc")}>
+                        <div>
+                            <Image src={StartDateBar} alt="StartDate Bar" width={20}/>
+                        </div>
+                        <div>Sort by Start Date</div>
+                    </div>
+
+                    <div className="cursor-pointer flex gap-x-4 w-[85%] hover:shadow-lg transition-all duration-300 px-2 py-2 rounded-lg" onClick={()=>setTaskFilter("end_date:asc")}>
+                        <div>
+                            <Image src={EndDateBar} alt="EndDate Bar" width={20}/>
+                        </div>
+                        <div>Sort by End Date</div>
+                    </div>
+
                 </div>
-                <div></div>
+
+
+                <div>
+
+                </div>
             </div>
         </div>
     );

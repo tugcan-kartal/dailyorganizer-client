@@ -40,14 +40,14 @@ const Tasks: React.FC=()=>{
       }, [taskFilter || ""]);
 
     return(
-        <div className="bg-blue-100 h-full">
-          <div className="flex gap-x-8">
+        <div className="h-full">
+          <div className="flex">
 
-            <div className="w-[15%] border-r-2 bg-gray-100 border-white shadow-lg">
+            <div className="w-[15%] border-r-2 bg-white border-gray-50 shadow-lg">
               <SideBar setTaskFilter={setTaskFilter}/>
             </div>
 
-            <div className="w-[60%]">
+            <div className="w-[85%] bg-blue-100 py-10">
               <TaskList tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks}/>
               <TaskAddForm fetchTasks={fetchTasks}/>
             </div>
