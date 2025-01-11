@@ -18,9 +18,6 @@ import FoodCat from "@/../public/assets/category-images/food.png";
 import EnvironmentCat from "@/../public/assets/category-images/environment.png";
 import OtherCat from "@/../public/assets/category-images/other.png";
 import { borderPicker } from "./borderPicker";
-import { GoSidebarCollapse } from "react-icons/go";
-import { IoCreateOutline } from "react-icons/io5";
-import { CiViewList } from "react-icons/ci";
 import HeaderActions from "./headerActions";
 
 const categoryImages: { [key: string]: string } = {
@@ -53,13 +50,13 @@ const TaskAddForm: React.FC<TaskAddProps> = ({ isSideBar,setIsSiteBar,isAddTask,
     title: "",
     description: "",
     importance_level: "3",
-    category: "",
+    category: "other",
     start_date: "",
     end_date: "",
     files: [] as File[],
   });
 
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("other");
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -149,7 +146,7 @@ const TaskAddForm: React.FC<TaskAddProps> = ({ isSideBar,setIsSiteBar,isAddTask,
               name="category"
               onChange={handleChange}
             >
-              <option value="" disabled>
+              <option value="other" >
                 Select a category
               </option>
               {Object.keys(categoryImages).map((key) => (
