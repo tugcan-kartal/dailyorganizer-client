@@ -22,6 +22,8 @@ const SideBar: React.FC<SideBarProps> = ({ isAddTask,setIsAddTask,isSideBar,setI
     return (
         <div>
             <div>
+
+                {/* Sidebardaki sol üst köşedeki butonlar */}
                 <div className="flex justify-between pt-4 px-3">
                     <div className="text-2xl cursor-pointer" onClick={()=>setIsSiteBar(!isSideBar)}>
                         {isSideBar ? <GoSidebarExpand /> : <GoSidebarCollapse />}
@@ -31,7 +33,8 @@ const SideBar: React.FC<SideBarProps> = ({ isAddTask,setIsAddTask,isSideBar,setI
                         <IoCreateOutline />
                     </div>
                 </div>
-
+                
+                {/* Sidebardaki filtreleme tip buton fieldlarının bulunduğu yer */}
                 <div className="flex flex-col justify-center gap-y-[2vh] mt-[5vh] ml-[1vw] border-b-2 border-gray-300 pb-10">
 
                     <div className="cursor-pointer flex gap-x-4 w-[85%] hover:shadow-lg transition-all duration-300 px-2 py-2 rounded-lg" onClick={()=>setTaskFilter("category:asc")}>
@@ -64,7 +67,8 @@ const SideBar: React.FC<SideBarProps> = ({ isAddTask,setIsAddTask,isSideBar,setI
                     </div>
 
                 </div>
-
+                
+                {/* Buraya da mevcut taskları tekli gösterimi yapcam */}
                 <div>
                 </div>
             </div>

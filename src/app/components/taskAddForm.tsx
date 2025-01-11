@@ -78,6 +78,7 @@ const TaskAddForm: React.FC<{fetchTasks: () => Promise<void>}> = ({ fetchTasks }
     fetchTasks()
   };
 
+  // Burada seçtiğimiz kategori resmini mevcut urlsini localde olsa çıkarıyor ve onu normal url haline getiriyor yüklencek sonra files adı altında taskToAdde ekliyor files'ı
   useEffect(() => {
     const fetchCategoryImage = async () => {
       if (selectedCategory && categoryImages[selectedCategory]) {
@@ -118,6 +119,7 @@ const TaskAddForm: React.FC<{fetchTasks: () => Promise<void>}> = ({ fetchTasks }
             onChange={handleChange}
           />
 
+          {/* Kategori seçme kısmı */}
           <select
             className="text-gray-400 border-b"
             name="category"
@@ -132,7 +134,8 @@ const TaskAddForm: React.FC<{fetchTasks: () => Promise<void>}> = ({ fetchTasks }
               </option>
             ))}
           </select>
-
+          
+          {/* importance level ekleme kısmı */}
           <div className="mt-4">
             <label className="text-gray-800 font-semibold">
               Importance Level
@@ -155,7 +158,8 @@ const TaskAddForm: React.FC<{fetchTasks: () => Promise<void>}> = ({ fetchTasks }
               </div>
             </div>
           </div>
-
+          
+          {/* Tarih ekleme kısmı */}
           <div className="flex justify-between items-center space-x-6">
             <div className="flex flex-col gap-y-1 w-1/2">
               <label className="text-sm text-gray-700 font-medium">
@@ -181,11 +185,12 @@ const TaskAddForm: React.FC<{fetchTasks: () => Promise<void>}> = ({ fetchTasks }
               />
             </div>
           </div>
-
+          
           {/* <div>
             <input type="file" name="files" multiple onChange={handleChange} />
           </div> */}
 
+          {/* Seçtiğin kategoriye göre resim gelme kısmı */}
           <div className="flex justify-center mt-4">
             {selectedCategory ? (
               <Image

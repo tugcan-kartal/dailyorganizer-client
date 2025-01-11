@@ -20,11 +20,14 @@ export interface Task {
 const Tasks: React.FC=()=>{
 
     const [tasks, setTasks] = useState<Task[]>([]);
-    const [taskFilter, setTaskFilter] = useState<string | undefined>(undefined);
 
+    // Burada sidebardaki seçeneklere göre sort yapan fieldı ayarlıyor
+    const [taskFilter, setTaskFilter] = useState<string | undefined>(undefined);
+    // Burada sidebar açık mı kapalı mı
+    const [isSideBar,setIsSiteBar]=useState<boolean>(true)
+    // Burada task eklencek mi diye boolean kontrol
     const [isAddTask,setIsAddTask]=useState<boolean>(false);
 
-    const [isSideBar,setIsSiteBar]=useState<boolean>(true)
 
     const fetchTasks = async () => {
         const token = localStorage.getItem("token");
@@ -48,24 +51,25 @@ const Tasks: React.FC=()=>{
         <div className="h-full">
           <div className="flex">
 
-
+            {/* Burası sidebar açık halinin gösterim yeri yani sidebar kısmı */}
             <div className={`transition-all duration-500 ease-in-out ${ isSideBar ? "w-[15%]" : "w-0" } border-r-2 bg-white border-gray-50 shadow-lg`}>
               <SideBar isAddTask={isAddTask} setIsAddTask={setIsAddTask} isSideBar={isSideBar} setIsSiteBar={setIsSiteBar} setTaskFilter={setTaskFilter}/>
             </div>
-
+            
             <div className={` ${isSideBar ? "w-[85%]" : "w-[100%]"} bg-blue-100`}>
+              {/* Burası sidebar kapalı ise kapalıyken çıkan buton yani tekrar açmak için çıkarılan ikon yeri üstte de sidebarın açık olup olmamasına göre slider şekliyle kapatıyor veya açıyor isSideBar özelliğine göre */}
               {!isSideBar && 
                 <div>
                   <GoSidebarCollapse onClick={()=>setIsSiteBar(!isSideBar)} className="text-2xl cursor-pointer ml-5"/>
                 </div>
               }
+              {/* Burada ise eğer isAddTask açıksa yani task ekleme isteniyorsa o çıkıyor yoksa task listesi geliyor */}
               {!isAddTask ? 
                 <TaskList tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks}/>
                 :
                 <TaskAddForm fetchTasks={fetchTasks}/>
               }
             </div>
-
 
           </div>
         </div>

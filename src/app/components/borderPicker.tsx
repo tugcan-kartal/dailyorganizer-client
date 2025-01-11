@@ -1,3 +1,4 @@
+//Importance leveller low dan extreme e gidiyor ve 1 den başlıyor bunlar low yerine 1 diyoruz
 export const borderPicker = (task: any) => {
     if (task.importance_level === "1") {
       return "border-green-500";
