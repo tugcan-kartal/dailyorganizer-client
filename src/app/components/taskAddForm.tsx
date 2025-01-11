@@ -107,7 +107,7 @@ const TaskAddForm: React.FC<TaskAddProps> = ({ isSideBar,setIsSiteBar,isAddTask,
   }, [selectedCategory]);
 
   return (
-    <div className="h-screen bg-gray-50">
+    <div className="bg-gray-50 min-h-screen">
       {/* Sidebar kapalıyken çıkan sol üstteki butonlar slide aç ve yeni task oluştur butonları */}
       <div>
         <HeaderActions
@@ -119,7 +119,7 @@ const TaskAddForm: React.FC<TaskAddProps> = ({ isSideBar,setIsSiteBar,isAddTask,
       </div>
       
       {/* Task ekleme kartının olduğu kısım */}
-      <div className="flex justify-center items-center mt-[15vh]">
+      <div className="flex justify-center items-center pt-[15vh]">
         <div
           className={`bg-white border-t-8 ${borderPicker(
             taskToAdd

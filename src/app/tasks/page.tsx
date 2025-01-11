@@ -51,11 +51,11 @@ const Tasks: React.FC=()=>{
           <div className="flex">
 
             {/* Burası sidebar açık halinin gösterim yeri yani sidebar kısmı */}
-            <div className={`transition-all duration-500 ease-in-out ${ isSideBar ? "w-[15%]" : "w-0" } border-r-2 bg-white border-gray-50 shadow-lg`}>
+            <div className={`min-h-screen transition-all duration-500 ease-in-out ${ isSideBar ? "w-[15%]" : "w-0" } border-r-2 bg-white border-gray-50 shadow-lg`}>
               <SideBar isAddTask={isAddTask} setIsAddTask={setIsAddTask} isSideBar={isSideBar} setIsSiteBar={setIsSiteBar} setTaskFilter={setTaskFilter}/>
             </div>
             
-            <div className={` ${isSideBar ? "w-[85%]" : "w-[100%]"} bg-blue-100`}>
+            <div className={`min-h-screen ${isSideBar ? "w-[85%]" : "w-[100%]"}`}>
               
               {/* Burada ise eğer isAddTask açıksa yani task ekleme isteniyorsa o çıkıyor yoksa task listesi geliyor */}
               {!isAddTask ? 

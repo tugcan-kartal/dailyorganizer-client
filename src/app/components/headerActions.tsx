@@ -17,9 +17,9 @@ const HeaderActions: React.FC<HeaderActionsProps> = ({
   setIsAddTask,
 }) => {
   return (
-    <div className="ml-4">
+    <div className="pl-4">
       {!isSideBar && (
-        <div className="flex gap-x-4 mt-[2vh]">
+        <div className="flex gap-x-4 pt-[2vh]">
           <div
             onClick={() => setIsSiteBar(!isSideBar)}
             className="text-2xl cursor-pointer"
