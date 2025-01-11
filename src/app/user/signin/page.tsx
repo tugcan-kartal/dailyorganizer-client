@@ -1,8 +1,12 @@
 "use client";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 
 const Signin: React.FC = () => {
+  const router=useRouter();
+  
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -43,6 +47,9 @@ const Signin: React.FC = () => {
 
         localStorage.setItem("token", data.token);
         setSuccess("Login successfully");
+        setTimeout(()=>{
+          router.push("/tasks")
+        },2000);
       }
     } catch (error) {
       console.error(error);
@@ -102,19 +109,9 @@ const Signin: React.FC = () => {
           </button>
         </form>
 
-        <p className="text-xs text-gray-400 text-center mt-4">
-          Your name and photo are displayed to users who invite you to a
-          workspace using your email. By continuing, you acknowledge that you
-          understand and agree to the{" "}
-          <a href="#" className="text-blue-500">
-            Terms & Conditions
-          </a>{" "}
-          and{" "}
-          <a href="#" className="text-blue-500">
-            Privacy Policy
-          </a>
-          .
-        </p>
+        <Link href={"/user/signup"} className="text-xs text-blue-700 mt-4 underline">
+          If you don't have an account.
+        </Link>
       </div>
     </div>
   );
