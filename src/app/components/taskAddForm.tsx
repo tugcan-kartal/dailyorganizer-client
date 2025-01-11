@@ -18,6 +18,9 @@ import FoodCat from "@/../public/assets/category-images/food.png";
 import EnvironmentCat from "@/../public/assets/category-images/environment.png";
 import OtherCat from "@/../public/assets/category-images/other.png";
 import { borderPicker } from "./borderPicker";
+import { GoSidebarCollapse } from "react-icons/go";
+import { IoCreateOutline } from "react-icons/io5";
+import { CiViewList } from "react-icons/ci";
 
 const categoryImages: { [key: string]: string } = {
   technology: TechnologyCat.src,
@@ -36,7 +39,15 @@ const categoryImages: { [key: string]: string } = {
   other: OtherCat.src,
 };
 
-const TaskAddForm: React.FC<{fetchTasks: () => Promise<void>}> = ({ fetchTasks }) => {
+interface TaskAddProps{
+  isSideBar: boolean;
+  setIsSiteBar: React.Dispatch<React.SetStateAction<boolean>>;
+  isAddTask: boolean;
+  setIsAddTask: React.Dispatch<React.SetStateAction<boolean>>;
+  fetchTasks: () => Promise<void>
+}
+
+const TaskAddForm: React.FC<TaskAddProps> = ({ isSideBar,setIsSiteBar,isAddTask,setIsAddTask,fetchTasks }) => {
   const [taskToAdd, setTaskToAdd] = useState({
     title: "",
     description: "",
@@ -95,125 +106,141 @@ const TaskAddForm: React.FC<{fetchTasks: () => Promise<void>}> = ({ fetchTasks }
   }, [selectedCategory]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div
-        className={`bg-white border-t-8 ${borderPicker(
-          taskToAdd
-        )} shadow-lg rounded-2xl w-[20vw] py-[4vh] relative`}
-      >
-        <form
-          className="mx-5 relative flex flex-col gap-y-4"
-          onSubmit={handleSubmit}
+    <div className="h-screen bg-gray-50">
+      {/* Sidebar kapalıyken çıkan sol üstteki butonlar slide aç ve yeni task oluştur butonları */}
+      <div className="pt-4 pl-5">
+        {!isSideBar && 
+          <div className="flex gap-x-4">
+            <div onClick={()=>setIsSiteBar(!isSideBar)} className="text-2xl cursor-pointer">
+              <GoSidebarCollapse />
+            </div>
+            <div onClick={()=>setIsAddTask(!isAddTask)} className="text-2xl cursor-pointer">
+                {!isAddTask ? <IoCreateOutline /> : <CiViewList />}
+            </div>
+          </div>
+        }
+      </div>
+
+      <div className="flex justify-center items-center mt-[15vh]">
+        <div
+          className={`bg-white border-t-8 ${borderPicker(
+            taskToAdd
+          )} shadow-lg rounded-2xl w-[20vw] py-[4vh] relative`}
         >
-          <input
-            className="text-2xl text-gray-800 font-semibold border-b"
-            name="title"
-            placeholder="Task Title"
-            onChange={handleChange}
-          />
-
-          <input
-            className="text-gray-400 border-b"
-            name="description"
-            placeholder="Task Description"
-            onChange={handleChange}
-          />
-
-          {/* Kategori seçme kısmı */}
-          <select
-            className="text-gray-400 border-b"
-            name="category"
-            onChange={handleChange}
+          <form
+            className="mx-5 relative flex flex-col gap-y-4"
+            onSubmit={handleSubmit}
           >
-            <option value="" disabled>
-              Select a category
-            </option>
-            {Object.keys(categoryImages).map((key) => (
-              <option key={key} value={key}>
-                {key.charAt(0).toUpperCase() + key.slice(1)}
+            <input
+              className="text-2xl text-gray-800 font-semibold border-b"
+              name="title"
+              placeholder="Task Title"
+              onChange={handleChange}
+            />
+
+            <input
+              className="text-gray-400 border-b"
+              name="description"
+              placeholder="Task Description"
+              onChange={handleChange}
+            />
+
+            {/* Kategori seçme kısmı */}
+            <select
+              className="text-gray-400 border-b"
+              name="category"
+              onChange={handleChange}
+            >
+              <option value="" disabled>
+                Select a category
               </option>
-            ))}
-          </select>
-          
-          {/* importance level ekleme kısmı */}
-          <div className="mt-4">
-            <label className="text-gray-800 font-semibold">
-              Importance Level
-            </label>
-            <div className="relative w-full mt-2">
-              <input
-                type="range"
-                min="1"
-                max="4"
-                step="1"
-                name="importance_level"
-                onChange={handleChange}
-                className="w-full h-3 rounded-lg appearance-none cursor-pointer bg-gray-300"
-              />
-              <div className="flex justify-between text-xs font-semibold mt-1">
-                <span className="text-green-500">Low</span>
-                <span className="text-yellow-500">Medium</span>
-                <span className="text-blue-500">High</span>
-                <span className="text-red-500">Extreme</span>
+              {Object.keys(categoryImages).map((key) => (
+                <option key={key} value={key}>
+                  {key.charAt(0).toUpperCase() + key.slice(1)}
+                </option>
+              ))}
+            </select>
+            
+            {/* importance level ekleme kısmı */}
+            <div className="mt-4">
+              <label className="text-gray-800 font-semibold">
+                Importance Level
+              </label>
+              <div className="relative w-full mt-2">
+                <input
+                  type="range"
+                  min="1"
+                  max="4"
+                  step="1"
+                  name="importance_level"
+                  onChange={handleChange}
+                  className="w-full h-3 rounded-lg appearance-none cursor-pointer bg-gray-300"
+                />
+                <div className="flex justify-between text-xs font-semibold mt-1">
+                  <span className="text-green-500">Low</span>
+                  <span className="text-yellow-500">Medium</span>
+                  <span className="text-blue-500">High</span>
+                  <span className="text-red-500">Extreme</span>
+                </div>
               </div>
             </div>
-          </div>
-          
-          {/* Tarih ekleme kısmı */}
-          <div className="flex justify-between items-center space-x-6">
-            <div className="flex flex-col gap-y-1 w-1/2">
-              <label className="text-sm text-gray-700 font-medium">
-                Starting Date
-              </label>
-              <input
-                className="text-xs text-gray-600 border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 rounded-md"
-                type="date"
-                name="start_date"
-                onChange={handleChange}
-              />
+            
+            {/* Tarih ekleme kısmı */}
+            <div className="flex justify-between items-center space-x-6">
+              <div className="flex flex-col gap-y-1 w-1/2">
+                <label className="text-sm text-gray-700 font-medium">
+                  Starting Date
+                </label>
+                <input
+                  className="text-xs text-gray-600 border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 rounded-md"
+                  type="date"
+                  name="start_date"
+                  onChange={handleChange}
+                />
+              </div>
+
+              <div className="flex flex-col gap-y-1 w-1/2">
+                <label className="text-sm text-gray-700 font-medium">
+                  Ending Date
+                </label>
+                <input
+                  className="text-xs text-gray-600 border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 rounded-md"
+                  type="date"
+                  name="end_date"
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+            
+            {/* <div>
+              <input type="file" name="files" multiple onChange={handleChange} />
+            </div> */}
+
+            {/* Seçtiğin kategoriye göre resim gelme kısmı */}
+            <div className="flex justify-center mt-4">
+              {selectedCategory ? (
+                <Image
+                  width={500}
+                  height={500}
+                  className="w-20"
+                  src={categoryImages[selectedCategory]}
+                  alt={selectedCategory}
+                />
+              ) : (
+                <p className="text-gray-500">
+                  Select a category to see the image
+                </p>
+              )}
             </div>
 
-            <div className="flex flex-col gap-y-1 w-1/2">
-              <label className="text-sm text-gray-700 font-medium">
-                Ending Date
-              </label>
-              <input
-                className="text-xs text-gray-600 border-b border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 p-2 rounded-md"
-                type="date"
-                name="end_date"
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          
-          {/* <div>
-            <input type="file" name="files" multiple onChange={handleChange} />
-          </div> */}
-
-          {/* Seçtiğin kategoriye göre resim gelme kısmı */}
-          <div className="flex justify-center mt-4">
-            {selectedCategory ? (
-              <Image
-                width={500}
-                height={500}
-                className="w-20"
-                src={categoryImages[selectedCategory]}
-                alt={selectedCategory}
-              />
-            ) : (
-              <p className="text-gray-500">
-                Select a category to see the image
-              </p>
-            )}
-          </div>
-
-          <button
-            type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-600"
-          >
-            Add Task
-          </button>
-        </form>
+            <button
+              type="submit"
+              className="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 hover:bg-blue-600"
+            >
+              Add Task
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );

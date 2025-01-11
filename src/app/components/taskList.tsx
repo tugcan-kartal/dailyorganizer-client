@@ -4,14 +4,21 @@ import { saveTaskOrder } from "../api/taskService";
 import TaskItem from "./taskItem";
 import { closestCorners, DndContext, DragOverlay } from "@dnd-kit/core";
 import { Task } from "../tasks/page";
+import { GoSidebarCollapse } from "react-icons/go";
+import { IoCreateOutline } from "react-icons/io5";
+import { CiViewList } from "react-icons/ci";
 
 interface TaskListProps {
   tasks: Task[];
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
   fetchTasks: () => Promise<void>;
+  isSideBar: boolean;
+  setIsSiteBar: React.Dispatch<React.SetStateAction<boolean>>;
+  isAddTask: boolean;
+  setIsAddTask: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const TaskList: React.FC<TaskListProps> = ({tasks,setTasks,fetchTasks}) => {
+const TaskList: React.FC<TaskListProps> = ({tasks,setTasks,fetchTasks,isSideBar,setIsSiteBar,isAddTask,setIsAddTask}) => {
 
   const [activeTask, setActiveTask] = useState<Task | null>(null); // Sürüklenen görev için olan state
 
@@ -51,6 +58,22 @@ const TaskList: React.FC<TaskListProps> = ({tasks,setTasks,fetchTasks}) => {
 
   return (
     <div>
+
+      {/* Sidebar kapalıyken çıkan sol üstteki butonlar slide aç ve yeni task oluştur butonları */}
+      <div className="ml-4">
+        {!isSideBar && 
+          <div className="flex gap-x-4 mt-[2vh]">
+            <div onClick={()=>setIsSiteBar(!isSideBar)} className="text-2xl cursor-pointer">
+              <GoSidebarCollapse />
+            </div>
+            <div onClick={()=>setIsAddTask(!isAddTask)} className="text-2xl cursor-pointer">
+              {!isAddTask ? <IoCreateOutline /> : <CiViewList />}
+            </div>
+          </div>
+        }
+      </div>
+      
+      {/* Task Listin kendisi var tüm tasklar */}
       <div className="grid grid-cols-3 gap-6 py-[4vh] ml-[5vw]">
         <DndContext
           collisionDetection={closestCorners}
@@ -76,6 +99,7 @@ const TaskList: React.FC<TaskListProps> = ({tasks,setTasks,fetchTasks}) => {
           </DragOverlay>
         </DndContext>
       </div>
+
     </div>
   );
 };

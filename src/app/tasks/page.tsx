@@ -4,7 +4,6 @@ import TaskList from "../components/taskList";
 import TaskAddForm from "../components/taskAddForm";
 import { getUserTasks } from "../api/taskService";
 import SideBar from "../components/sideBar";
-import { GoSidebarCollapse } from "react-icons/go";
 
 export interface Task {
   _id: string;
@@ -57,17 +56,12 @@ const Tasks: React.FC=()=>{
             </div>
             
             <div className={` ${isSideBar ? "w-[85%]" : "w-[100%]"} bg-blue-100`}>
-              {/* Burası sidebar kapalı ise kapalıyken çıkan buton yani tekrar açmak için çıkarılan ikon yeri üstte de sidebarın açık olup olmamasına göre slider şekliyle kapatıyor veya açıyor isSideBar özelliğine göre */}
-              {!isSideBar && 
-                <div>
-                  <GoSidebarCollapse onClick={()=>setIsSiteBar(!isSideBar)} className="text-2xl cursor-pointer ml-5"/>
-                </div>
-              }
+              
               {/* Burada ise eğer isAddTask açıksa yani task ekleme isteniyorsa o çıkıyor yoksa task listesi geliyor */}
               {!isAddTask ? 
-                <TaskList tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks}/>
+                <TaskList isAddTask={isAddTask} setIsAddTask={setIsAddTask} isSideBar={isSideBar} setIsSiteBar={setIsSiteBar} tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks}/>
                 :
-                <TaskAddForm fetchTasks={fetchTasks}/>
+                <TaskAddForm isAddTask={isAddTask} setIsAddTask={setIsAddTask} isSideBar={isSideBar} setIsSiteBar={setIsSiteBar} fetchTasks={fetchTasks}/>
               }
             </div>
 

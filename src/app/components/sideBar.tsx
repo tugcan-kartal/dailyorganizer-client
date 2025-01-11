@@ -7,6 +7,7 @@ import EndDateBar from "@/../public/assets/sidebar-images/end-date.png";
 import { GoSidebarExpand } from "react-icons/go";
 import { GoSidebarCollapse } from "react-icons/go";
 import { IoCreateOutline } from "react-icons/io5";
+import { CiViewList } from "react-icons/ci";
 
 
 interface SideBarProps {
@@ -30,7 +31,7 @@ const SideBar: React.FC<SideBarProps> = ({ isAddTask,setIsAddTask,isSideBar,setI
                     </div>
 
                     <div onClick={()=>setIsAddTask(!isAddTask)} className="text-2xl cursor-pointer">
-                        <IoCreateOutline />
+                        {!isAddTask ? <IoCreateOutline /> : <CiViewList />}
                     </div>
                 </div>
                 
