@@ -6,25 +6,27 @@ import StartDateBar from "@/../public/assets/sidebar-images/start-date.png";
 import EndDateBar from "@/../public/assets/sidebar-images/end-date.png";
 import { GoSidebarExpand } from "react-icons/go";
 import { GoSidebarCollapse } from "react-icons/go";
+import { IoCreateOutline } from "react-icons/io5";
+
 
 interface SideBarProps {
+    isSideBar: boolean;
+    setIsSiteBar: React.Dispatch<React.SetStateAction<boolean>>;
     setTaskFilter: (filter: string) => void;
 }
 
-const SideBar: React.FC<SideBarProps> = ({ setTaskFilter }) => {
-    
-    const [isSideBar,setIsSiteBar]=useState<boolean>(true)
+const SideBar: React.FC<SideBarProps> = ({ isSideBar,setIsSiteBar,setTaskFilter }) => {
 
     return (
         <div>
             <div>
-                <div className="flex justify-between pl-5 pt-4">
-                    <div className="text-2xl" onClick={()=>setIsSiteBar(!isSideBar)}>
+                <div className="flex justify-between pt-4 px-3">
+                    <div className="text-2xl cursor-pointer" onClick={()=>setIsSiteBar(!isSideBar)}>
                         {isSideBar ? <GoSidebarExpand /> : <GoSidebarCollapse />}
                     </div>
 
-                    <div>
-
+                    <div className="text-2xl cursor-pointer">
+                        <IoCreateOutline />
                     </div>
                 </div>
 

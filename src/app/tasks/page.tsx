@@ -4,6 +4,7 @@ import TaskList from "../components/taskList";
 import TaskAddForm from "../components/taskAddForm";
 import { getUserTasks } from "../api/taskService";
 import SideBar from "../components/sideBar";
+import { GoSidebarCollapse } from "react-icons/go";
 
 export interface Task {
   _id: string;
@@ -20,6 +21,8 @@ const Tasks: React.FC=()=>{
 
     const [tasks, setTasks] = useState<Task[]>([]);
     const [taskFilter, setTaskFilter] = useState<string | undefined>(undefined);
+
+    const [isSideBar,setIsSiteBar]=useState<boolean>(true)
 
     const fetchTasks = async () => {
         const token = localStorage.getItem("token");
@@ -43,14 +46,21 @@ const Tasks: React.FC=()=>{
         <div className="h-full">
           <div className="flex">
 
-            <div className="w-[15%] border-r-2 bg-white border-gray-50 shadow-lg">
-              <SideBar setTaskFilter={setTaskFilter}/>
+
+            <div className={`transition-all duration-500 ease-in-out ${ isSideBar ? "w-[15%]" : "w-0" } border-r-2 bg-white border-gray-50 shadow-lg`}>
+              <SideBar isSideBar={isSideBar} setIsSiteBar={setIsSiteBar} setTaskFilter={setTaskFilter}/>
             </div>
 
-            <div className="w-[85%] bg-blue-100 py-10">
+            <div className={` ${isSideBar ? "w-[85%]" : "w-[100%]"}  bg-blue-100 py-10`}>
+              {!isSideBar && 
+                <div>
+                  <GoSidebarCollapse onClick={()=>setIsSiteBar(!isSideBar)} className="text-2xl cursor-pointer ml-5"/>
+                </div>
+              }
               <TaskList tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks}/>
-              <TaskAddForm fetchTasks={fetchTasks}/>
+              {/* <TaskAddForm fetchTasks={fetchTasks}/> */}
             </div>
+
 
           </div>
         </div>
