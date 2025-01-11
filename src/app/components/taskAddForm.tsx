@@ -21,6 +21,7 @@ import { borderPicker } from "./borderPicker";
 import { GoSidebarCollapse } from "react-icons/go";
 import { IoCreateOutline } from "react-icons/io5";
 import { CiViewList } from "react-icons/ci";
+import HeaderActions from "./headerActions";
 
 const categoryImages: { [key: string]: string } = {
   technology: TechnologyCat.src,
@@ -108,19 +109,16 @@ const TaskAddForm: React.FC<TaskAddProps> = ({ isSideBar,setIsSiteBar,isAddTask,
   return (
     <div className="h-screen bg-gray-50">
       {/* Sidebar kapalıyken çıkan sol üstteki butonlar slide aç ve yeni task oluştur butonları */}
-      <div className="pt-4 pl-5">
-        {!isSideBar && 
-          <div className="flex gap-x-4">
-            <div onClick={()=>setIsSiteBar(!isSideBar)} className="text-2xl cursor-pointer">
-              <GoSidebarCollapse />
-            </div>
-            <div onClick={()=>setIsAddTask(!isAddTask)} className="text-2xl cursor-pointer">
-                {!isAddTask ? <IoCreateOutline /> : <CiViewList />}
-            </div>
-          </div>
-        }
+      <div>
+        <HeaderActions
+        isSideBar={isSideBar}
+        setIsSiteBar={setIsSiteBar}
+        isAddTask={isAddTask}
+        setIsAddTask={setIsAddTask}
+        />
       </div>
-
+      
+      {/* Task ekleme kartının olduğu kısım */}
       <div className="flex justify-center items-center mt-[15vh]">
         <div
           className={`bg-white border-t-8 ${borderPicker(

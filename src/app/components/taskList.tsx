@@ -7,6 +7,7 @@ import { Task } from "../tasks/page";
 import { GoSidebarCollapse } from "react-icons/go";
 import { IoCreateOutline } from "react-icons/io5";
 import { CiViewList } from "react-icons/ci";
+import HeaderActions from "./headerActions";
 
 interface TaskListProps {
   tasks: Task[];
@@ -60,17 +61,13 @@ const TaskList: React.FC<TaskListProps> = ({tasks,setTasks,fetchTasks,isSideBar,
     <div>
 
       {/* Sidebar kapalıyken çıkan sol üstteki butonlar slide aç ve yeni task oluştur butonları */}
-      <div className="ml-4">
-        {!isSideBar && 
-          <div className="flex gap-x-4 mt-[2vh]">
-            <div onClick={()=>setIsSiteBar(!isSideBar)} className="text-2xl cursor-pointer">
-              <GoSidebarCollapse />
-            </div>
-            <div onClick={()=>setIsAddTask(!isAddTask)} className="text-2xl cursor-pointer">
-              {!isAddTask ? <IoCreateOutline /> : <CiViewList />}
-            </div>
-          </div>
-        }
+      <div>
+        <HeaderActions
+          isSideBar={isSideBar}
+          setIsSiteBar={setIsSiteBar}
+          isAddTask={isAddTask}
+          setIsAddTask={setIsAddTask}
+        />
       </div>
       
       {/* Task Listin kendisi var tüm tasklar */}
