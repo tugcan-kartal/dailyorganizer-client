@@ -46,13 +46,33 @@ interface TaskAddProps{
 }
 
 const TaskAddForm: React.FC<TaskAddProps> = ({ isSideBar,setIsSiteBar,isAddTask,setIsAddTask,fetchTasks }) => {
+
+  // Kullanıcı start date girmeden de veri göndermek için zorunlu istiyor yani server bugünün tarihi
+  const getTodayDate = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-based
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  // Kullanıcı end date girmeden de veri göndermek için zorunlu istiyor yani server yarının tarihi
+  const getNextDayDate = () => {
+    const today = new Date();
+    today.setDate(today.getDate() + 1); // Move to the next day
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
   const [taskToAdd, setTaskToAdd] = useState({
     title: "",
     description: " ",
     importance_level: "3",
     category: "other",
-    start_date: "",
-    end_date: "",
+    start_date: getTodayDate(),
+    end_date: getNextDayDate(),
     files: [] as File[],
   });
 

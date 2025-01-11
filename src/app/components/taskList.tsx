@@ -4,9 +4,6 @@ import { saveTaskOrder } from "../api/taskService";
 import TaskItem from "./taskItem";
 import { closestCorners, DndContext, DragOverlay } from "@dnd-kit/core";
 import { Task } from "../tasks/page";
-import { GoSidebarCollapse } from "react-icons/go";
-import { IoCreateOutline } from "react-icons/io5";
-import { CiViewList } from "react-icons/ci";
 import HeaderActions from "./headerActions";
 
 interface TaskListProps {
