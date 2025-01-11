@@ -48,7 +48,7 @@ interface TaskAddProps{
 const TaskAddForm: React.FC<TaskAddProps> = ({ isSideBar,setIsSiteBar,isAddTask,setIsAddTask,fetchTasks }) => {
   const [taskToAdd, setTaskToAdd] = useState({
     title: "",
-    description: "",
+    description: " ",
     importance_level: "3",
     category: "other",
     start_date: "",
