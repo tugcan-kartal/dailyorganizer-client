@@ -19,6 +19,7 @@ import EnvironmentCat from "@/../public/assets/category-images/environment.png";
 import OtherCat from "@/../public/assets/category-images/other.png";
 import { borderPicker } from "./borderPicker";
 import HeaderActions from "./headerActions";
+import toast from "react-hot-toast";
 
 const categoryImages: { [key: string]: string } = {
   technology: TechnologyCat.src,
@@ -105,6 +106,8 @@ const TaskAddForm: React.FC<TaskAddProps> = ({ isSideBar,setIsSiteBar,isAddTask,
 
     await addTask(taskToAdd, token);
     fetchTasks()
+
+    toast.success("Successfully added")
   };
 
   // Burada seçtiğimiz kategori resmini mevcut urlsini localde olsa çıkarıyor ve onu normal url haline getiriyor yüklencek sonra files adı altında taskToAdde ekliyor files'ı

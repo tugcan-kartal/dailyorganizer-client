@@ -7,7 +7,7 @@ import EndDateBar from "@/../public/assets/sidebar-images/end-date.png";
 import { GoSidebarExpand } from "react-icons/go";
 import { GoSidebarCollapse } from "react-icons/go";
 import { IoCreateOutline } from "react-icons/io5";
-import { CiViewList } from "react-icons/ci";
+import { GoChecklist } from "react-icons/go";
 
 
 interface SideBarProps {
@@ -31,12 +31,12 @@ const SideBar: React.FC<SideBarProps> = ({ isAddTask,setIsAddTask,isSideBar,setI
                     </div>
 
                     <div onClick={()=>setIsAddTask(!isAddTask)} className="text-2xl cursor-pointer">
-                        {!isAddTask ? <IoCreateOutline /> : <CiViewList />}
+                        {!isAddTask ? <IoCreateOutline /> : <GoChecklist />}
                     </div>
                 </div>
                 
                 {/* Sidebardaki filtreleme tip buton fieldlarının bulunduğu yer */}
-                <div className="flex flex-col justify-center gap-y-[2vh] mt-[5vh] ml-[1vw] border-b-2 border-gray-300 pb-10">
+                <div className="flex flex-col justify-center gap-y-[2vh] pt-[5vh] pl-[1vw] border-b-2 border-gray-100 pb-10">
 
                     <div className="cursor-pointer flex gap-x-4 w-[85%] hover:shadow-lg transition-all duration-300 px-2 py-2 rounded-lg" onClick={()=>setTaskFilter("category:asc")}>
                         <div>

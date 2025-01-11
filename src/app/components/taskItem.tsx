@@ -9,6 +9,7 @@ import { MdDragIndicator } from "react-icons/md";
 import { IoIosMenu } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import { borderPicker } from "./borderPicker";
+import toast from "react-hot-toast";
 
 const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
   task,
@@ -29,12 +30,14 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
   const handleDelete = async () => {
     await deleteTask(task._id);
     refreshTasks();
+    toast.success("Successfully deleted");
   };
 
   const handleUpdate = async () => {
     await updateTask(task._id, newUpdatedTask);
     setIsEditing(false);
     refreshTasks();
+    toast.success("Successfully updated");
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
