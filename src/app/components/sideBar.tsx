@@ -10,12 +10,14 @@ import { IoCreateOutline } from "react-icons/io5";
 
 
 interface SideBarProps {
+    isAddTask: boolean;
+    setIsAddTask: React.Dispatch<React.SetStateAction<boolean>>;
     isSideBar: boolean;
     setIsSiteBar: React.Dispatch<React.SetStateAction<boolean>>;
     setTaskFilter: (filter: string) => void;
 }
 
-const SideBar: React.FC<SideBarProps> = ({ isSideBar,setIsSiteBar,setTaskFilter }) => {
+const SideBar: React.FC<SideBarProps> = ({ isAddTask,setIsAddTask,isSideBar,setIsSiteBar,setTaskFilter }) => {
 
     return (
         <div>
@@ -25,7 +27,7 @@ const SideBar: React.FC<SideBarProps> = ({ isSideBar,setIsSiteBar,setTaskFilter 
                         {isSideBar ? <GoSidebarExpand /> : <GoSidebarCollapse />}
                     </div>
 
-                    <div className="text-2xl cursor-pointer">
+                    <div onClick={()=>setIsAddTask(!isAddTask)} className="text-2xl cursor-pointer">
                         <IoCreateOutline />
                     </div>
                 </div>

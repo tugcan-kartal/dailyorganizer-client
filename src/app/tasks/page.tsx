@@ -22,6 +22,8 @@ const Tasks: React.FC=()=>{
     const [tasks, setTasks] = useState<Task[]>([]);
     const [taskFilter, setTaskFilter] = useState<string | undefined>(undefined);
 
+    const [isAddTask,setIsAddTask]=useState<boolean>(false);
+
     const [isSideBar,setIsSiteBar]=useState<boolean>(true)
 
     const fetchTasks = async () => {
@@ -48,17 +50,20 @@ const Tasks: React.FC=()=>{
 
 
             <div className={`transition-all duration-500 ease-in-out ${ isSideBar ? "w-[15%]" : "w-0" } border-r-2 bg-white border-gray-50 shadow-lg`}>
-              <SideBar isSideBar={isSideBar} setIsSiteBar={setIsSiteBar} setTaskFilter={setTaskFilter}/>
+              <SideBar isAddTask={isAddTask} setIsAddTask={setIsAddTask} isSideBar={isSideBar} setIsSiteBar={setIsSiteBar} setTaskFilter={setTaskFilter}/>
             </div>
 
-            <div className={` ${isSideBar ? "w-[85%]" : "w-[100%]"}  bg-blue-100 py-10`}>
+            <div className={` ${isSideBar ? "w-[85%]" : "w-[100%]"} bg-blue-100`}>
               {!isSideBar && 
                 <div>
                   <GoSidebarCollapse onClick={()=>setIsSiteBar(!isSideBar)} className="text-2xl cursor-pointer ml-5"/>
                 </div>
               }
-              <TaskList tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks}/>
-              {/* <TaskAddForm fetchTasks={fetchTasks}/> */}
+              {!isAddTask ? 
+                <TaskList tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks}/>
+                :
+                <TaskAddForm fetchTasks={fetchTasks}/>
+              }
             </div>
 
 
