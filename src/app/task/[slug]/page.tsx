@@ -1,6 +1,7 @@
 "use client"
 
 import { getTaskDetail } from "@/app/api/taskService";
+import TaskItem from "@/app/components/taskItem";
 import { Task } from "@/app/tasks/page";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -30,14 +31,17 @@ const TaskDetails=()=>{
 
     return(
         <div>
-            {taskDetail && 
-                <div>
-                    <div>
-                        <h1>{taskDetail.title}</h1>
-                        <p>{taskDetail.description}</p>
-                    </div>
-                </div>
-            }
+            <div></div>
+
+            <div>
+                {taskDetail 
+                ? 
+                    <TaskItem task={taskDetail} fetchTasks={fetchTaskDetail}/>
+                :
+                    <p>Loading task details...</p>
+                }
+                
+            </div>
         </div>
     )
 }
