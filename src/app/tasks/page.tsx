@@ -52,7 +52,7 @@ const Tasks: React.FC=()=>{
 
             {/* Burası sidebar açık halinin gösterim yeri yani sidebar kısmı */}
             <div className={`min-h-screen transition-all duration-500 ease-in-out ${ isSideBar ? "w-[15%]" : "w-0" } border-r-2 bg-white border-gray-50 shadow-lg`}>
-              <SideBar isAddTask={isAddTask} setIsAddTask={setIsAddTask} isSideBar={isSideBar} setIsSiteBar={setIsSiteBar} setTaskFilter={setTaskFilter}/>
+              <SideBar tasks={tasks} isAddTask={isAddTask} setIsAddTask={setIsAddTask} isSideBar={isSideBar} setIsSiteBar={setIsSiteBar} setTaskFilter={setTaskFilter}/>
             </div>
             
             <div className={`min-h-screen ${isSideBar ? "w-[85%]" : "w-[100%]"}`}>

@@ -8,9 +8,11 @@ import { GoSidebarExpand } from "react-icons/go";
 import { GoSidebarCollapse } from "react-icons/go";
 import { IoCreateOutline } from "react-icons/io5";
 import { GoChecklist } from "react-icons/go";
+import { Task } from "../tasks/page";
 
 
 interface SideBarProps {
+    tasks: Task[] | undefined;
     isAddTask: boolean;
     setIsAddTask: React.Dispatch<React.SetStateAction<boolean>>;
     isSideBar: boolean;
@@ -18,7 +20,7 @@ interface SideBarProps {
     setTaskFilter: (filter: string) => void;
 }
 
-const SideBar: React.FC<SideBarProps> = ({ isAddTask,setIsAddTask,isSideBar,setIsSiteBar,setTaskFilter }) => {
+const SideBar: React.FC<SideBarProps> = ({ tasks,isAddTask,setIsAddTask,isSideBar,setIsSiteBar,setTaskFilter }) => {
 
     return (
         <div>
@@ -70,7 +72,14 @@ const SideBar: React.FC<SideBarProps> = ({ isAddTask,setIsAddTask,isSideBar,setI
                 </div>
                 
                 {/* Buraya da mevcut taskları tekli gösterimi yapcam */}
-                <div>
+                <div className="flex flex-col justify-center items-start pl-[2vw] pt-[2vh] gap-y-4">
+                    {tasks && tasks.map((task,index)=>(
+                        <div key={index}>
+                            <div className="cursor-pointer hover:scale-110 p-2 rounded-full transition-all duration-200">
+                                {task.title}
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
