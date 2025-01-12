@@ -1,5 +1,5 @@
 import React from "react";
-import { GoSidebarCollapse } from "react-icons/go";
+import { GoChecklist, GoSidebarCollapse } from "react-icons/go";
 import { IoCreateOutline } from "react-icons/io5";
 import { CiViewList } from "react-icons/ci";
 import { useTasksContext } from "../context/TasksContext";
@@ -27,7 +27,7 @@ const HeaderActions: React.FC = () => {
             onClick={() => setIsAddTask(!isAddTask)}
             className="text-2xl cursor-pointer"
           >
-            {!isAddTask ? <IoCreateOutline /> : <CiViewList />}
+            {!isAddTask ? <IoCreateOutline /> : <GoChecklist />}
           </div>
         </div>
       )}

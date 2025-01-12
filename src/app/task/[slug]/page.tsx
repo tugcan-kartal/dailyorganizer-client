@@ -1,49 +1,61 @@
-"use client"
+"use client";
 
 import { getTaskDetail } from "@/app/api/taskService";
 import TaskItem from "@/app/components/taskItem";
 import { Task } from "@/app/context/TasksContext";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { AiOutlineHome } from "react-icons/ai";
 
-const TaskDetails=()=>{
+const TaskDetails = () => {
+  const router = useRouter();
 
-    const [taskDetail,setTaskDetail]=useState<Task>();
-    
-    const params=useParams();
-    const taskId=params.slug;
+  const [taskDetail, setTaskDetail] = useState<Task>();
 
-    const fetchTaskDetail=async()=>{
-        const token=localStorage.getItem("token");
-        if (!token || typeof taskId !== "string") return;
+  const params = useParams();
+  const taskId = params.slug;
 
-        try {
-            const data=await getTaskDetail(token,taskId);
-            setTaskDetail(data);
-        } catch (error) {
-            console.log(error);
-        }
+  const fetchTaskDetail = async () => {
+    const token = localStorage.getItem("token");
+    if (!token || typeof taskId !== "string") return;
+
+    try {
+      const data = await getTaskDetail(token, taskId);
+      setTaskDetail(data);
+    } catch (error) {
+      console.log(error);
     }
+  };
 
-    useEffect(()=>{
-        fetchTaskDetail();
-    },[])
+  const navigateTasksPage = () => {
+    router.push("/tasks");
+  };
 
-    return(
-        <div>
-            <div></div>
+  useEffect(() => {
+    fetchTaskDetail();
+  }, []);
 
-            <div>
-                {taskDetail 
-                ? 
-                    <TaskItem task={taskDetail} fetchTasks={fetchTaskDetail}/>
-                :
-                    <p>Loading task details...</p>
-                }
-                
-            </div>
+  return (
+    <div className="h-screen flex flex-col bg-gray-50">
+      {/* Üstteki ikon kısmı */}
+      <div className="absolute top-4 left-4">
+        <div onClick={navigateTasksPage}>
+          <AiOutlineHome  className="text-4xl cursor-pointer" />
         </div>
-    )
-}
+      </div>
+
+      {/* Sayfa içeriği */}
+      <div className="flex flex-1 items-center justify-center">
+        <div>
+          {taskDetail ? (
+            <TaskItem task={taskDetail} fetchTasks={fetchTaskDetail} />
+          ) : (
+            <p>Loading task details...</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default TaskDetails;
