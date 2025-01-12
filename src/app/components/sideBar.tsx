@@ -9,6 +9,7 @@ import { GoSidebarCollapse } from "react-icons/go";
 import { IoCreateOutline } from "react-icons/io5";
 import { GoChecklist } from "react-icons/go";
 import { Task } from "../tasks/page";
+import { useRouter } from "next/navigation";
 
 
 interface SideBarProps {
@@ -21,6 +22,12 @@ interface SideBarProps {
 }
 
 const SideBar: React.FC<SideBarProps> = ({ tasks,isAddTask,setIsAddTask,isSideBar,setIsSiteBar,setTaskFilter }) => {
+
+    const router=useRouter();
+
+    const navigateToTaskDetails=(id: string)=>{
+        router.push(`/task/${id}`)
+    }
 
     return (
         <div>
@@ -75,7 +82,7 @@ const SideBar: React.FC<SideBarProps> = ({ tasks,isAddTask,setIsAddTask,isSideBa
                 <div className="flex flex-col justify-center items-start pl-[2vw] pt-[2vh] gap-y-4">
                     {tasks && tasks.map((task,index)=>(
                         <div key={index}>
-                            <div className="cursor-pointer hover:scale-110 p-2 rounded-full transition-all duration-200">
+                            <div onClick={()=>navigateToTaskDetails(task._id)} className="cursor-pointer hover:scale-110 p-2 rounded-full transition-all duration-200">
                                 {task.title}
                             </div>
                         </div>

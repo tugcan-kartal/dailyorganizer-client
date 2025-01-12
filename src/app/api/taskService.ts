@@ -2,6 +2,20 @@ import { Task } from "../tasks/page";
 
 const API_URL="http://localhost:3000/task";
 
+
+export const getTaskDetail=async(token: string,id: string)=>{
+  const response=await fetch(`${API_URL}/${id}`,{
+    method: "GET",
+    headers: {
+      "Content-Type":"application/json",
+      Authorization: `Bearer ${token}`,
+    }
+  })
+
+  return await response.json();
+}
+
+//Kullanıcıya ait tüm taskları çekiyor
 export const getUserTasks=async(token: string,taskFilter?: string)=>{
     const queryParams=taskFilter ? `?filter=${taskFilter}` : "";
     const response=await fetch(`${API_URL}${queryParams}`, {
