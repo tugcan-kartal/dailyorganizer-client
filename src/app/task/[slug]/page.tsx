@@ -2,7 +2,7 @@
 
 import { getTaskDetail } from "@/app/api/taskService";
 import TaskItem from "@/app/components/taskItem";
-import { Task } from "@/app/tasks/page";
+import { Task } from "@/app/context/TasksContext";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 

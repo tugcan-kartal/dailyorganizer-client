@@ -8,7 +8,7 @@ import { GoSidebarExpand } from "react-icons/go";
 import { GoSidebarCollapse } from "react-icons/go";
 import { IoCreateOutline } from "react-icons/io5";
 import { GoChecklist } from "react-icons/go";
-import { Task } from "../tasks/page";
+import { Task } from "../context/TasksContext";
 import { useRouter } from "next/navigation";
 
 

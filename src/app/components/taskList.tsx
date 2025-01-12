@@ -3,7 +3,7 @@ import { rectSortingStrategy, SortableContext } from "@dnd-kit/sortable";
 import { saveTaskOrder } from "../api/taskService";
 import TaskItem from "./taskItem";
 import { closestCorners, DndContext, DragOverlay } from "@dnd-kit/core";
-import { Task } from "../tasks/page";
+import { Task } from "../context/TasksContext";
 import HeaderActions from "./headerActions";
 
 interface TaskListProps {

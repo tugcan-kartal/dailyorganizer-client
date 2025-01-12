@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import { TasksProvider } from "./context/TasksContext";
 
 export const metadata: Metadata = {
   title: "Daily Organizer AI",
@@ -14,10 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        {children}
-        <Toaster />
-      </body>
+      <TasksProvider>
+        <body>
+          {children}
+          <Toaster />
+        </body>
+      </TasksProvider>
     </html>
   );
 }
