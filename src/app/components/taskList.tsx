@@ -3,20 +3,21 @@ import { rectSortingStrategy, SortableContext } from "@dnd-kit/sortable";
 import { saveTaskOrder } from "../api/taskService";
 import TaskItem from "./taskItem";
 import { closestCorners, DndContext, DragOverlay } from "@dnd-kit/core";
-import { Task } from "../context/TasksContext";
+import { Task, useTasksContext } from "../context/TasksContext";
 import HeaderActions from "./headerActions";
 
-interface TaskListProps {
-  tasks: Task[];
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
-  fetchTasks: () => Promise<void>;
-  isSideBar: boolean;
-  setIsSiteBar: React.Dispatch<React.SetStateAction<boolean>>;
-  isAddTask: boolean;
-  setIsAddTask: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-const TaskList: React.FC<TaskListProps> = ({tasks,setTasks,fetchTasks,isSideBar,setIsSiteBar,isAddTask,setIsAddTask}) => {
+const TaskList: React.FC = () => {
+
+  const {
+    tasks,
+    setTasks,
+    isSideBar,
+    setIsSideBar,
+    isAddTask,
+    setIsAddTask,
+    fetchTasks
+  } =useTasksContext();
 
   const [activeTask, setActiveTask] = useState<Task | null>(null); // Sürüklenen görev için olan state
 
@@ -59,12 +60,7 @@ const TaskList: React.FC<TaskListProps> = ({tasks,setTasks,fetchTasks,isSideBar,
 
       {/* Sidebar kapalıyken çıkan sol üstteki butonlar slide aç ve yeni task oluştur butonları */}
       <div>
-        <HeaderActions
-          isSideBar={isSideBar}
-          setIsSiteBar={setIsSiteBar}
-          isAddTask={isAddTask}
-          setIsAddTask={setIsAddTask}
-        />
+        <HeaderActions />
       </div>
       
       {/* Task Listin kendisi var tüm tasklar */}

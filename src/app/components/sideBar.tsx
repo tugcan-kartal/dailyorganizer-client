@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import CategoryBar from "@/../public/assets/sidebar-images/category.png";
 import ImportanceBar from "@/../public/assets/sidebar-images/importance.png";
@@ -8,20 +8,19 @@ import { GoSidebarExpand } from "react-icons/go";
 import { GoSidebarCollapse } from "react-icons/go";
 import { IoCreateOutline } from "react-icons/io5";
 import { GoChecklist } from "react-icons/go";
-import { Task } from "../context/TasksContext";
+import { useTasksContext } from "../context/TasksContext";
 import { useRouter } from "next/navigation";
 
+const SideBar: React.FC = () => {
 
-interface SideBarProps {
-    tasks: Task[] | undefined;
-    isAddTask: boolean;
-    setIsAddTask: React.Dispatch<React.SetStateAction<boolean>>;
-    isSideBar: boolean;
-    setIsSiteBar: React.Dispatch<React.SetStateAction<boolean>>;
-    setTaskFilter: (filter: string) => void;
-}
-
-const SideBar: React.FC<SideBarProps> = ({ tasks,isAddTask,setIsAddTask,isSideBar,setIsSiteBar,setTaskFilter }) => {
+    const {
+        tasks,
+        setTaskFilter,
+        isSideBar,
+        setIsSideBar,
+        isAddTask,
+        setIsAddTask,
+      } = useTasksContext();
 
     const router=useRouter();
 
@@ -35,7 +34,7 @@ const SideBar: React.FC<SideBarProps> = ({ tasks,isAddTask,setIsAddTask,isSideBa
 
                 {/* Sidebardaki sol üst köşedeki butonlar */}
                 <div className="flex justify-between pt-4 px-3">
-                    <div className="text-2xl cursor-pointer" onClick={()=>setIsSiteBar(!isSideBar)}>
+                    <div className="text-2xl cursor-pointer" onClick={()=>setIsSideBar(!isSideBar)}>
                         {isSideBar ? <GoSidebarExpand /> : <GoSidebarCollapse />}
                     </div>
 

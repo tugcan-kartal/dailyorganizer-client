@@ -31,36 +31,15 @@ const Tasks: React.FC = () => {
             isSideBar ? "w-[15%]" : "w-0"
           } border-r-2 bg-white border-gray-50 shadow-lg`}
         >
-          <SideBar
-            tasks={tasks}
-            isAddTask={isAddTask}
-            setIsAddTask={setIsAddTask}
-            isSideBar={isSideBar}
-            setIsSiteBar={setIsSideBar}
-            setTaskFilter={setTaskFilter}
-          />
+          <SideBar />
         </div>
 
         <div className={`min-h-screen ${isSideBar ? "w-[85%]" : "w-[100%]"}`}>
           {/* Burada ise eğer isAddTask açıksa yani task ekleme isteniyorsa o çıkıyor yoksa task listesi geliyor */}
           {!isAddTask ? (
-            <TaskList
-              isAddTask={isAddTask}
-              setIsAddTask={setIsAddTask}
-              isSideBar={isSideBar}
-              setIsSiteBar={setIsSideBar}
-              tasks={tasks}
-              setTasks={setTasks}
-              fetchTasks={fetchTasks}
-            />
+            <TaskList />
           ) : (
-            <TaskAddForm
-              isAddTask={isAddTask}
-              setIsAddTask={setIsAddTask}
-              isSideBar={isSideBar}
-              setIsSiteBar={setIsSideBar}
-              fetchTasks={fetchTasks}
-            />
+            <TaskAddForm />
           )}
         </div>
       </div>

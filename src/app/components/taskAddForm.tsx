@@ -20,6 +20,7 @@ import OtherCat from "@/../public/assets/category-images/other.png";
 import { borderPicker } from "./borderPicker";
 import HeaderActions from "./headerActions";
 import toast from "react-hot-toast";
+import { useTasksContext } from "../context/TasksContext";
 
 const categoryImages: { [key: string]: string } = {
   technology: TechnologyCat.src,
@@ -38,15 +39,17 @@ const categoryImages: { [key: string]: string } = {
   other: OtherCat.src,
 };
 
-interface TaskAddProps{
-  isSideBar: boolean;
-  setIsSiteBar: React.Dispatch<React.SetStateAction<boolean>>;
-  isAddTask: boolean;
-  setIsAddTask: React.Dispatch<React.SetStateAction<boolean>>;
-  fetchTasks: () => Promise<void>
-}
 
-const TaskAddForm: React.FC<TaskAddProps> = ({ isSideBar,setIsSiteBar,isAddTask,setIsAddTask,fetchTasks }) => {
+
+const TaskAddForm: React.FC = () => {
+
+  const {
+      isSideBar,
+      setIsSideBar,
+      isAddTask,
+      setIsAddTask,
+      fetchTasks
+    } = useTasksContext();
 
   // Kullanıcı start date girmeden de veri göndermek için zorunlu istiyor yani server bugünün tarihi
   const getTodayDate = () => {
@@ -130,12 +133,7 @@ const TaskAddForm: React.FC<TaskAddProps> = ({ isSideBar,setIsSiteBar,isAddTask,
     <div className="bg-gray-50 min-h-screen">
       {/* Sidebar kapalıyken çıkan sol üstteki butonlar slide aç ve yeni task oluştur butonları */}
       <div>
-        <HeaderActions
-        isSideBar={isSideBar}
-        setIsSiteBar={setIsSiteBar}
-        isAddTask={isAddTask}
-        setIsAddTask={setIsAddTask}
-        />
+        <HeaderActions />
       </div>
       
       {/* Task ekleme kartının olduğu kısım */}
