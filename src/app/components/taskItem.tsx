@@ -10,6 +10,7 @@ import { IoIosMenu } from "react-icons/io";
 import { IoMdClose } from "react-icons/io";
 import { borderPicker } from "./borderPicker";
 import toast from "react-hot-toast";
+import { MdChatBubbleOutline } from "react-icons/md";
 
 const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
   task,
@@ -227,6 +228,11 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
                   alt="not found"
                 />
               </div>
+            </div>
+            
+            {/* Yapay zeka butonu */}
+            <div className="text-3xl flex justify-end cursor-pointer">
+              <MdChatBubbleOutline />
             </div>
           </div>
         </div>
