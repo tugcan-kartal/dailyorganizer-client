@@ -36,16 +36,16 @@ const TaskDetails = () => {
   }, []);
 
   return (
-    <div className="h-screen flex flex-col bg-gray-50">
+    <div className="h-screen flex flex-col items-center gap-y-[3vh] py-[3vh] bg-gray-50">
       {/* Üstteki ikon kısmı */}
-      <div className="absolute top-4 left-4">
+      <div className="">
         <div onClick={navigateTasksPage}>
-          <AiOutlineHome  className="text-4xl cursor-pointer" />
+          <AiOutlineHome className="text-4xl cursor-pointer" />
         </div>
       </div>
 
-      {/* Sayfa içeriği */}
-      <div className="flex flex-1 items-center justify-center">
+      {/* Task kart kısmı */}
+      <div className="">
         <div>
           {taskDetail ? (
             <TaskItem task={taskDetail} fetchTasks={fetchTaskDetail} />
@@ -53,6 +53,11 @@ const TaskDetails = () => {
             <p>Loading task details...</p>
           )}
         </div>
+      </div>
+
+      {/* Yapay zeka chat kısmı */}
+      <div>
+          
       </div>
     </div>
   );

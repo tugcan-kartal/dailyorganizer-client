@@ -11,6 +11,7 @@ import { IoMdClose } from "react-icons/io";
 import { borderPicker } from "./borderPicker";
 import toast from "react-hot-toast";
 import { MdChatBubbleOutline } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
   task,
@@ -27,6 +28,12 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
 
   const [isMenu, setIsMenu] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+
+  const router=useRouter();
+
+  const navigateToTaskDetails=(id: string)=>{
+    router.push(`task/${id}`);
+  }
 
   const handleDelete = async () => {
     await deleteTask(task._id);
@@ -231,7 +238,7 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
             </div>
             
             {/* Yapay zeka butonu */}
-            <div className="text-3xl flex justify-end cursor-pointer">
+            <div onClick={()=>navigateToTaskDetails(task._id)} className="text-3xl flex justify-end cursor-pointer">
               <MdChatBubbleOutline />
             </div>
           </div>
