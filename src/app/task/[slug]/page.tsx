@@ -1,6 +1,6 @@
 "use client";
 
-import { setTaskToGbt } from "@/app/api/taskGbtService";
+import { sendMessageToGbt, setTaskToGbt } from "@/app/api/taskGbtService";
 import { getTaskDetail } from "@/app/api/taskService";
 import TaskItem from "@/app/components/taskItem";
 import { Task } from "@/app/context/TasksContext";
@@ -12,6 +12,9 @@ const TaskDetails = () => {
   const router = useRouter();
 
   const [taskDetail, setTaskDetail] = useState<Task>();
+
+  const [gbtQuestion,setGbtQuestion]=useState("");
+  const [gbtAnswer,setGbtAnswer]=useState("");
 
   const params = useParams();
   const taskId = params.slug;
@@ -42,7 +45,27 @@ const TaskDetails = () => {
     } catch (error) {
         console.log("Error in sendTaskDetail:", error);
     }
-};
+  };
+
+  const getAnswerFromGbt=async(e:React.FormEvent<HTMLFormElement>)=>{
+    e.preventDefault();
+
+    const token=localStorage.getItem("token");
+    if(!token) return;
+
+    try {
+      const response=await sendMessageToGbt(token,gbtQuestion);
+      if (!response) {
+        console.error("Error from server:", response.error);
+      } else {
+          console.log("Success:", response.message);
+          console.log(response)
+          setGbtAnswer(response.message);
+      }
+    } catch (error) {
+      console.log("Error in sendTaskDetail:", error);
+    }
+  }
 
   const navigateTasksPage = () => {
     router.push("/tasks");
@@ -79,7 +102,14 @@ const TaskDetails = () => {
 
       {/* Yapay zeka chat kısmı */}
       <div>
-          
+          <div>
+            {gbtAnswer ? <div>{gbtAnswer}</div> : "Loading answer"}
+          </div>
+
+          <form onSubmit={getAnswerFromGbt}>
+            <input placeholder="Ask a question" onChange={(e)=>setGbtQuestion(e.target.value)}/>
+            <button type="submit">Send</button>
+          </form>
       </div>
     </div>
   );

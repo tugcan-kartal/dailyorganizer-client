@@ -17,3 +17,21 @@ export const setTaskToGbt = async (token: string, id: string) => {
         console.log(error);
     }
 };
+
+export const sendMessageToGbt  = async (token: string,message: string) => {
+    try {
+        const response=await fetch(`${API_URL}/send-message`,{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({message: message})
+        });
+
+        const responseData=await response.json();
+        return responseData;
+    } catch (error) {
+        console.log(error);
+    }
+}
