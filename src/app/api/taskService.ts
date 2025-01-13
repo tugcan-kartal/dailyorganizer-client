@@ -1,4 +1,4 @@
-import { Task } from "../tasks/page";
+import { Task } from "../context/TasksContext";
 
 const API_URL="http://localhost:3000/task";
 

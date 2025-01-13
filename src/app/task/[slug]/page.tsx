@@ -1,5 +1,6 @@
 "use client";
 
+import { setTaskToGbt } from "@/app/api/taskGbtService";
 import { getTaskDetail } from "@/app/api/taskService";
 import TaskItem from "@/app/components/taskItem";
 import { Task } from "@/app/context/TasksContext";
@@ -27,12 +28,33 @@ const TaskDetails = () => {
     }
   };
 
+  const sendTaskDetail = async () => {
+    const token = localStorage.getItem("token");
+    if (!token || typeof taskId !== "string") return;
+
+    try {
+        const response = await setTaskToGbt(token, taskId);
+        if (!response) {
+            console.error("Error from server:", response.error);
+        } else {
+            console.log("Success:", response.message);
+        }
+    } catch (error) {
+        console.log("Error in sendTaskDetail:", error);
+    }
+};
+
   const navigateTasksPage = () => {
     router.push("/tasks");
   };
 
   useEffect(() => {
-    fetchTaskDetail();
+    const forWait=async()=>{
+      await fetchTaskDetail();
+      await sendTaskDetail();
+    }
+
+    forWait();
   }, []);
 
   return (
