@@ -13,7 +13,7 @@ const TaskDetails = () => {
 
   const [taskDetail, setTaskDetail] = useState<Task>();
 
-  const [gbtQuestion,setGbtQuestion]=useState("");
+  const [gbtQuestion,setGbtQuestion]=useState("Tavsiye ver");
   const [gbtAnswer,setGbtAnswer]=useState("");
 
   const params = useParams();
@@ -75,41 +75,49 @@ const TaskDetails = () => {
     const forWait=async()=>{
       await fetchTaskDetail();
       await sendTaskDetail();
+      await getAnswerFromGbt({ preventDefault: () => {} } as React.FormEvent<HTMLFormElement>);
     }
 
     forWait();
   }, []);
 
   return (
-    <div className="h-screen flex flex-col items-center gap-y-[3vh] py-[3vh] bg-gray-50">
-      {/* Üstteki ikon kısmı */}
-      <div className="">
-        <div onClick={navigateTasksPage}>
-          <AiOutlineHome className="text-4xl cursor-pointer" />
+    <div className="bg-gray-200 h-screen">
+      <div className="flex flex-col justify-center items-center">
+      
+        {/* Üstteki ikon kısmı */}
+        <div className="pt-[5vh]">
+          <div onClick={navigateTasksPage}>
+            <AiOutlineHome className="text-4xl cursor-pointer" />
+          </div>
         </div>
-      </div>
 
-      {/* Task kart kısmı */}
-      <div className="">
-        <div>
-          {taskDetail ? (
-            <TaskItem task={taskDetail} fetchTasks={fetchTaskDetail} />
-          ) : (
-            <p>Loading task details...</p>
-          )}
-        </div>
-      </div>
+        {/* İçerik */}
+        <div className="flex justify-center items-center pt-[10vh] gap-x-[5vw] w-[80%] mx-auto">
 
-      {/* Yapay zeka chat kısmı */}
-      <div>
-          <div>
-            {gbtAnswer ? <div>{gbtAnswer}</div> : "Loading answer"}
+          {/* Task kart kısmı */}
+          <div className="">
+              {taskDetail ? (
+                <TaskItem task={taskDetail} fetchTasks={fetchTaskDetail} />
+              ) : (
+                <p>Loading task details...</p>
+              )}
           </div>
 
-          <form onSubmit={getAnswerFromGbt}>
-            <input placeholder="Ask a question" onChange={(e)=>setGbtQuestion(e.target.value)}/>
-            <button type="submit">Send</button>
-          </form>
+          {/* Yapay zeka chat kısmı */}
+          <div className="">
+              <div>
+                {gbtAnswer ? <div>{gbtAnswer}</div> : "Loading answer"}
+              </div>
+
+              <form onSubmit={getAnswerFromGbt}>
+                <input placeholder="Ask a question" onChange={(e)=>setGbtQuestion(e.target.value)}/>
+                <button type="submit">Send</button>
+              </form>
+          </div>
+
+        </div>
+
       </div>
     </div>
   );
