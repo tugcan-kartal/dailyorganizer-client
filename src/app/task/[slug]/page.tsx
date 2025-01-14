@@ -71,6 +71,23 @@ const TaskDetails = () => {
     router.push("/tasks");
   };
 
+  const formatAnswer = (answer: string) => {
+    return answer
+      .split("\n")
+      .map((line, index) => {
+        if (line.startsWith("**")) {
+          // Başlıkları kalın yap
+          return <h3 key={index} className="font-bold text-lg mt-2">{line.replace(/\*\*/g, "")}</h3>;
+        } else if (line.startsWith("1.") || line.startsWith("-")) {
+          // Maddeleri listeye çevir
+          return <li key={index} className="ml-4 list-disc">{line.replace(/^\d+\.\s*/, "").replace(/^-/, "").trim()}</li>;
+        } else {
+          // Normal paragraflar
+          return <p key={index} className="mb-2">{line}</p>;
+        }
+      });
+  };
+
   useEffect(() => {
     const forWait=async()=>{
       await fetchTaskDetail();
@@ -105,15 +122,17 @@ const TaskDetails = () => {
           </div>
 
           {/* Yapay zeka chat kısmı */}
-          <div className="">
-              <div>
-                {gbtAnswer ? <div>{gbtAnswer}</div> : "Loading answer"}
+          <div className="flex flex-col gap-y-4">
+              <div className="h-[50vh] overflow-y-scroll bg-white rounded-2xl p-4">
+                {gbtAnswer ? <div>{formatAnswer(gbtAnswer)}</div> : <div>"Loading Answer</div>}
               </div>
-
-              <form onSubmit={getAnswerFromGbt}>
-                <input placeholder="Ask a question" onChange={(e)=>setGbtQuestion(e.target.value)}/>
-                <button type="submit">Send</button>
-              </form>
+              
+              <div className="">
+                <form onSubmit={getAnswerFromGbt}>
+                  <input placeholder="Ask a question" className="p-2 rounded-l w-[90%]" onChange={(e)=>setGbtQuestion(e.target.value)}/>
+                  <button className="w-[10%] bg-gray-100 p-2 rounded-r" type="submit">Send</button>
+                </form>
+              </div>
           </div>
 
         </div>
