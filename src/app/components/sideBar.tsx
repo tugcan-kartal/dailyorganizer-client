@@ -46,33 +46,33 @@ const SideBar: React.FC = () => {
                 {/* Sidebardaki filtreleme tip buton fieldlarının bulunduğu yer */}
                 <div className="flex flex-col justify-center gap-y-[2vh] pt-[5vh] pl-[1vw] border-b-2 border-gray-100 pb-10">
 
-                    <div className="cursor-pointer flex gap-x-4 w-[85%] hover:shadow-lg transition-all duration-300 px-2 py-2 rounded-lg" onClick={()=>setTaskFilter("category:asc")}>
+                    <div className="cursor-pointer flex md:flex-row flex-col gap-x-4  hover:shadow-lg transition-all duration-300 px-2 py-2 rounded-lg" onClick={()=>setTaskFilter("category:asc")}>
                         <div>
-                            <Image src={CategoryBar} alt="Category Bar" width={20}/>
+                            <Image className="mx-auto" src={CategoryBar} alt="Category Bar" width={20}/>
                         </div>
-                        <div>Sort by category</div>
+                        <div className="text-center">Sort by category</div>
                     </div>
 
-                    <div className="cursor-pointer flex gap-x-4 w-[85%] hover:shadow-lg transition-all duration-300 px-2 py-2 rounded-lg" onClick={()=>setTaskFilter("importance_level:asc")}>
+                    <div className="cursor-pointer flex md:flex-row flex-col gap-x-4  hover:shadow-lg transition-all duration-300 px-2 py-2 rounded-lg" onClick={()=>setTaskFilter("importance_level:asc")}>
                         <div>
-                            <Image src={ImportanceBar} alt="Importance Bar" width={20}/>
+                            <Image className="mx-auto" src={ImportanceBar} alt="Importance Bar" width={20}/>
                         </div>
-                        <div>Sort by Priority</div>
+                        <div className="text-center">Sort by Priority</div>
                     </div>
 
 
-                    <div className="cursor-pointer flex gap-x-4 w-[85%] hover:shadow-lg transition-all duration-300 px-2 py-2 rounded-lg" onClick={()=>setTaskFilter("start_date:asc")}>
+                    <div className="cursor-pointer flex md:flex-row flex-col gap-x-4  hover:shadow-lg transition-all duration-300 px-2 py-2 rounded-lg" onClick={()=>setTaskFilter("start_date:asc")}>
                         <div>
-                            <Image src={StartDateBar} alt="StartDate Bar" width={20}/>
+                            <Image className="mx-auto" src={StartDateBar} alt="StartDate Bar" width={20}/>
                         </div>
-                        <div>Sort by Start Date</div>
+                        <div className="text-center">Sort by Start Date</div>
                     </div>
 
-                    <div className="cursor-pointer flex gap-x-4 w-[85%] hover:shadow-lg transition-all duration-300 px-2 py-2 rounded-lg" onClick={()=>setTaskFilter("end_date:asc")}>
+                    <div className="cursor-pointer flex md:flex-row flex-col gap-x-4  hover:shadow-lg transition-all duration-300 px-2 py-2 rounded-lg" onClick={()=>setTaskFilter("end_date:asc")}>
                         <div>
-                            <Image src={EndDateBar} alt="EndDate Bar" width={20}/>
+                            <Image className="mx-auto" src={EndDateBar} alt="EndDate Bar" width={20}/>
                         </div>
-                        <div>Sort by End Date</div>
+                        <div className="text-center">Sort by End Date</div>
                     </div>
 
                 </div>

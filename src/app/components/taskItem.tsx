@@ -85,7 +85,7 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
       <div
         className={`bg-white border-t-8 ${borderPicker(
           task
-        )} shadow-lg rounded-2xl w-[20vw] py-4 relative`}
+        )} shadow-lg rounded-2xl md:w-[20vw] py-4 relative`}
       >
         <div className="relative w-[90%] mx-auto py-2">
           <div>
@@ -180,7 +180,7 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
               {/* date ve yüzde barı kısmı */}
               <div className="flex justify-between mt-[5vh] mx-3 gap-x-[1.5vw]">
                 {/* Start Date Section */}
-                <div className="flex flex-col items-center w-[20%]">
+                <div className="flex flex-col items-center md:w-[20%] w-[10%]">
                   <div className="text-sm text-gray-700 font-medium">
                     {new Date(task.start_date).toLocaleDateString("en-GB")}
                   </div>
@@ -196,7 +196,7 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
                 </div>
 
                 {/* Progress Bar Section */}
-                <div className="flex flex-col items-center w-[60%]">
+                <div className="flex flex-col items-center md:w-[60%] w-[30%]">
                   <div className="relative w-full bg-gray-200 rounded-full h-4">
                     <div
                       className="bg-blue-500 h-4 rounded-full transition-all duration-300 ease-in-out"
@@ -209,7 +209,7 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
                 </div>
 
                 {/* End Date Section */}
-                <div className="flex flex-col items-center w-[20%]">
+                <div className="flex flex-col items-center md:w-[20%] w-[10%]">
                   <div className="text-sm text-gray-700 font-medium">
                     {new Date(task.end_date).toLocaleDateString("en-GB")}
                   </div>

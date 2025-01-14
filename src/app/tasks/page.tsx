@@ -28,7 +28,7 @@ const Tasks: React.FC = () => {
         {/* Burası sidebar açık halinin gösterim yeri yani sidebar kısmı */}
         <div
           className={`min-h-screen transition-all duration-500 ease-in-out ${
-            isSideBar ? "w-[15%]" : "w-0"
+            isSideBar ? "md:w-[15%]" : "w-0"
           } border-r-2 bg-white border-gray-50 shadow-lg`}
         >
           <SideBar />

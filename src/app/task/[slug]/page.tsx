@@ -160,7 +160,7 @@ const TaskDetails = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-br from-gray-100 to-gray-300 min-h-screen">
+    <div className="bg-gradient-to-br from-gray-100 to-gray-300 min-h-screen py-[2vh]">
       <div className="flex flex-col items-center">
 
         {/* Ev iconu burada */}
@@ -172,7 +172,7 @@ const TaskDetails = () => {
         </div>
 
         {/* Task kartı ve gbt formu */}
-        <div className="flex flex-col lg:flex-row justify-center items-start pt-[10vh] gap-x-[5vw] w-[90%] max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row justify-center items-start md:pt-[10vh] pt-[5vh] gap-x-[5vw] gap-y-[5vh] w-[90%] max-w-7xl mx-auto">
           {/* Task kartı */}
           <div className="w-full lg:w-1/3">
             {taskDetail ? (
@@ -203,7 +203,7 @@ const TaskDetails = () => {
               />
               <button
                 type="submit"
-                className="w-[10%] bg-blue-600 text-white p-4 rounded-r-xl hover:bg-blue-700 transition"
+                className="md:w-[10%] bg-blue-600 text-white p-4 rounded-r-xl hover:bg-blue-700 transition"
               >
                 Send
               </button>

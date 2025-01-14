@@ -141,10 +141,10 @@ const TaskAddForm: React.FC = () => {
         <div
           className={`bg-white border-t-8 ${borderPicker(
             taskToAdd
-          )} shadow-lg rounded-2xl w-[20vw] py-[4vh] relative`}
+          )} shadow-lg rounded-2xl md:w-[20vw] w-[80%] py-[4vh] relative`}
         >
           <form
-            className="mx-5 relative flex flex-col gap-y-4"
+            className="md:mx-5 mx-3 relative flex flex-col gap-y-4"
             onSubmit={handleSubmit}
           >
             <input
@@ -202,7 +202,7 @@ const TaskAddForm: React.FC = () => {
             </div>
             
             {/* Tarih ekleme kısmı */}
-            <div className="flex justify-between items-center space-x-6">
+            <div className="flex justify-between items-center md:space-x-6 space-x-3">
               <div className="flex flex-col gap-y-1 w-1/2">
                 <label className="text-sm text-gray-700 font-medium">
                   Starting Date
