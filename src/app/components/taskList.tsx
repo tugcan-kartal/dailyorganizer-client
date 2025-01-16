@@ -64,7 +64,7 @@ const TaskList: React.FC = () => {
       </div>
       
       {/* Task Listin kendisi var tüm tasklar */}
-      <div className="grid grid-cols-3 gap-6 py-[4vh] ml-[5vw]">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 py-[4vh] md:ml-[10%] mx-[10%] md:mx-0">
         <DndContext
           collisionDetection={closestCorners}
           onDragStart={handleDragStart}

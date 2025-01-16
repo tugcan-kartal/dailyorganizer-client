@@ -85,7 +85,7 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
       <div
         className={`bg-white border-t-8 ${borderPicker(
           task
-        )} shadow-lg rounded-2xl w-[20vw] py-4 relative`}
+        )} shadow-lg rounded-2xl md:w-[65%] py-4 relative`}
       >
         <div className="relative w-[90%] mx-auto py-2">
           <div>
@@ -117,16 +117,16 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
               {/* Delete cancel update butonları */}
               <div>
                 {isMenu && (
-                  <div className="flex justify-center gap-x-[1.5vw] mb-5">
+                  <div className="flex justify-center md:gap-x-[5%] gap-x-[10%] mb-5">
                     <button
-                      className="bg-red-500 rounded-2xl px-[1.5vw] py-1 text-white shadow-lg"
+                      className="bg-red-500 rounded-2xl px-[5%] py-1 text-white shadow-lg"
                       onClick={handleDelete}
                     >
                       Delete
                     </button>
                     
                     <button
-                      className="bg-yellow-500 rounded-2xl px-[1.5vw] py-1 text-white shadow-lg"
+                      className="bg-yellow-500 rounded-2xl px-[5%] py-1 text-white shadow-lg"
                       onClick={() => setIsEditing(!isEditing)}
                     >
                       {isEditing ? "Cancel" : "Edit"}
@@ -134,7 +134,7 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
 
                     {isEditing ? (
                       <button
-                        className="bg-green-500 rounded-2xl px-[1.5vw] py-1 text-white shadow-lg"
+                        className="bg-green-500 rounded-2xl px-[5%] py-1 text-white shadow-lg"
                         onClick={handleUpdate}
                       >
                         {isEditing ? "Update" : ""}
@@ -178,9 +178,9 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
               </div>
 
               {/* date ve yüzde barı kısmı */}
-              <div className="flex justify-between mt-[5vh] mx-3 gap-x-[1.5vw]">
+              <div className="flex justify-between md:mt-[20%] mx-[5%] gap-x-[1.5vw]">
                 {/* Start Date Section */}
-                <div className="flex flex-col items-center w-[20%]">
+                <div className="flex flex-col items-center md:w-[20%]">
                   <div className="text-sm text-gray-700 font-medium">
                     {new Date(task.start_date).toLocaleDateString("en-GB")}
                   </div>
@@ -190,14 +190,14 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
                       name="start_date"
                       onChange={handleChange}
                       placeholder="Update task start_date"
-                      className="border-2 border-gray-300 focus:border-blue-500 rounded-lg px-[0.7vw] py-2 mt-2 w-full transition-all duration-300 ease-in-out shadow-sm focus:ring-2 focus:ring-blue-500"
-                    />
+                      className="border border-gray-300 focus:border-blue-500 rounded-full w-8 pr-[10%] mt-2 text-transparent bg-transparent cursor-pointer transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
                   )}
                 </div>
 
                 {/* Progress Bar Section */}
-                <div className="flex flex-col items-center w-[60%]">
-                  <div className="relative w-full bg-gray-200 rounded-full h-4">
+                <div className="flex flex-col items-center md:w-[60%] md:mt-[5%] mt-[20%]">
+                  <div className="relative md:w-full w-[150%] bg-gray-200 rounded-full h-4">
                     <div
                       className="bg-blue-500 h-4 rounded-full transition-all duration-300 ease-in-out"
                       style={{ width: `${progress}%` }}
@@ -209,7 +209,7 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
                 </div>
 
                 {/* End Date Section */}
-                <div className="flex flex-col items-center w-[20%]">
+                <div className="flex flex-col items-center md:w-[20%]">
                   <div className="text-sm text-gray-700 font-medium">
                     {new Date(task.end_date).toLocaleDateString("en-GB")}
                   </div>
@@ -219,8 +219,8 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
                       name="end_date"
                       onChange={handleChange}
                       placeholder="Update task end_date"
-                      className="border-2 border-gray-300 focus:border-blue-500 rounded-lg px-[0.7vw] py-2 mt-2 w-full transition-all duration-300 ease-in-out shadow-sm focus:ring-2 focus:ring-blue-500"
-                    />
+                      className="border border-gray-300 focus:border-blue-500 rounded-full w-8 pr-[10%] mt-2 text-transparent bg-transparent cursor-pointer transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      />
                   )}
                 </div>
               </div>
@@ -229,8 +229,8 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
               <div className="flex justify-center">
                 <Image
                   className="mt-[5vh]"
-                  width="100"
-                  height={100}
+                  width={75}
+                  height={75}
                   src={task.images[0]?.Location || OtherCat}
                   alt="not found"
                 />

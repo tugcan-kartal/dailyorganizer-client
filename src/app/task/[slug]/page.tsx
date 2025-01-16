@@ -164,7 +164,7 @@ const TaskDetails = () => {
       <div className="flex flex-col items-center">
 
         {/* Ev iconu burada */}
-        <div className="pt-[5vh]">
+        <div className="pt-[3%] md:pr-[11%]">
           <AiOutlineHome
             className="text-4xl cursor-pointer hover:text-indigo-600 transition"
             onClick={navigateTasksPage}
@@ -172,9 +172,9 @@ const TaskDetails = () => {
         </div>
 
         {/* Task kartı ve gbt formu */}
-        <div className="flex flex-col lg:flex-row justify-center items-start pt-[10vh] gap-x-[5vw] w-[90%] max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row justify-center items-start pt-[5%] gap-x-[2%] w-[90%] max-w-7xl mx-auto gap-y-[5vh]">
           {/* Task kartı */}
-          <div className="w-full lg:w-1/3">
+          <div className="w-full ">
             {taskDetail ? (
               <TaskItem task={taskDetail} fetchTasks={fetchTaskDetail} />
             ) : (
@@ -183,7 +183,7 @@ const TaskDetails = () => {
           </div>
           
           {/* Gbt formu */}
-          <div className="flex flex-col gap-y-6 w-full lg:w-2/3">
+          <div className="flex flex-col gap-y-6 w-full ">
             <div className="h-[50vh] overflow-y-auto bg-white shadow-md rounded-xl p-6">
               {gbtAnswer ? (
                 <div>{formatAnswer(gbtAnswer)}</div>
@@ -203,7 +203,7 @@ const TaskDetails = () => {
               />
               <button
                 type="submit"
-                className="w-[10%] bg-blue-600 text-white p-4 rounded-r-xl hover:bg-blue-700 transition"
+                className="md:w-[10%] bg-blue-600 text-white p-4 rounded-r-xl hover:bg-blue-700 transition"
               >
                 Send
               </button>

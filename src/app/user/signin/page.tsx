@@ -58,7 +58,7 @@ const Signin: React.FC = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 shadow-md rounded-md w-[400px]">
+      <div className="bg-white p-8 shadow-md rounded-md md:w-[400px] w-[300px]">
         <div className="mb-6">
           <h1 className="text-2xl font-semibold">Think it. Make it.</h1>
           <p className="text-2xl text-gray-400 font-semibold">

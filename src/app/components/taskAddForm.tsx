@@ -130,18 +130,18 @@ const TaskAddForm: React.FC = () => {
   }, [selectedCategory]);
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-gray-100 h-screen">
       {/* Sidebar kapalıyken çıkan sol üstteki butonlar slide aç ve yeni task oluştur butonları */}
       <div>
         <HeaderActions />
       </div>
       
       {/* Task ekleme kartının olduğu kısım */}
-      <div className="flex justify-center items-center pt-[15vh]">
+      <div className="md:flex justify-center items-center md:pt-[10%] pt-[15%] md:px-[0%] px-[5%]">
         <div
           className={`bg-white border-t-8 ${borderPicker(
             taskToAdd
-          )} shadow-lg rounded-2xl w-[20vw] py-[4vh] relative`}
+          )} shadow-lg rounded-2xl md:w-[20%] py-[4vh] relative`}
         >
           <form
             className="mx-5 relative flex flex-col gap-y-4"

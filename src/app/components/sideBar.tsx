@@ -30,7 +30,7 @@ const SideBar: React.FC = () => {
 
     return (
         <div>
-            <div>
+            <div className="overflow-y-hidden">
 
                 {/* Sidebardaki sol üst köşedeki butonlar */}
                 <div className="flex justify-between pt-4 px-3">

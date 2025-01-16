@@ -28,13 +28,13 @@ const Tasks: React.FC = () => {
         {/* Burası sidebar açık halinin gösterim yeri yani sidebar kısmı */}
         <div
           className={`min-h-screen transition-all duration-500 ease-in-out ${
-            isSideBar ? "w-[15%]" : "w-0"
+            isSideBar ? "md:w-[15%] w-[100%]" : "w-0"
           } border-r-2 bg-white border-gray-50 shadow-lg`}
         >
           <SideBar />
         </div>
 
-        <div className={`min-h-screen ${isSideBar ? "w-[85%]" : "w-[100%]"}`}>
+        <div className={`min-h-screen ${isSideBar ? "md:w-[85%] w-0" : "w-[100%]"}`}>
           {/* Burada ise eğer isAddTask açıksa yani task ekleme isteniyorsa o çıkıyor yoksa task listesi geliyor */}
           {!isAddTask ? (
             <TaskList />
