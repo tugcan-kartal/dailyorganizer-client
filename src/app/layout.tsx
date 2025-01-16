@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { TasksProvider } from "./context/TasksContext";
+import Middleware from "../../middlware";
 
 export const metadata: Metadata = {
   title: "Daily Organizer AI",
@@ -17,6 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <TasksProvider>
         <body>
+          <Middleware />
           {children}
           <Toaster />
         </body>

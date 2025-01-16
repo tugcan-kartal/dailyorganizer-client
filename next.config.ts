@@ -7,15 +7,6 @@ const nextConfig: NextConfig = {
       'tasksdailyorganizer.s3.eu-north-1.amazonaws.com' // Eğer bölge farklıysa bu da eklenebilir
     ],
   },
-  async redirects(){
-    return [
-      {
-        source: '/',
-        destination: '/user/signup',
-        permanent: true,
-      }
-    ]
-  },
 };
 
 export default nextConfig;
