@@ -137,7 +137,7 @@ const TaskAddForm: React.FC = () => {
       </div>
       
       {/* Task ekleme kartının olduğu kısım */}
-      <div className="md:flex justify-center items-center md:pt-[10%] pt-[15%] md:px-[0%] px-[5%]">
+      <div className="md:flex justify-center items-center md:pt-[3%] pt-[15%] md:px-[0%] px-[5%]">
         <div
           className={`bg-white border-t-8 ${borderPicker(
             taskToAdd

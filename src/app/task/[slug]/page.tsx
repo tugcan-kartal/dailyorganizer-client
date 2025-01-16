@@ -160,7 +160,7 @@ const TaskDetails = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-br from-gray-100 to-gray-300 min-h-screen">
+    <div className="bg-gradient-to-br from-gray-100 to-gray-300 min-h-screen md:py-[0vh] pb-[10%]">
       <div className="flex flex-col items-center">
 
         {/* Ev iconu burada */}

@@ -85,7 +85,7 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
       <div
         className={`bg-white border-t-8 ${borderPicker(
           task
-        )} shadow-lg rounded-2xl md:w-[65%] py-4 relative`}
+        )} shadow-lg rounded-2xl md:w-[85%] py-4 relative`}
       >
         <div className="relative w-[90%] mx-auto py-2">
           <div>
