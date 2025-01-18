@@ -35,3 +35,20 @@ export const sendMessageToGbt  = async (token: string,message: string) => {
         console.log(error);
     }
 }
+
+export const getHistoryGbt = async (token: string, taskId: string) => {
+    try {
+        const response = await fetch(`${API_URL}/history/${taskId}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        const responseData = await response.json();
+        return responseData;
+    } catch (error) {
+        console.error(error);
+    }
+};

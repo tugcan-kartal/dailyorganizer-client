@@ -1,6 +1,10 @@
 "use client";
 
-import { sendMessageToGbt, setTaskToGbt } from "@/app/api/taskGbtService";
+import {
+  getHistoryGbt,
+  sendMessageToGbt,
+  setTaskToGbt,
+} from "@/app/api/taskGbtService";
 import { getTaskDetail } from "@/app/api/taskService";
 import TaskItem from "@/app/components/taskItem";
 import { Task } from "@/app/context/TasksContext";
@@ -13,8 +17,12 @@ const TaskDetails = () => {
 
   const [taskDetail, setTaskDetail] = useState<Task>();
 
-  const [gbtQuestion,setGbtQuestion]=useState("Tavsiye ver");
-  const [gbtAnswer,setGbtAnswer]=useState("");
+  const [gbtQuestion, setGbtQuestion] = useState("Tavsiye ver");
+  const [gbtAnswer, setGbtAnswer] = useState("");
+
+  const [gbtHistory, setGbtHistory] = useState<
+    { message: string; response: string; timestamp: Date }[]
+  >([]);
 
   const params = useParams();
   const taskId = params.slug;
@@ -36,36 +44,53 @@ const TaskDetails = () => {
     if (!token || typeof taskId !== "string") return;
 
     try {
-        const response = await setTaskToGbt(token, taskId);
-        if (!response) {
-            console.error("Error from server:", response.error);
-        } else {
-            console.log("Success:", response.message);
-        }
-    } catch (error) {
-        console.log("Error in sendTaskDetail:", error);
-    }
-  };
-
-  const getAnswerFromGbt=async(e:React.FormEvent<HTMLFormElement>)=>{
-    e.preventDefault();
-
-    const token=localStorage.getItem("token");
-    if(!token) return;
-
-    try {
-      const response=await sendMessageToGbt(token,gbtQuestion);
+      const response = await setTaskToGbt(token, taskId);
       if (!response) {
         console.error("Error from server:", response.error);
-      } else {
-          console.log("Success:", response.message);
-          console.log(response)
-          setGbtAnswer(response.message);
       }
     } catch (error) {
       console.log("Error in sendTaskDetail:", error);
     }
-  }
+  };
+
+  const getAnswerFromGbt = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    try {
+      const response = await sendMessageToGbt(token, gbtQuestion);
+      if (!response) {
+        console.error("Error from server:", response.error);
+      } else {
+        setGbtAnswer(response.message);
+        setGbtHistory((prev) => [
+          ...prev,
+          {
+            message: gbtQuestion,
+            response: response.message,
+            timestamp: new Date(),
+          },
+        ]);
+      }
+      setGbtQuestion("");
+    } catch (error) {
+      console.log("Error in sendTaskDetail:", error);
+    }
+  };
+
+  const getPastMessagesFromGbt = async () => {
+    const token = localStorage.getItem("token");
+    if (!token || typeof taskId !== "string") return;
+
+    try {
+      const response = await getHistoryGbt(token, taskId);
+      setGbtHistory(response.messages || []);
+    } catch (error) {
+      console.error("Error fetching chat history:", error);
+    }
+  };
 
   const navigateTasksPage = () => {
     router.push("/tasks");
@@ -148,21 +173,26 @@ const TaskDetails = () => {
       }
     });
   };
-  
+
   useEffect(() => {
-    const forWait=async()=>{
+    const forWait = async () => {
       await fetchTaskDetail();
       await sendTaskDetail();
-      await getAnswerFromGbt({ preventDefault: () => {} } as React.FormEvent<HTMLFormElement>);
-    }
+      await getAnswerFromGbt({
+        preventDefault: () => {},
+      } as React.FormEvent<HTMLFormElement>);
+    };
 
     forWait();
   }, []);
 
+  useEffect(() => {
+    getPastMessagesFromGbt();
+  }, [gbtAnswer]);
+
   return (
     <div className="bg-gradient-to-br from-gray-100 to-gray-300 min-h-screen md:py-[0vh] pb-[10%]">
       <div className="flex flex-col items-center">
-
         {/* Ev iconu burada */}
         <div className="pt-[3%] md:pr-[11%]">
           <AiOutlineHome
@@ -181,17 +211,41 @@ const TaskDetails = () => {
               <p className="text-gray-500">Loading task details...</p>
             )}
           </div>
-          
+
           {/* Gbt formu */}
-          <div className="flex flex-col gap-y-6 w-full ">
+          <div className="flex flex-col gap-y-6 w-full">
             <div className="h-[50vh] overflow-y-auto bg-white shadow-md rounded-xl p-6">
-              {gbtAnswer ? (
-                <div>{formatAnswer(gbtAnswer)}</div>
-              ) : (
-                <div className="text-gray-400">"Loading Answer..."</div>
-              )}
+              {gbtHistory.map((history, key) => (
+                <div key={key} className="mb-4 relative">
+                  {/* Kullanıcı Mesajı */}
+                  <div className="flex justify-start relative">
+                    <div className="bg-blue-100 text-blue-900 p-3 rounded-lg shadow-md max-w-[75%] relative">
+                      <div>{history.message}</div>
+                      <div className="text-xs text-gray-500 absolute bottom-[-20px] left-2">
+                        {new Date(history.timestamp).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Yanıt Mesajı */}
+                  <div className="flex justify-end mt-2 relative">
+                    <div className="bg-gray-200 text-gray-900 p-3 rounded-lg shadow-md max-w-[75%] relative">
+                      <div>{formatAnswer(history.response)}</div>
+                      <div className="text-xs text-gray-500 absolute bottom-[-20px] right-2">
+                        {new Date(history.timestamp).toLocaleTimeString([], {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
-            
+
             <form
               onSubmit={getAnswerFromGbt}
               className="flex items-center w-full shadow-md rounded-xl bg-white"
@@ -200,6 +254,7 @@ const TaskDetails = () => {
                 placeholder="Ask a question..."
                 className="p-4 flex-grow rounded-l-xl border-none focus:ring-2 focus:ring-blue-600 outline-none"
                 onChange={(e) => setGbtQuestion(e.target.value)}
+                value={gbtQuestion}
               />
               <button
                 type="submit"
