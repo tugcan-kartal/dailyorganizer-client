@@ -100,7 +100,7 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
                   {...attributes}
                   {...listeners}
                   style={style}
-                  className="text-3xl font-semibold cursor-pointer"
+                  className="text-3xl font-semibold cursor-move"
                 >
                   <MdDragIndicator />
                 </div>

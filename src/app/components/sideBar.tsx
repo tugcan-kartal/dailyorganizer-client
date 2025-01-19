@@ -53,7 +53,7 @@ const SideBar: React.FC = () => {
                         <div>Sort by category</div>
                     </div>
 
-                    <div className="cursor-pointer flex gap-x-4 w-[85%] hover:shadow-lg transition-all duration-300 px-2 py-2 rounded-lg" onClick={()=>setTaskFilter("importance_level:asc")}>
+                    <div className="cursor-pointer flex gap-x-4 w-[85%] hover:shadow-lg transition-all duration-300 px-2 py-2 rounded-lg" onClick={()=>setTaskFilter("importance_level:desc")}>
                         <div>
                             <Image src={ImportanceBar} alt="Importance Bar" width={20}/>
                         </div>
