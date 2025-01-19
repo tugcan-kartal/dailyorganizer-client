@@ -141,7 +141,7 @@ const TaskAddForm: React.FC = () => {
         <div
           className={`bg-white border-t-8 ${borderPicker(
             taskToAdd
-          )} shadow-lg rounded-2xl md:w-[20%] py-[4vh] relative`}
+          )} shadow-lg rounded-2xl md:w-[30%] py-[4vh] relative`}
         >
           <form
             className="mx-5 relative flex flex-col gap-y-4"
