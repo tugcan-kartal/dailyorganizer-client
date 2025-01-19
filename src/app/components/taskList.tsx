@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { rectSortingStrategy, SortableContext } from "@dnd-kit/sortable";
 import { saveTaskOrder } from "../api/taskService";
 import TaskItem from "./taskItem";
-import { closestCorners, DndContext, DragOverlay } from "@dnd-kit/core";
+import { closestCorners, DndContext, DragOverlay, MouseSensor, TouchSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { Task, useTasksContext } from "../context/TasksContext";
 import HeaderActions from "./headerActions";
 
@@ -20,6 +20,11 @@ const TaskList: React.FC = () => {
   } =useTasksContext();
 
   const [activeTask, setActiveTask] = useState<Task | null>(null); // Sürüklenen görev için olan state
+
+  const sensors = useSensors(
+    useSensor(MouseSensor), // Web için fare sensörü
+    useSensor(TouchSensor) // Dokunmatik desteği ekler
+  );
 
   // Sürüklenen görev için olan fonksiyonlar
   const handleDragStart = (event: any) => {
@@ -69,6 +74,7 @@ const TaskList: React.FC = () => {
           collisionDetection={closestCorners}
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
+          sensors={sensors}
         >
           <SortableContext
             items={tasks?.map((task) => task._id)}
@@ -82,7 +88,7 @@ const TaskList: React.FC = () => {
           {/* Drag yapılırken gösterilen kısım */}
           <DragOverlay>
             {activeTask ? (
-              <div className="bg-white shadow-lg rounded-2xl w-[20vw] h-[10vh] text-center pt-7">
+              <div className="bg-white shadow-lg rounded-2xl md:w-[20vw] w-[40vw] md:h-[10vh] h-[10vh] text-center py-7">
                 <div>{activeTask.title}</div>
               </div>
             ) : null}
