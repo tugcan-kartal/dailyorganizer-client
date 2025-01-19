@@ -60,7 +60,7 @@ const TaskDetails = () => {
     if (!token) return;
 
     try {
-      const response = await sendMessageToGbt(token, gbtQuestion);
+      const response = await sendMessageToGbt(token, gbtQuestion, taskId as string);
       if (!response) {
         console.error("Error from server:", response.error);
       } else {

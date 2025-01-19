@@ -18,7 +18,7 @@ export const setTaskToGbt = async (token: string, id: string) => {
     }
 };
 
-export const sendMessageToGbt  = async (token: string,message: string) => {
+export const sendMessageToGbt  = async (token: string,message: string,taskId: string) => {
     try {
         const response=await fetch(`${API_URL}/send-message`,{
             method: "POST",
@@ -26,7 +26,10 @@ export const sendMessageToGbt  = async (token: string,message: string) => {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify({message: message})
+            body: JSON.stringify({
+                message: message,
+                taskId: taskId,
+            })
         });
 
         const responseData=await response.json();
