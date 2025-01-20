@@ -174,7 +174,7 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
             <div className="w-[80%] mx-auto">
               {/* title kısmı */}
               <div>
-                <div className={`text-2xl text-gray-800 font-semibold ${newUpdatedTask.status==="done" ? "" : "line-through"}`}>
+                <div className={`text-2xl text-gray-800 font-semibold ${newUpdatedTask.status==="process" ? "" : "line-through"}`}>
                   {task.title}
                 </div>
                 {isEditing && (
@@ -262,7 +262,7 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
             
             <div className="flex justify-between">
               <div onClick={changeStatus} className="text-3xl cursor-pointer">
-                {newUpdatedTask.status==="process" ? <MdDone /> : <MdHourglassEmpty />}
+                {newUpdatedTask.status==="process" ? <MdHourglassEmpty /> : <MdDone />}
               </div>
 
               <div onClick={()=>navigateToTaskDetails(task._id)} className="text-3xl  cursor-pointer">
