@@ -178,9 +178,6 @@ const TaskDetails = () => {
     const forWait = async () => {
       await fetchTaskDetail();
       await sendTaskDetail();
-      await getAnswerFromGbt({
-        preventDefault: () => {},
-      } as React.FormEvent<HTMLFormElement>);
     };
 
     forWait();
@@ -219,7 +216,7 @@ const TaskDetails = () => {
                 <div key={key} className="mb-4 relative">
                   {/* Kullanıcı Mesajı */}
                   <div className="flex justify-start relative">
-                    <div className="bg-blue-100 text-blue-900 p-3 rounded-lg shadow-md max-w-[75%] relative">
+                    <div className="bg-blue-100 text-blue-900 p-3 rounded-lg shadow-md md:max-w-[75%] max-w-[85%] relative">
                       <div>{history.message}</div>
                       <div className="text-xs text-gray-500 absolute bottom-[-20px] left-2">
                         {new Date(history.timestamp).toLocaleTimeString([], {
@@ -231,8 +228,8 @@ const TaskDetails = () => {
                   </div>
 
                   {/* Yanıt Mesajı */}
-                  <div className="flex justify-end mt-2 relative">
-                    <div className="bg-gray-50 text-gray-900 p-3 rounded-lg shadow-md max-w-[75%] relative">
+                  <div className="flex justify-end md:mt-2 mt-6 relative">
+                    <div className="bg-gray-50 text-gray-900 p-3 rounded-lg shadow-md md:max-w-[75%] max-w-[85%] relative">
                       <div>{formatAnswer(history.response)}</div>
                       <div className="text-xs text-gray-500 absolute bottom-[-20px] right-2">
                         {new Date(history.timestamp).toLocaleTimeString([], {
