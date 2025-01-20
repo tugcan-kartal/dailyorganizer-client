@@ -232,7 +232,7 @@ const TaskDetails = () => {
 
                   {/* Yanıt Mesajı */}
                   <div className="flex justify-end mt-2 relative">
-                    <div className="bg-gray-200 text-gray-900 p-3 rounded-lg shadow-md max-w-[75%] relative">
+                    <div className="bg-gray-50 text-gray-900 p-3 rounded-lg shadow-md max-w-[75%] relative">
                       <div>{formatAnswer(history.response)}</div>
                       <div className="text-xs text-gray-500 absolute bottom-[-20px] right-2">
                         {new Date(history.timestamp).toLocaleTimeString([], {
