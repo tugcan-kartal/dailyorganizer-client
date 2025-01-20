@@ -88,7 +88,7 @@ const Signin: React.FC = () => {
           <input
             type="email"
             placeholder="Enter your email address"
-            className="w-full py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
+            className="w-full py-2 px-2 border-b border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
             onChange={handleChange}
             name="email"
           />
@@ -96,7 +96,7 @@ const Signin: React.FC = () => {
           <input
             type="password"
             placeholder="Enter your password"
-            className="w-full py-2 px-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
+            className="w-full py-2 px-2 border-b border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
             onChange={handleChange}
             name="password"
           />
