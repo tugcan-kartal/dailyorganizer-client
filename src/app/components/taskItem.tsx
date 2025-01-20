@@ -128,9 +128,12 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
                   <MdDragIndicator />
                 </div>
 
-                {/* Kapama butonu */}
+                {/* Kapama butonu editi de kapatıyor açıksa */}
                 <div
-                  onClick={() => setIsMenu(!isMenu)}
+                  onClick={() => {
+                    isEditing ? setIsEditing(false) : "";
+                    setIsMenu(!isMenu);
+                  }}
                   className="text-4xl cursor-pointer"
                 >
                   {isMenu ? <IoMdClose /> : <IoIosMenu />}
