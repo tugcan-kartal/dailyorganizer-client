@@ -29,7 +29,7 @@ const Tasks: React.FC = () => {
         <div
           className={`min-h-screen transition-all duration-500 ease-in-out ${
             isSideBar ? "md:w-[15%] w-[100%]" : "w-0"
-          } border-r-2 bg-white border-gray-50 shadow-lg`}
+          } `}
         >
           <SideBar />
         </div>

@@ -130,7 +130,7 @@ const TaskAddForm: React.FC = () => {
   }, [selectedCategory]);
 
   return (
-    <div className="bg-gray-100 h-screen">
+    <div className="bg-gradient-to-br from-blue-50 via-gray-100 to-blue-200 h-full">
       {/* Sidebar kapalıyken çıkan sol üstteki butonlar slide aç ve yeni task oluştur butonları */}
       <div>
         <HeaderActions />

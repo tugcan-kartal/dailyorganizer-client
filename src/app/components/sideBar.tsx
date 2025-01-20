@@ -35,7 +35,7 @@ const SideBar: React.FC = () => {
 
     return (
         <div>
-            <div className="overflow-y-hidden">
+            <div className="overflow-hidden bg-white border-gray-50 border-r-2">
 
                 {/* Sidebardaki sol üst köşedeki butonlar */}
                 <div className="flex justify-between pt-4 px-3">
@@ -84,10 +84,10 @@ const SideBar: React.FC = () => {
                 
                 {/* Buraya da mevcut taskları tekli gösterimi yapcam ve signout butonu */}
                 <div className="flex flex-col justify-center items-start pl-[2vw] pt-[2vh] gap-y-4">
-                    <div onClick={logoutAccount} className="ml-[3.5vw] bg-gray-200 text-black p-2 rounded-full cursor-pointer hover:opacity-90">Sign Out</div>
+                    <div onClick={logoutAccount} className="ml-[20%] bg-gray-200 text-black p-2 rounded-full cursor-pointer hover:opacity-90">Sign Out</div>
                     {tasks && tasks.map((task,index)=>(
                         <div key={index}>
-                            <div onClick={()=>navigateToTaskDetails(task._id)} className="cursor-pointer hover:scale-110 p-2 rounded-full transition-all duration-200">
+                            <div onClick={()=>navigateToTaskDetails(task._id)} className="cursor-pointer hover:scale-90 p-2 rounded-full transition-all duration-200">
                                 {task.title}
                             </div>
                         </div>

@@ -57,7 +57,7 @@ const Signin: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 via-gray-100 to-blue-200">
       <div className="bg-white p-8 shadow-md rounded-md md:w-[400px] w-[300px]">
         <div className="mb-6">
           <h1 className="text-2xl font-semibold">Think it. Make it.</h1>
