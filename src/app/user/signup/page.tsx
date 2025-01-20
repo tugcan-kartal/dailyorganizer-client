@@ -3,6 +3,8 @@
 import Link from "next/link";
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import LogoTransparent from "@/../public/logo-transparent.png";
 
 const Signup: React.FC = () => {
   const router=useRouter();
@@ -59,9 +61,18 @@ const Signup: React.FC = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 via-gray-100 to-blue-200">
+      <div className="flex justify-center items-center absolute top-0 left-0">
+        <div>
+          <Image className="w-[5vw]" src={LogoTransparent} alt="not found" />
+        </div>
+        <div className="text-xl font-semibold">
+          Taskly Adviser AI
+        </div>
+      </div>
+      
       <div className="bg-white p-8 shadow-md rounded-md md:w-[400px] w-[300px]">
         <div className="mb-6">
-          <h1 className="text-2xl font-semibold">Think it. Make it.</h1>
+          <h1 className="text-2xl font-semibold">Your Task, Our Advice</h1>
           <p className="text-2xl text-gray-400 font-semibold">Sign up</p>
         </div>
 
@@ -114,7 +125,7 @@ const Signup: React.FC = () => {
           </button>
         </form>
 
-        <Link href={"/user/signin"} className="text-xs text-blue-700 mt-4 underline">
+        <Link href={"/user/signin"} className="text-xs text-blue-700 mt-6 hover:underline">
           If you already have an account.
         </Link>
       </div>
