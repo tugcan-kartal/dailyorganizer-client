@@ -12,6 +12,7 @@ export interface Task {
     start_date: string;
     end_date: string;
     order: number;
+    status: string;
 }
 
 interface TasksContextProps {

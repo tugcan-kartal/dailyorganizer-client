@@ -12,6 +12,9 @@ import { borderPicker } from "./borderPicker";
 import toast from "react-hot-toast";
 import { MdChatBubbleOutline } from "react-icons/md";
 import { useRouter } from "next/navigation";
+import { MdDone } from "react-icons/md";
+import { MdHourglassEmpty } from "react-icons/md";
+
 
 const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
   task,
@@ -24,6 +27,7 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
     category: task.category,
     start_date: task.start_date,
     end_date: task.end_date,
+    status: task.status,
   });
 
   const [isMenu, setIsMenu] = useState(false);
@@ -54,6 +58,25 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
       [e.target.name]: e.target.value,
     });
   };
+
+  const changeStatus=async()=>{
+    const newStatus = newUpdatedTask.status === "process" ? "done" : "process";
+
+    setNewUpdatedTask({
+      ...newUpdatedTask,
+      status: newStatus,
+    });
+
+    //burada tekrar güncel statusu gönderme sebebimiz eski state'i göndermesi reactın
+    await updateTask(
+      task._id, 
+      {
+        ...newUpdatedTask,
+        status: newStatus,
+      }
+    );
+    refreshTasks();
+  }
 
   // Yüzde tamamlanma ibresi burası--------
   const calculateProgress = () => {
@@ -133,12 +156,12 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
                     </button>
 
                     {isEditing ? (
-                      <button
-                        className="bg-green-500 rounded-2xl px-[5%] py-1 text-white shadow-lg"
-                        onClick={handleUpdate}
-                      >
-                        {isEditing ? "Update" : ""}
-                      </button>
+                        <button
+                          className="bg-green-500 rounded-2xl px-[5%] py-1 text-white shadow-lg"
+                          onClick={handleUpdate}
+                        >
+                          {isEditing ? "Update" : ""}
+                        </button>
                     ) : (
                       ""
                     )}
@@ -151,7 +174,7 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
             <div className="w-[80%] mx-auto">
               {/* title kısmı */}
               <div>
-                <div className="text-2xl text-gray-800 font-semibold">
+                <div className={`text-2xl text-gray-800 font-semibold ${newUpdatedTask.status==="done" ? "" : "line-through"}`}>
                   {task.title}
                 </div>
                 {isEditing && (
@@ -237,10 +260,16 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
               </div>
             </div>
             
-            {/* Yapay zeka butonu */}
-            <div onClick={()=>navigateToTaskDetails(task._id)} className="text-3xl flex justify-end cursor-pointer">
-              <MdChatBubbleOutline />
+            <div className="flex justify-between">
+              <div onClick={changeStatus} className="text-3xl cursor-pointer">
+                {newUpdatedTask.status==="process" ? <MdDone /> : <MdHourglassEmpty />}
+              </div>
+
+              <div onClick={()=>navigateToTaskDetails(task._id)} className="text-3xl  cursor-pointer">
+                <MdChatBubbleOutline />
+              </div>
             </div>
+
           </div>
         </div>
       </div>

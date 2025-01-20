@@ -85,7 +85,7 @@ const TaskList: React.FC = () => {
   // Sürüklenen görev için olan fonksiyonlar bitiş
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-blue-200 min-h-screen">
       {/* Sidebar kapalıyken çıkan sol üstteki butonlar slide aç ve yeni task oluştur butonları */}
       <div>
         <HeaderActions />
