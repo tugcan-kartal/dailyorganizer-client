@@ -85,8 +85,8 @@ const SideBar: React.FC = () => {
 
                 </div>
                 
-                {/* Buraya da mevcut taskları tekli gösterimi yapcam ve signout butonu */}
-                <div className="flex flex-col justify-center items-start pl-[2vw] pt-[2vh] gap-y-4">
+                {/* Buraya da mevcut taskları tekli gösterimi yapcam*/}
+                <div className="flex flex-col justify-center items-start pl-[1vw] pt-[2vh] gap-y-4">
                     {tasks && tasks.map((task,index)=>(
                         <div key={index}>
                             <div onClick={()=>navigateToTaskDetails(task._id)} className="cursor-pointer hover:scale-90 p-2 rounded-full transition-all duration-200">
