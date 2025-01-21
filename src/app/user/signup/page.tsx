@@ -63,9 +63,9 @@ const Signup: React.FC = () => {
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 via-gray-100 to-blue-200">
       <div className="flex justify-center items-center absolute top-0 left-0">
         <div>
-          <Image className="w-[5vw]" src={LogoTransparent} alt="not found" />
+          <Image className="md:w-[5vw] w-[15vw]" src={LogoTransparent} alt="not found" />
         </div>
-        <div className="text-xl font-semibold">
+        <div className="md:text-xl font-semibold">
           Taskly Adviser AI
         </div>
       </div>
