@@ -39,7 +39,7 @@ export const TasksProvider: React.FC<{children: React.ReactNode}>=({children})=>
     // Burada task eklencek mi diye boolean kontrol
     const [isAddTask,setIsAddTask]=useState<boolean>(false);
 
-
+    //Burada sidebardaki ayarlara göre filtreleme yapıyor prioritysine göre değişiyor
     const fetchTasks = async () => {
         const token = localStorage.getItem("token");
         if (!token) return;

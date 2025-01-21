@@ -17,7 +17,7 @@ const TaskDetails = () => {
 
   const [taskDetail, setTaskDetail] = useState<Task>();
 
-  const [gbtQuestion, setGbtQuestion] = useState("Tavsiye ver");
+  const [gbtQuestion, setGbtQuestion] = useState("Give me advice");
   const [gbtAnswer, setGbtAnswer] = useState("");
 
   const [gbtHistory, setGbtHistory] = useState<

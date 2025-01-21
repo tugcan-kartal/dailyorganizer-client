@@ -4,6 +4,7 @@ import CategoryBar from "@/../public/assets/sidebar-images/category.png";
 import ImportanceBar from "@/../public/assets/sidebar-images/importance.png";
 import StartDateBar from "@/../public/assets/sidebar-images/start-date.png";
 import EndDateBar from "@/../public/assets/sidebar-images/end-date.png";
+import StatusBar from "@/../public/assets/sidebar-images/status.png";
 import { GoSidebarExpand } from "react-icons/go";
 import { GoSidebarCollapse } from "react-icons/go";
 import { IoCreateOutline } from "react-icons/io5";
@@ -78,6 +79,13 @@ const SideBar: React.FC = () => {
                             <Image src={EndDateBar} alt="EndDate Bar" width={20}/>
                         </div>
                         <div>Sort by End Date</div>
+                    </div>
+
+                    <div className="cursor-pointer flex gap-x-4 w-[85%] hover:shadow-lg transition-all duration-300 px-2 py-2 rounded-lg" onClick={()=>setTaskFilter("status:process-first")}>
+                        <div>
+                            <Image src={StatusBar} alt="Status Bar" width={20}/>
+                        </div>
+                        <div>Sort by Status</div>
                     </div>
 
                 </div>
