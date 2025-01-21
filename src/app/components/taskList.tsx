@@ -15,6 +15,7 @@ import { Task, useTasksContext } from "../context/TasksContext";
 import HeaderActions from "./headerActions";
 import { getDetailUser } from "../api/userService";
 import { IoCreateOutline } from "react-icons/io5";
+import Profile from "./profile";
 
 const TaskList: React.FC = () => {
   const {
@@ -87,8 +88,9 @@ const TaskList: React.FC = () => {
   return (
     <div className="bg-gradient-to-br from-blue-50 via-gray-200 to-blue-200 h-full">
       {/* Sidebar kapalıyken çıkan sol üstteki butonlar slide aç ve yeni task oluştur butonları */}
-      <div>
+      <div className="flex justify-between">
         <HeaderActions />
+        <Profile />
       </div>
 
       {/* Eğer task varsa ilk yer yoksa diğer yer çalışıyor bu dndContextler fln sürüklemek için gereken paketin şeyleri */}
