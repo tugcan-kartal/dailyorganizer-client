@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import LogoTransparent from "@/../public/logo-transparent.png";
 import Image from "next/image";
 
@@ -57,6 +57,40 @@ const Signin: React.FC = () => {
       console.error(error);
     }
   };
+
+
+  //Google giriş için başlangıç
+
+  // useEffect içinde token'ı al ve localStorage'a kaydet
+  useEffect(() => {
+      // URL parametrelerinden token'ı al
+      const searchParams = new URLSearchParams(window.location.search);
+      const token = searchParams.get("token");
+  
+      if (token) {
+        console.log("Token found:", token);
+  
+        // Token'ı localStorage'a kaydet
+        localStorage.setItem("token", token);
+        setSuccess("Login successfully");
+        setTimeout(() => {
+          router.push("/tasks");
+        }, 2000);
+  
+        // Token kaydedildikten sonra yönlendir
+      }else{
+        console.log("Google token not found");
+      }
+    }, [router]);
+
+    // Burada sunucudaki auth içindeki google a yönlendiriyoruz o da kullanıcıya giriş şansını veriyor sonra callbacke yönlendiriyor
+    // callbacke yönlendirilen ise gerekli jwt token ve kullanıcı kaydedip token döndürüyor yukarıda useEffect yapıyor
+    const handleGoogle = () => {
+      window.location.href = "http://localhost:3000/auth/google";
+    };
+
+    //Google giriş için son
+
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 via-gray-100 to-blue-200 gap-x-[10%] relative">
@@ -118,6 +152,9 @@ const Signin: React.FC = () => {
             Continue
           </button>
         </form>
+        
+        {/* Google'ın girişi için yönlendirme yapıyor */}
+        <div className="bg-red-500 text-white p-2 mt-1 text-center font-semibold rounded-xl cursor-pointer hover:bg-red-600" onClick={handleGoogle}>Google sign in</div>
 
         <Link
           href={"/user/signup"}
