@@ -5,6 +5,7 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import LogoTransparent from "@/../public/logo-transparent.png";
+import { signUpUser } from "@/app/api/userService";
 
 const Signup: React.FC = () => {
   const router=useRouter();
@@ -27,36 +28,7 @@ const Signup: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setErrors([]);
-
-    try {
-      const response = await fetch("http://localhost:3000/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData), // Kullanıcı verilerini gönder
-      });
-
-      if (!response.ok) {
-        const data = await response.json();
-        const errorMessages = Array.isArray(data.message)
-          ? data.message
-          : [data.message];
-        setErrors(errorMessages);
-      } else {
-        const data = await response.json();
-        console.log("Token:", data.token);
-
-        localStorage.setItem("token", data.token);
-        setSuccess("Signup successfully");
-        setTimeout(()=>{
-          router.push("/user/signin")
-        },2000);
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    await signUpUser(userData,setErrors,setSuccess,router);
   };
 
   return (

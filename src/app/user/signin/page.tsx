@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import LogoTransparent from "@/../public/logo-transparent.png";
 import Image from "next/image";
+import { signInUser } from "@/app/api/userService";
 
 const Signin: React.FC = () => {
   const router = useRouter();
@@ -26,36 +27,8 @@ const Signin: React.FC = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setErrors([]);
-
-    try {
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData), // Kullanıcı verilerini gönder
-      });
-
-      if (!response.ok) {
-        const data = await response.json();
-        const errorMessages = Array.isArray(data.message)
-          ? data.message
-          : [data.message];
-        setErrors(errorMessages);
-      } else {
-        const data = await response.json();
-        console.log("Token:", data.token);
-
-        localStorage.setItem("token", data.token);
-        setSuccess("Login successfully");
-        setTimeout(() => {
-          router.push("/tasks");
-        }, 2000);
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    
+    await signInUser(userData,setErrors,setSuccess,router);
   };
 
 
@@ -83,13 +56,13 @@ const Signin: React.FC = () => {
       }
     }, [router]);
 
-    // Burada sunucudaki auth içindeki google a yönlendiriyoruz o da kullanıcıya giriş şansını veriyor sonra callbacke yönlendiriyor
-    // callbacke yönlendirilen ise gerekli jwt token ve kullanıcı kaydedip token döndürüyor yukarıda useEffect yapıyor
-    const handleGoogle = () => {
-      window.location.href = "http://localhost:3000/auth/google";
-    };
+  // Burada sunucudaki auth içindeki google a yönlendiriyoruz o da kullanıcıya giriş şansını veriyor sonra callbacke yönlendiriyor
+  // callbacke yönlendirilen ise gerekli jwt token ve kullanıcı kaydedip token döndürüyor yukarıda useEffect yapıyor
+  const handleGoogle = () => {
+    window.location.href = "http://localhost:3000/auth/google";
+  };
 
-    //Google giriş için son
+  //Google giriş için son
 
 
   return (
@@ -147,7 +120,7 @@ const Signin: React.FC = () => {
 
           <button
             type="submit"
-            className="w-full py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-md font-medium"
+            className="bg-blue-500 w-full text-white p-2 mt-1 text-center font-semibold rounded-xl cursor-pointer hover:bg-blue-600"
           >
             Continue
           </button>
