@@ -7,20 +7,15 @@ import { useTasksContext } from "../context/TasksContext";
 
 const Tasks: React.FC = () => {
   const {
-    tasks,
-    setTasks,
     taskFilter,
-    setTaskFilter,
     isSideBar,
-    setIsSideBar,
     isAddTask,
-    setIsAddTask,
     fetchTasks
   } = useTasksContext();
 
   useEffect(() => {
     fetchTasks();
-  }, [taskFilter || ""]);
+  }, [taskFilter]);
 
   return (
     <div className="h-full">

@@ -44,10 +44,6 @@ const categoryImages: { [key: string]: string } = {
 const TaskAddForm: React.FC = () => {
 
   const {
-      isSideBar,
-      setIsSideBar,
-      isAddTask,
-      setIsAddTask,
       fetchTasks
     } = useTasksContext();
 

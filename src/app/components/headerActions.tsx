@@ -2,8 +2,6 @@ import React from "react";
 import { GoChecklist, GoSidebarCollapse } from "react-icons/go";
 import { IoCreateOutline } from "react-icons/io5";
 import { useTasksContext } from "../context/TasksContext";
-import Image from "next/image";
-import LogoTransparent from "@/../public/logo-transparent.png"
 const HeaderActions: React.FC = () => {
 
   const {

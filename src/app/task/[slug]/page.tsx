@@ -191,7 +191,7 @@ const TaskDetails = () => {
     <div className="bg-gradient-to-br from-gray-100 to-gray-300 min-h-screen md:py-[0vh] pb-[10%]">
       <div className="flex flex-col items-center">
         {/* Ev iconu burada */}
-        <div className="pt-[3%] md:pr-[11%]">
+        <div className="pt-[3%] md:pr-[5%]">
           <AiOutlineHome
             className="text-4xl cursor-pointer hover:text-indigo-600 transition"
             onClick={navigateTasksPage}

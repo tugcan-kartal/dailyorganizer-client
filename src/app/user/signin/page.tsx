@@ -133,7 +133,7 @@ const Signin: React.FC = () => {
           href={"/user/signup"}
           className="text-xs text-blue-700 mt-6 hover:underline"
         >
-          If you don't have an account.
+          If you dont have an account.
         </Link>
       </div>
       

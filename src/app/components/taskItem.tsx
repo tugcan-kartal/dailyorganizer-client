@@ -131,7 +131,9 @@ const TaskItem: React.FC<{ task: any; fetchTasks: () => Promise<void> }> = ({
                 {/* Kapama butonu editi de kapatıyor açıksa */}
                 <div
                   onClick={() => {
-                    isEditing ? setIsEditing(false) : "";
+                    if(isEditing){
+                      setIsEditing(false);
+                    }
                     setIsMenu(!isMenu);
                   }}
                   className="text-4xl cursor-pointer"

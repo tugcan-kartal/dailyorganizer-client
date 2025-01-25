@@ -21,8 +21,6 @@ const TaskList: React.FC = () => {
   const {
     tasks,
     setTasks,
-    isSideBar,
-    setIsSideBar,
     isAddTask,
     setIsAddTask,
     fetchTasks,
