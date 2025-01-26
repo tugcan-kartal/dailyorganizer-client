@@ -8,6 +8,8 @@ import Image from "next/image";
 import { signInUser } from "@/app/api/userService";
 
 const Signin: React.FC = () => {
+  const API_URL="http://13.51.47.163:3000/auth";
+
   const router = useRouter();
 
   const [userData, setUserData] = useState({
@@ -59,7 +61,7 @@ const Signin: React.FC = () => {
   // Burada sunucudaki auth içindeki google a yönlendiriyoruz o da kullanıcıya giriş şansını veriyor sonra callbacke yönlendiriyor
   // callbacke yönlendirilen ise gerekli jwt token ve kullanıcı kaydedip token döndürüyor yukarıda useEffect yapıyor
   const handleGoogle = () => {
-    window.location.href = "http://localhost:3000/auth/google";
+    window.location.href = `${API_URL}/google`;
   };
 
   //Google giriş için son

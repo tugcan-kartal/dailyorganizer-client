@@ -1,6 +1,6 @@
 import { Task } from "../context/TasksContext";
 
-const API_URL="http://localhost:3000/task";
+const API_URL="http://13.51.47.163:3000/task";
 
 
 export const getTaskDetail=async(token: string,id: string)=>{
