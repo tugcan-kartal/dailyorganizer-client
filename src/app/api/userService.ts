@@ -1,4 +1,4 @@
-const API_URL="http://13.51.47.163:3000/auth";
+const API_URL="https://api.tasklyadviserai.com/auth";
 
 export const signUpUser=async(userData:any,setErrors:any,setSuccess:any,router:any)=>{
 

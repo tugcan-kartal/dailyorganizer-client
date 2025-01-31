@@ -1,4 +1,4 @@
-const API_URL="http://13.51.47.163:3000/chat";
+const API_URL="https://api.tasklyadviserai.com/chat";
 
 export const setTaskToGbt = async (token: string, id: string) => {
     try {

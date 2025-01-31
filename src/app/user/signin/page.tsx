@@ -8,7 +8,7 @@ import Image from "next/image";
 import { signInUser } from "@/app/api/userService";
 
 const Signin: React.FC = () => {
-  const API_URL="http://13.51.47.163:3000/auth";
+  const API_URL="https://api.tasklyadviserai.com/auth";
 
   const router = useRouter();
 
