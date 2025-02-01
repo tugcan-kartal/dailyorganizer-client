@@ -35,7 +35,7 @@ export const TasksProvider: React.FC<{children: React.ReactNode}>=({children})=>
     // Burada sidebardaki seçeneklere göre sort yapan fieldı ayarlıyor
     const [taskFilter, setTaskFilter] = useState<string | undefined>(undefined);
     // Burada sidebar açık mı kapalı mı
-    const [isSideBar,setIsSideBar]=useState<boolean>(true)
+    const [isSideBar,setIsSideBar]=useState<boolean>(false)
     // Burada task eklencek mi diye boolean kontrol
     const [isAddTask,setIsAddTask]=useState<boolean>(false);
 
