@@ -20,6 +20,9 @@ const Signin: React.FC = () => {
   const [errors, setErrors] = useState<string[]>([]);
   const [success, setSuccess] = useState<string>("");
 
+  const [isWebView, setIsWebView] = useState(false); // 📌 WebView olup olmadığını sakla
+
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUserData({
       ...userData,
@@ -32,6 +35,19 @@ const Signin: React.FC = () => {
     
     await signInUser(userData,setErrors,setSuccess,router);
   };
+
+  useEffect(() => {
+    // 📌 User-Agent kontrolü yaparak WebView olup olmadığını tespit et
+    const userAgent = navigator.userAgent || navigator.vendor;
+
+    if (
+      /FBAN|FBAV|Instagram|WebView|wv/i.test(userAgent) || // Facebook, Instagram, genel WebView kontrolü
+      /\bwv\b/.test(userAgent) || // Bazı WebView'ler için ek kontrol
+      /Android.*Version\/[\d.]+.*Safari\//i.test(userAgent) // Android özel WebView kontrolü
+    ) {
+      setIsWebView(true); // Eğer WebView içindeyse bunu kaydet
+    }
+  }, []);
 
 
   //Google giriş için başlangıç
@@ -127,7 +143,9 @@ const Signin: React.FC = () => {
             Continue
           </button>
           
+          {!isWebView && (
           <div className="bg-red-500 text-white p-2 mt-1 text-center font-semibold rounded-xl cursor-pointer hover:bg-red-600" onClick={handleGoogle}>Google sign in</div>
+          )}
         </form>
 
 
