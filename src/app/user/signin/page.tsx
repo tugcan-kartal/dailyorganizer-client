@@ -129,7 +129,11 @@ const Signin: React.FC = () => {
         </form>
         
         {/* Google'ın girişi için yönlendirme yapıyor */}
-        <div className="bg-red-500 text-white p-2 mt-1 text-center font-semibold rounded-xl cursor-pointer hover:bg-red-600" onClick={handleGoogle}>Google sign in</div>
+        {
+          typeof window !== "undefined" && (
+            <div className="bg-red-500 text-white p-2 mt-1 text-center font-semibold rounded-xl cursor-pointer hover:bg-red-600" onClick={handleGoogle}>Google sign in</div>
+          )
+        }
 
         <Link
           href={"/user/signup"}
